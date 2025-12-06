@@ -1,4 +1,3 @@
-"use client";
 
 import { Navigation, Footer, HeroSlideshow, Newsletter, LabelShowcase } from "@/components";
 import Link from "next/link";
