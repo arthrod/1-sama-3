@@ -1,10 +1,23 @@
 import { config, fields, collection, singleton } from "@keystatic/core";
 
+// Use local storage during build (when GitHub env vars aren't available)
+// and github storage at runtime
+const isGitHubConfigured =
+  process.env.KEYSTATIC_GITHUB_CLIENT_ID &&
+  process.env.KEYSTATIC_GITHUB_CLIENT_SECRET &&
+  process.env.KEYSTATIC_SECRET;
+
+const storage = isGitHubConfigured
+  ? {
+      kind: "github" as const,
+      repo: "arthrod/1-sama-3" as const,
+    }
+  : {
+      kind: "local" as const,
+    };
+
 export default config({
-  storage: {
-    kind: "github",
-    repo: "arthrod/1-sama-3",
-  },
+  storage,
   ui: {
     brand: { name: "Sá Marias" },
     navigation: {
