@@ -1,6 +1,5 @@
 // Force this route to be completely dynamic - never evaluated at build time
 export const dynamic = "force-dynamic";
-export const runtime = "edge";
 
 // Use a dynamic import with a getter to ensure this is only evaluated at runtime
 export async function GET(request: Request) {

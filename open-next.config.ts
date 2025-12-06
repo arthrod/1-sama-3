@@ -1,5 +1,9 @@
 import { defineCloudflareConfig } from "@opennextjs/cloudflare";
 
-export default defineCloudflareConfig({
-  buildCommand: "bun next build",
-});
+const config = defineCloudflareConfig({});
+
+// Add buildCommand to prevent infinite loop
+// opennextjs-cloudflare runs `bun run build` by default which causes recursion
+config.buildCommand = "bun next build";
+
+export default config;
