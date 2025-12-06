@@ -7,9 +7,9 @@ import Markdoc from "@markdoc/markdoc";
 import { reader } from "../../../keystatic/reader";
 
 interface Props {
-  params: {
+  params: Promise<{
     slug: string;
-  };
+  }>;
 }
 
 const query = React.cache(async (_slug: string) => {
@@ -17,21 +17,25 @@ const query = React.cache(async (_slug: string) => {
     const posts = await reader.collections.posts.all();
     const publishedPosts = posts
       .filter(post => post.entry.status === "published")
-      .map((post: any) => ({
-        title: post.entry.title,
-        slug: post.slug,
-        link: `/posts/${post.slug}`,
-        excerpt: post.entry.excerpt,
-        featuredImage: post.entry.featuredImage,
-        categories: post.entry.categories,
-        publishedDate: post.entry.publishedDate,
-        author: post.entry.author,
-        content: post.entry.content,
-        seo: post.entry.seo,
-      }))
-      .sort((a: any, b: any) => {
-        const dateA = new Date(a.publishedDate || 0);
-        const dateB = new Date(b.publishedDate || 0);
+      .map((post: unknown) => {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        const p = post as { entry: any; slug: string };
+        return {
+          title: p.entry.title,
+          slug: p.slug,
+          link: `/posts/${p.slug}`,
+          excerpt: p.entry.excerpt,
+          featuredImage: p.entry.featuredImage,
+          categories: p.entry.categories,
+          publishedDate: p.entry.publishedDate,
+          author: p.entry.author,
+          content: p.entry.content,
+          seo: p.entry.seo,
+        };
+      })
+      .sort((a: unknown, b: unknown) => {
+        const dateA = new Date((a as { publishedDate: string | null }).publishedDate || 0);
+        const dateB = new Date((b as { publishedDate: string | null }).publishedDate || 0);
         return dateB.getTime() - dateA.getTime();
       });
 
@@ -65,7 +69,8 @@ const query = React.cache(async (_slug: string) => {
 });
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const data = await query(params.slug);
+  const { slug } = await params;
+  const data = await query(slug);
   if (!data) {
     return notFound();
   }
@@ -76,7 +81,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 export default async function Page({ params }: Props) {
-  const data = await query(params.slug);
+  const { slug } = await params;
+  const data = await query(slug);
   if (!data) {
     return notFound();
   }
