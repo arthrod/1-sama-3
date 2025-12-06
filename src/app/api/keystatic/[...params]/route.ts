@@ -2,7 +2,7 @@
 export const dynamic = "force-dynamic";
 
 // Apply Cloudflare User-Agent fix for GitHub API compatibility
-import "../../../lib/keystatic-client";
+import "../../../../lib/keystatic-client";
 
 // Use a dynamic import with a getter to ensure this is only evaluated at runtime
 export async function GET(request: Request) {
