@@ -1,13 +1,16 @@
-import { createReader } from '@keystatic/core/reader';
+"server-only" 
+import { createGitHubReader } from '@keystatic/core/reader/github';
 import keystaticConfig from '../../../keystatic.config';
 import Link from 'next/link';
 
 // Force this route to be completely dynamic - never evaluated at build time
 export const dynamic = "force-dynamic";
 
-// 1. Create a reader
-const reader = createReader(process.cwd(), keystaticConfig);
-
+// 1. Create a reade
+const reader = createGitHubReader(keystaticConfig, {
+    repo: 'arthrod/1-sama-3',
+    token: process.env.KEYSTATIC_GITHUB_TOKEN,
+});
 export default async function Page() {
 
   // 2. Read the "Posts" collection
