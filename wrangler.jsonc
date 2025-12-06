@@ -7,5 +7,13 @@
   "assets": {
     "directory": ".open-next/assets",
     "binding": "ASSETS"
+  },
+  "vars": {
+    "CMS_CLIENT": "keystatic",
+    "NEXT_PUBLIC_KEYSTATIC_STORAGE_KIND": "github",
+    "NEXT_PUBLIC_KEYSTATIC_STORAGE_REPO": "arthrod/1-sama-3",
+    "KEYSTATIC_PATH_PREFIX": "",
+    "NEXT_PUBLIC_KEYSTATIC_CONTENT_PATH": "src/content",
+    "KEYSTATIC_GITHUB_TOKEN": "@github-token"
   }
 }

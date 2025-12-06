@@ -19,7 +19,14 @@ Create a `.env.local` file based on `.env.example` and configure the following:
 2. Generate a new token with:
    - `repo` scope (for private repositories)
    - `public_repo` scope (for public repositories)
-3. Add the token to your `.env.local` file
+3. Add the token as a Cloudflare secret:
+   ```bash
+   wrangler secret put KEYSTATIC_GITHUB_TOKEN
+   ```
+
+### Cloudflare Workers Environment Variables
+
+Environment variables are configured in `wrangler.jsonc` for Cloudflare Workers. The GitHub token should be set as a secret for security, not committed to the repository.
 
 ## Authentication
 
