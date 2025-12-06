@@ -5,4 +5,3 @@ export { Newsletter } from "./Newsletter";
 export { WineCard } from "./WineCard";
 export { LabelShowcase } from "./LabelShowcase";
 export { ThemeProvider, useTheme } from "./ThemeProvider";
-export { Providers } from "./Providers";
