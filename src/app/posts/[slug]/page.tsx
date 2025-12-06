@@ -21,10 +21,10 @@ interface Post {
   featuredImage: string | null;
   categories: readonly string[];
   publishedDate: string | null;
-  author: {
+  author?: {
     name: string;
     avatar?: string | null;
-  } | Record<string, never>;
+  };
   content: () => Promise<{ node: Node }>;
   seo: {
     metaTitle?: string;
@@ -37,7 +37,7 @@ const query = React.cache(async (_slug: string) => {
     const posts = await reader.collections.posts.all();
     const publishedPosts = posts
       .filter(post => post.entry.status === "published")
-      .map((post: { entry: { status: string; title: string; excerpt: string; featuredImage: string | null; categories: readonly string[]; publishedDate: string | null; author: { name: string; avatar?: string | null } | Record<string, never>; content: () => Promise<{ node: Node }>; seo: { metaTitle?: string; metaDescription?: string } }; slug: string }): Post => {
+      .map((post: { entry: { status: string; title: string; excerpt: string; featuredImage: string | null; categories: readonly string[]; publishedDate: string | null; author?: { name: string; avatar?: string | null }; content: () => Promise<{ node: Node }>; seo: { metaTitle?: string; metaDescription?: string } }; slug: string }): Post => {
         return {
           title: post.entry.title,
           slug: post.slug,
@@ -152,7 +152,7 @@ export default async function Page({ params }: Props) {
                 })
               }
             </time>
-            {data.data.author && 'name' in data.data.author && data.data.author.name && (
+            {data.data.author?.name && (
               <span className="font-sans italic">
                 por {data.data.author.name}
               </span>
