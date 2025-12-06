@@ -4,7 +4,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "bun next dev",
+    "dev": "bun next dev --turbo",
     "build": "bun opennextjs-cloudflare build",
     "start": "bun next start",
     "lint": "bun eslint",
@@ -16,7 +16,7 @@
     "@keystatic/core": "^0.5.48",
     "@keystatic/next": "^5.0.3",
     "framer-motion": "^12.23.25",
-    "next": "16.0.7",
+    "next": "^15.5.7",
     "react": "19.2.0",
     "react-dom": "19.2.0"
   },
@@ -27,7 +27,7 @@
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "eslint": "^9",
-    "eslint-config-next": "16.0.7",
+    "eslint-config-next": "^15.5.7",
     "tailwindcss": "^4",
     "typescript": "^5",
     "wrangler": "latest"
