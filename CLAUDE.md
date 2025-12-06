@@ -65,6 +65,10 @@ No testing framework is currently configured. Consider adding Jest/Vitest for un
 - Configured for Cloudflare Pages deployment
 - Uses Wrangler for type generation
 - Build process via `@opennextjs/cloudflare` package
+- **Important**: If you set environment variables from the Cloudflare dashboard, use the `--keep-vars` option to prevent them from being deleted during deployments:
+  ```bash
+  opennextjs-cloudflare deploy -- --keep-vars
+  ```
 
 ## Development Guidelines
 
