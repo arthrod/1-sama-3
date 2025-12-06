@@ -69,6 +69,11 @@ No testing framework is currently configured. Consider adding Jest/Vitest for un
   ```bash
   opennextjs-cloudflare deploy -- --keep-vars
   ```
+- **GitHub Token Setup**: The `KEYSTATIC_GITHUB_TOKEN` secret must be set via Wrangler CLI (not in wrangler.jsonc):
+  ```bash
+  wrangler secret put KEYSTATIC_GITHUB_TOKEN
+  ```
+  Then enter your GitHub personal access token when prompted.
 
 ## Development Guidelines
 
