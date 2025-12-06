@@ -12,12 +12,33 @@ interface Props {
   }>;
 }
 
+interface Post {
+  title: string;
+  slug: string;
+  link: string;
+  excerpt: string;
+  featuredImage: string | null;
+  categories: readonly string[];
+  publishedDate: string | null;
+  author: {
+    name: string;
+    avatar?: string | null;
+  } | Record<string, never>;
+  content: {
+    node: unknown;
+  };
+  seo: {
+    metaTitle?: string;
+    metaDescription?: string;
+  };
+}
+
 const query = React.cache(async (_slug: string) => {
   try {
     const posts = await reader.collections.posts.all();
     const publishedPosts = posts
       .filter(post => post.entry.status === "published")
-      .map((post: unknown) => {
+      .map((post: unknown): Post => {
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         const p = post as { entry: any; slug: string };
         return {
@@ -33,9 +54,9 @@ const query = React.cache(async (_slug: string) => {
           seo: p.entry.seo,
         };
       })
-      .sort((a: unknown, b: unknown) => {
-        const dateA = new Date((a as { publishedDate: string | null }).publishedDate || 0);
-        const dateB = new Date((b as { publishedDate: string | null }).publishedDate || 0);
+      .sort((a: Post, b: Post): number => {
+        const dateA = new Date(a.publishedDate || 0);
+        const dateB = new Date(b.publishedDate || 0);
         return dateB.getTime() - dateA.getTime();
       });
 
@@ -87,16 +108,7 @@ export default async function Page({ params }: Props) {
     return notFound();
   }
 
-  const PostLayout = ({ data, prev, next }: { data: unknown; prev?: unknown; next?: unknown }) => {
-    const postData = data as {
-      title: string;
-      categories: string[];
-      publishedDate: string | null;
-      author: { name: string } | Record<string, never>;
-      featuredImage: string | null;
-      excerpt: string;
-      content: { node: unknown };
-    };
+  const PostLayout = ({ data, prev, next }: { data: Post; prev?: { name: string; link: string }; next?: { name: string; link: string } }) => {
 
     return (
       <div className="min-h-screen transition-colors duration-500 bg-paper dark:bg-paper-dark">
@@ -114,9 +126,9 @@ export default async function Page({ params }: Props) {
           {/* Header */}
           <header className="mb-12">
             {/* Categories */}
-            {postData.categories && postData.categories.length > 0 && (
+            {data.categories && data.categories.length > 0 && (
               <div className="flex flex-wrap gap-2 mb-6">
-                {postData.categories.map((category: string) => (
+                {data.categories.map((category: string) => (
                   <span
                     key={category}
                     className="text-xs font-sans uppercase tracking-wider text-merlot dark:text-merlot-light"
@@ -128,32 +140,32 @@ export default async function Page({ params }: Props) {
             )}
 
             <h1 className="font-serif text-4xl md:text-5xl text-ink dark:text-paper mb-6">
-              {postData.title}
+              {data.title}
             </h1>
 
             <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 text-sm text-graphite dark:text-graphite-light">
-              <time dateTime={postData.publishedDate || ""}>
-                {postData.publishedDate &&
-                  new Date(postData.publishedDate).toLocaleDateString("pt-BR", {
+              <time dateTime={data.publishedDate || ""}>
+                {data.publishedDate &&
+                  new Date(data.publishedDate).toLocaleDateString("pt-BR", {
                     day: "numeric",
                     month: "long",
                     year: "numeric",
                   })
                 }
               </time>
-              {postData.author && 'name' in postData.author && postData.author.name && (
+              {data.author && 'name' in data.author && data.author.name && (
                 <span className="font-sans italic">
-                  por {postData.author.name}
+                  por {data.author.name}
                 </span>
               )}
             </div>
           </header>
 
           {/* Featured Image */}
-          {postData.featuredImage && (
+          {data.featuredImage && (
             <div className="aspect-[16/9] relative overflow-hidden mb-12 border-2 border-dotted border-graphite-light">
               <Image
-                src={postData.featuredImage}
+                src={data.featuredImage}
                 alt=""
                 fill
                 className="object-cover"
@@ -162,19 +174,19 @@ export default async function Page({ params }: Props) {
           )}
 
           {/* Excerpt */}
-          {postData.excerpt && (
+          {data.excerpt && (
             <div className="mb-12 p-6 bg-paper-200 dark:bg-ink border border-dotted border-graphite">
               <p className="font-serif text-lg text-ink dark:text-paper italic">
-                {postData.excerpt as string}
+                {data.excerpt}
               </p>
             </div>
           )}
 
           {/* Content */}
           <div className="prose prose-lg dark:prose-invert max-w-none prose-headings:font-serif prose-p:font-serif prose-p:leading-relaxed prose-strong:text-ink dark:prose-strong:text-paper prose-a:text-merlot dark:prose-a:text-merlot-light prose-a:no-underline hover:prose-a:underline">
-            {postData.content?.node && (
+            {data.content?.node && (
               // eslint-disable-next-line @typescript-eslint/no-explicit-any
-              <div dangerouslySetInnerHTML={{ __html: Markdoc.renderers.html(Markdoc.transform(postData.content.node as any)) }} />
+              <div dangerouslySetInnerHTML={{ __html: Markdoc.renderers.html(Markdoc.transform(data.content.node as any)) }} />
             )}
           </div>
 
@@ -184,19 +196,19 @@ export default async function Page({ params }: Props) {
               <div className="flex justify-between items-center">
                 {prev && (
                   <Link
-                    href={(prev as { link: string }).link}
+                    href={prev.link}
                     className="font-serif text-ink dark:text-paper hover:text-merlot dark:hover:text-merlot-light transition-colors"
                   >
-                    ← {(prev as { name: string }).name}
+                    ← {prev.name}
                   </Link>
                 )}
                 <div className="flex-1"></div>
                 {next && (
                   <Link
-                    href={(next as { link: string }).link}
+                    href={next.link}
                     className="font-serif text-ink dark:text-paper hover:text-merlot dark:hover:text-merlot-light transition-colors text-right"
                   >
-                    {(next as { name: string }).name} →
+                    {next.name} →
                   </Link>
                 )}
               </div>
