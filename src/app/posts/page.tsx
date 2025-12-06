@@ -2,8 +2,8 @@ import { createReader } from '@keystatic/core/reader';
 import keystaticConfig from '../../../keystatic.config';
 import Link from 'next/link';
 
-// Force this page to be static
-export const dynamic = "force-static";
+// Force this route to be completely dynamic - never evaluated at build time
+export const dynamic = "force-dynamic";
 
 // 1. Create a reader
 const reader = createReader(process.cwd(), keystaticConfig);
