@@ -1,5 +1,7 @@
 "use client";
 
+import Link from "next/link";
+
 export function Newsletter() {
   return (
     <div className="relative bg-paper-dark dark:bg-black text-paper py-24 px-6 border-y-4 border-double border-graphite">
@@ -11,9 +13,11 @@ export function Newsletter() {
           <div className="absolute bottom-0 left-0 w-2 h-2 border-b border-l border-paper"></div>
           <div className="absolute bottom-0 right-0 w-2 h-2 border-b border-r border-paper"></div>
 
-          <h2 className="font-serif text-4xl md:text-6xl mb-6 text-paper">
-            Crônicas da Adega
-          </h2>
+          <Link href="/posts" className="block no-underline hover:no-underline">
+            <h2 className="font-serif text-4xl md:text-6xl mb-6 text-paper hover:text-merlot transition-colors duration-300 cursor-pointer">
+              Crônicas da Adega
+            </h2>
+          </Link>
 
           <p className="font-serif italic text-graphite-lighter mb-10 text-lg md:text-xl max-w-lg mx-auto leading-relaxed">
             &ldquo;Apenas o essencial permanece.&rdquo; <br />

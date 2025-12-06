@@ -13,7 +13,7 @@ interface NavItem {
 const NAV_ITEMS: NavItem[] = [
   { label: "Início", path: "/" },
   { label: "As Três Sás", path: "/as-tres-sas" },
-  { label: "Blog", path: "/blog" },
+  { label: "Crônicas da Adega", path: "/posts" },
   { label: "Admin", path: "/keystatic" },
 ];
 

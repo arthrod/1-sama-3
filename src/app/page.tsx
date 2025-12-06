@@ -1,19 +1,6 @@
 "use client";
 
-import { Navigation, Footer, HeroSlideshow, Newsletter, WineCard } from "@/components";
-import type { WineProduct } from "@/types";
-
-const sampleProduct: WineProduct = {
-  id: "1",
-  name: "Sá Dona",
-  year: "2025",
-  type: "Vinho Fino Tinto Seco",
-  region: "Ritápolis - MG",
-  price: 189.0,
-  image:
-    "https://images.unsplash.com/photo-1584916201218-f4242ceb4809?auto=format&fit=crop&q=80&w=400",
-  tags: ["Inverno", "Syrah", "Exclusive"],
-};
+import { Navigation, Footer, HeroSlideshow, Newsletter, LabelShowcase } from "@/components";
 
 export default function Home() {
   return (
@@ -34,7 +21,7 @@ export default function Home() {
                   A Garrafa
                 </span>
               </div>
-              <WineCard product={sampleProduct} />
+              <LabelShowcase />
             </div>
 
             {/* Content Column */}

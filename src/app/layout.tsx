@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Playfair_Display, Lato, Great_Vibes } from "next/font/google";
 import "./globals.css";
-import { ThemeProvider } from "@/components/ThemeProvider";
+import { Providers } from "@/components/Providers";
 
 const playfair = Playfair_Display({
   variable: "--font-playfair",
@@ -39,7 +39,7 @@ export default function RootLayout({
       <body
         className={`${playfair.variable} ${lato.variable} ${greatVibes.variable} antialiased`}
       >
-        <ThemeProvider>{children}</ThemeProvider>
+        <Providers>{children}</Providers>
       </body>
     </html>
   );
