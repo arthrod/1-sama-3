@@ -1,6 +1,7 @@
 "use client";
 
 import { Navigation, Footer, HeroSlideshow, Newsletter, LabelShowcase } from "@/components";
+import Link from "next/link";
 
 export default function Home() {
   return (
@@ -41,11 +42,17 @@ export default function Home() {
                 <h3 className="font-serif text-2xl text-ink dark:text-paper mb-4">
                   Colheita de Inverno
                 </h3>
-                <p className="font-serif text-lg leading-relaxed text-ink-faint dark:text-graphite-lighter">
+                <p className="font-serif text-lg leading-relaxed text-ink-faint dark:text-graphite-lighter mb-6">
                   Nossa Syrah reflete o terroir único de Ritápolis. A colheita
                   de inverno concentra os açúcares e acentua os taninos,
                   resultando em um vinho de corpo excepcional e longevidade.
                 </p>
+                <Link
+                  href="/posts"
+                  className="inline-block font-serif text-lg text-merlot dark:text-merlot-light hover:text-ink dark:hover:text-paper transition-colors underline underline-offset-4 decoration-2 decoration-merlot/30 hover:decoration-merlot/60 dark:decoration-merlot-light/30 dark:hover:decoration-merlot-light/60"
+                >
+                  Leia nossas Crônicas da Adega →
+                </Link>
               </div>
             </div>
           </div>

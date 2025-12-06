@@ -1,5 +1,7 @@
 "use client";
 
+import Image from "next/image";
+
 export function LabelShowcase() {
   return (
     <div className="group relative bg-paper dark:bg-paper-dark border-2 border-transparent hover:border-graphite-lighter dark:hover:border-graphite transition-colors duration-500 min-h-[500px] h-auto md:h-[600px] flex flex-col">
@@ -21,36 +23,42 @@ export function LabelShowcase() {
         {/* Side-by-side labels container */}
         <div className="relative z-10 flex items-center justify-center gap-4 md:gap-8 w-full max-w-4xl">
           {/* Front Label */}
-          <div className="flex-1 flex flex-col items-center">
-            <img
-              src="/images/label-front.jpeg"
-              alt="Frente do Rótulo Sá Dona"
-              className="
-                w-full h-auto max-h-[350px] object-contain
-                filter grayscale contrast-125
-                group-hover:grayscale-0 group-hover:contrast-100
-                transition-all duration-700 ease-in-out
-                scale-100 group-hover:scale-105
-              "
-            />
+          <div className="flex-1 flex flex-col items-center relative h-[350px]">
+            <div className="relative w-full h-full">
+              <Image
+                src="/images/label-front.jpeg"
+                alt="Frente do Rótulo Sá Dona"
+                fill
+                className={`
+                  object-contain
+                  filter grayscale contrast-125
+                  group-hover:grayscale-0 group-hover:contrast-100
+                  transition-all duration-700 ease-in-out
+                  scale-100 group-hover:scale-105
+                `}
+              />
+            </div>
             <p className="mt-4 text-xs font-serif italic text-graphite dark:text-graphite-light opacity-70">
               Frente
             </p>
           </div>
 
           {/* Back Label */}
-          <div className="flex-1 flex flex-col items-center">
-            <img
-              src="/images/label-back.jpeg"
-              alt="Verso do Rótulo Sá Dona"
-              className="
-                w-full h-auto max-h-[350px] object-contain
-                filter grayscale contrast-125
-                group-hover:grayscale-0 group-hover:contrast-100
-                transition-all duration-700 ease-in-out
-                scale-100 group-hover:scale-105
-              "
-            />
+          <div className="flex-1 flex flex-col items-center relative h-[350px]">
+            <div className="relative w-full h-full">
+              <Image
+                src="/images/label-back.jpeg"
+                alt="Verso do Rótulo Sá Dona"
+                fill
+                className={`
+                  object-contain
+                  filter grayscale contrast-125
+                  group-hover:grayscale-0 group-hover:contrast-100
+                  transition-all duration-700 ease-in-out
+                  scale-100 group-hover:scale-105
+                `}
+              />
+            </div>
             <p className="mt-4 text-xs font-serif italic text-graphite dark:text-graphite-light opacity-70">
               Verso
             </p>

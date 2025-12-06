@@ -48,8 +48,8 @@ export default function MariaRitaSection() {
 								</span>
 								<div className="w-12 h-0.5 bg-merlot my-6"></div>
 								<p className="font-sans font-light italic text-lg text-ink">
-									"O vinho não é apenas o que fermenta nos barris, mas o que
-									amadurece em nossas almas."
+									&ldquo;O vinho não é apenas o que fermenta nos barris, mas o que
+									amadurece em nossas almas.&rdquo;
 								</p>
 							</div>
 						</motion.div>
