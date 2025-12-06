@@ -1,9 +1,13 @@
-import { createReader } from "@keystatic/core/reader";
+"server-only"
+import { createGitHubReader } from "@keystatic/core/reader/github";
 import React from "react";
 import Markdoc from "@markdoc/markdoc";
 import keystaticConfig from "../../../../keystatic.config";
 
-const reader = createReader(process.cwd(), keystaticConfig);
+const reader = createGitHubReader(keystaticConfig, {
+  repo: 'arthrod/1-sama-3',
+  token: process.env.KEYSTATIC_GITHUB_TOKEN,
+});
 
 type PostParams = {
   params: Promise<{
