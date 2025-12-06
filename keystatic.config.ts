@@ -1,28 +1,14 @@
 import { config, fields, collection, singleton } from "@keystatic/core";
 
-// Use local storage during build (when GitHub env vars aren't available)
-// and github storage at runtime
-const isGitHubConfigured =
-  process.env.KEYSTATIC_GITHUB_CLIENT_ID &&
-  process.env.KEYSTATIC_GITHUB_CLIENT_SECRET &&
-  process.env.KEYSTATIC_SECRET;
-
-const storage = isGitHubConfigured
-  ? {
-      kind: "github" as const,
-      repo: "arthrod/1-sama-3" as const,
-    }
-  : {
-      kind: "local" as const,
-    };
-
+// Local config for build time and the Keystatic UI page (/keystatic)
+// The API route uses a separate GitHub config defined inline for runtime
 export default config({
-  storage,
+  storage: { kind: "local" },
   ui: {
     brand: { name: "Sá Marias" },
     navigation: {
-      "Conteúdo": ["posts"],
-      "Configurações": ["site", "home"],
+      "Conteúdo": ["posts"] as ("posts" | "site" | "home")[],
+      "Configurações": ["site", "home"] as ("posts" | "site" | "home")[],
     },
   },
   collections: {
