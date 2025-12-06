@@ -16,7 +16,7 @@ export default config({
     posts: collection({
       label: "Blog Posts",
       slugField: "title",
-      path: "content/posts/*",
+      path: "src/contents/posts/*",
       format: { contentField: "content" },
       schema: {
         title: fields.slug({ name: { label: "Título" } }),
@@ -80,7 +80,7 @@ export default config({
   singletons: {
     site: singleton({
       label: "Configurações do Site",
-      path: "content/site/site",
+      path: "src/contents/site/site",
       schema: {
         siteName: fields.text({ label: "Nome do Site" }),
         siteDescription: fields.text({
@@ -96,7 +96,7 @@ export default config({
     }),
     home: singleton({
       label: "Página Inicial",
-      path: "content/home/home",
+      path: "src/contents/home/home",
       schema: {
         heroTitle: fields.text({ label: "Título Principal" }),
         heroSubtitle: fields.text({
