@@ -1,14 +1,15 @@
 import { config, fields, collection, singleton } from "@keystatic/core";
 
-// Local config for build time and the Keystatic UI page (/keystatic)
-// The API route uses a separate GitHub config defined inline for runtime
 export default config({
-  storage: { kind: "local" },
+  storage: {
+    kind: "github",
+    repo: "arthrod/1-sama-3",
+  },
   ui: {
     brand: { name: "Sá Marias" },
     navigation: {
-      "Conteúdo": ["posts"] as ("posts" | "site" | "home")[],
-      "Configurações": ["site", "home"] as ("posts" | "site" | "home")[],
+      Conteúdo: ["posts"],
+      Configurações: ["site", "home"],
     },
   },
   collections: {
