@@ -1,3 +1,5 @@
+"use client";
+
 import BernadeteSection from "@/components/AsTresSas/BernadeteSection";
 import GenaSection from "@/components/AsTresSas/GenaSection";
 import MariaRitaSection from "@/components/AsTresSas/MariaRitaSection";
