@@ -3,4 +3,5 @@
 import { makePage } from "@keystatic/next/ui/app";
 import config from "../../../keystatic.config";
 
-export default makePage(config);
+const KeystaticPage = makePage(config);
+export default KeystaticPage;
