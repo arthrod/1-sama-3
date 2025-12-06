@@ -2,6 +2,9 @@ import { createReader } from '@keystatic/core/reader';
 import keystaticConfig from '../../../keystatic.config';
 import Link from 'next/link';
 
+// Force this page to be static
+export const dynamic = "force-static";
+
 // 1. Create a reader
 const reader = createReader(process.cwd(), keystaticConfig);
 
