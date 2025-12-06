@@ -3,7 +3,7 @@ import { config, fields, collection, singleton } from "@keystatic/core";
 export default config({
   storage: {
     kind: "github",
-    repo: process.env.NEXT_PUBLIC_KEYSTATIC_STORAGE_REPO || "arthrod/1-sama-3",
+    repo: "arthrod/1-sama-3",
   },
   ui: {
     brand: { name: "Sá Marias" },

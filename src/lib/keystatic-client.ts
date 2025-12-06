@@ -2,10 +2,10 @@
 // This fix adds the required User-Agent header for Cloudflare compatibility
 // Based on: https://keystatic.com/docs/guides/cloudflare/
 
-const self = global || globalThis || this;
-const originalFetch = self.fetch;
+const globalSelf = global || globalThis || this;
+const originalFetch = globalSelf.fetch;
 
-self.fetch = (input: RequestInfo | URL, init?: RequestInit) => {
+globalSelf.fetch = (input: RequestInfo | URL, init?: RequestInit) => {
   const requestInit: RequestInit = {
     ...(init ?? {}),
     headers: {
