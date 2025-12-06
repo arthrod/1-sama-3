@@ -6,10 +6,10 @@ export default config({
     repo: "arthrod/1-sama-3",
   },
   ui: {
-    brand: { name: "Sá Marias" },
+    brand: { name: "SÃ¡ Marias" },
     navigation: {
-      Conteúdo: ["posts"],
-      Configurações: ["site", "home"],
+      ConteÃºdo: ["posts"],
+      ConfiguraÃ§Ãµes: ["site", "home"],
     },
   },
   collections: {
@@ -19,7 +19,7 @@ export default config({
       path: "content/posts/*",
       format: { contentField: "content" },
       schema: {
-        title: fields.slug({ name: { label: "Título" } }),
+        title: fields.slug({ name: { label: "TÃ­tulo" } }),
         status: fields.select({
           label: "Status",
           options: [
@@ -29,7 +29,7 @@ export default config({
           defaultValue: "draft",
         }),
         publishedDate: fields.date({
-          label: "Data de Publicação",
+          label: "Data de PublicaÃ§Ã£o",
         }),
         excerpt: fields.text({
           label: "Resumo",
@@ -44,7 +44,7 @@ export default config({
           label: "Categorias",
           options: [
             { label: "Vinhos", value: "vinhos" },
-            { label: "Harmonização", value: "harmonizacao" },
+            { label: "HarmonizaÃ§Ã£o", value: "harmonizacao" },
             { label: "Cultura", value: "cultura" },
             { label: "Eventos", value: "eventos" },
             { label: "Dicas", value: "dicas" },
@@ -63,28 +63,28 @@ export default config({
         ),
         seo: fields.object(
           {
-            metaTitle: fields.text({ label: "Meta Título" }),
+            metaTitle: fields.text({ label: "Meta TÃ­tulo" }),
             metaDescription: fields.text({
-              label: "Meta Descrição",
+              label: "Meta DescriÃ§Ã£o",
               multiline: true,
             }),
           },
           { label: "SEO" }
         ),
         content: fields.markdoc({
-          label: "Conteúdo",
+          label: "ConteÃºdo",
         }),
       },
     }),
   },
   singletons: {
     site: singleton({
-      label: "Configurações do Site",
+      label: "ConfiguraÃ§Ãµes do Site",
       path: "content/site/site",
       schema: {
         siteName: fields.text({ label: "Nome do Site" }),
         siteDescription: fields.text({
-          label: "Descrição do Site",
+          label: "DescriÃ§Ã£o do Site",
           multiline: true,
         }),
         logo: fields.image({
@@ -95,12 +95,12 @@ export default config({
       },
     }),
     home: singleton({
-      label: "Página Inicial",
+      label: "PÃ¡gina Inicial",
       path: "content/home/home",
       schema: {
-        heroTitle: fields.text({ label: "Título Principal" }),
+        heroTitle: fields.text({ label: "TÃ­tulo Principal" }),
         heroSubtitle: fields.text({
-          label: "Subtítulo",
+          label: "SubtÃ­tulo",
           multiline: true,
         }),
         heroImage: fields.image({
