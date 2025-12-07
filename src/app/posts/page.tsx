@@ -1,10 +1,10 @@
 // Force this route to be completely dynamic - never evaluated at build time
 export const dynamic = "force-dynamic";
 
+import { Newsletter } from "@/components";
 import { createGitHubReader } from "@keystatic/core/reader/github";
 import Image from "next/image";
 import Link from "next/link";
-import { Newsletter } from "@/components";
 import keystaticConfig from "../../../keystatic.config";
 import "../../lib/keystatic-client";
 
@@ -118,7 +118,7 @@ export default async function BlogPage() {
 										) : (
 											<div className="w-full h-full bg-paper-300 dark:bg-ink-light flex items-center justify-center">
 												<span className="font-serif text-6xl text-graphite/20">
-													"
+													&amp;quot;
 												</span>
 											</div>
 										)}
