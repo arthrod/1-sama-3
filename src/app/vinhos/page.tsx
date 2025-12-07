@@ -28,9 +28,9 @@ export default async function WinesPage() {
 							A Garrafeira
 						</h1>
 						<p className="font-serif text-xl text-ink-faint dark:text-graphite-lighter leading-relaxed italic">
-							"Vinhos que expressam a alma de Ritápolis. A colheita de inverno
+							&ldquo;Vinhos que expressam a alma de Ritápolis. A colheita de inverno
 							concentra os açúcares e acentua os taninos, resultando em um corpo
-							excepcional."
+							excepcional.&rdquo;
 						</p>
 					</div>
 
