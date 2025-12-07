@@ -1,12 +1,14 @@
+import { initOpenNextCloudflareForDev } from "@opennextjs/cloudflare";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import type { NextConfig } from "next";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
-const nextConfig: NextConfig = {
+/** @type {import("next").NextConfig} */
+const nextConfig = {
 	output: "standalone",
 	outputFileTracingRoot: path.resolve(__dirname),
+	turbopack: {},
 	// Configure webpack for better Cloudflare Workers compatibility
 	webpack: (config, { isServer }) => {
 		if (isServer) {
@@ -41,6 +43,4 @@ const nextConfig: NextConfig = {
 export default nextConfig;
 
 // Initialize OpenNext Cloudflare for local dev with bindings
-import { initOpenNextCloudflareForDev } from "@opennextjs/cloudflare";
-
 initOpenNextCloudflareForDev();

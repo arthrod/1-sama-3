@@ -1,5 +1,5 @@
 {
-	"$schema": "./node_modules/wrangler/config-schema.json",
+	"$schema": "/Users/arthrod/temp/Manual Library/temp/1-sama-3/node_modules/wrangler/config-schema.json",
 	"main": "./worker.ts",
 	"name": "samarias",
 	"compatibility_date": "2025-03-25",
@@ -15,5 +15,16 @@
 		"NEXT_PUBLIC_KEYSTATIC_STORAGE_REPO": "arthrod/1-sama-3",
 		"KEYSTATIC_PATH_PREFIX": "",
 		"NEXT_PUBLIC_KEYSTATIC_CONTENT_PATH": "./src/content"
-	}
+	},
+	"routes": [
+		{
+			"pattern": "*.samarias.org/*",
+			"zone_name": "samarias.org"
+		},
+		{
+			"pattern": "samarias.org",
+			"zone_name": "samarias.org",
+			"custom_domain": true
+		}
+	]
 }
