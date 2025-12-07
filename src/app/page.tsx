@@ -1,10 +1,10 @@
 export const dynamic = "force-dynamic";
 
-// import { WineCard } from "@/components/WineCard"; // Removed to use custom inline card
-import { Footer, HeroSlideshow, Navigation, Newsletter } from "@/components";
 import { createGitHubReader } from "@keystatic/core/reader/github";
 import Image from "next/image";
 import Link from "next/link";
+// import { WineCard } from "@/components/WineCard"; // Removed to use custom inline card
+import { Footer, HeroSlideshow, Navigation, Newsletter } from "@/components";
 import keystaticConfig from "../../keystatic.config";
 import "../lib/keystatic-client";
 
@@ -74,7 +74,7 @@ export default async function Home() {
 										key={wine.slug}
 										className="group cursor-pointer flex flex-col gap-6"
 									>
-										<div className="aspect-[3/4] bg-paper-200 overflow-hidden relative border border-paper-300">
+										<div className="aspect-3/4 bg-paper-200 overflow-hidden relative border border-paper-300">
 											{wine.entry.image && (
 												<Image
 													src={wine.entry.image}

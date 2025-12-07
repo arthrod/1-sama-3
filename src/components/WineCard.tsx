@@ -1,5 +1,7 @@
 "use client";
 
+import Image from "next/image";
+
 // Define the type locally or import it
 interface WineProductProps {
 	name: string;
@@ -34,10 +36,11 @@ export function WineCard({ product }: WineCardProps) {
 				<div className="absolute inset-0 bg-paper-200 dark:bg-ink opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
 
 				{product.image ? (
-					// eslint-disable-next-line @next/next/no-img-element
-					<img
+					<Image
 						src={product.image}
 						alt={product.name}
+						width={512}
+						height={512}
 						className={`
                 h-64 md:h-80 w-auto object-contain
                 filter grayscale contrast-125
@@ -45,6 +48,7 @@ export function WineCard({ product }: WineCardProps) {
                 transition-all duration-700 ease-in-out z-10
                 scale-100 group-hover:scale-110 drop-shadow-xl
             `}
+						sizes="(min-width: 768px) 20rem, 16rem"
 					/>
 				) : (
 					<div className="flex flex-col items-center justify-center z-10 opacity-50">
@@ -73,30 +77,18 @@ export function WineCard({ product }: WineCardProps) {
 						<div className="w-8 h-px bg-merlot/50 dark:bg-merlot-light/50 mb-3 group-hover:w-16 transition-all duration-500"></div>
 					</div>
 
-					<h3 className="font-script text-5xl text-ink dark:text-paper leading-none transition-colors duration-300">
+					{/* Title size guide:
+            - For smaller titles use `text-4xl md:text-5xl`
+            - Current (doubled) size uses `text-6xl md:text-7xl`
+            - For even larger hero treatment try `text-7xl md:text-8xl`
+          */}
+					<h3 className="font-script text-6xl md:text-7xl text-ink dark:text-paper leading-none transition-colors duration-300">
 						{product.name}
 					</h3>
 
 					<p className="font-serif text-base italic text-ink-faint dark:text-graphite-lighter transition-colors duration-300">
 						{product.type}
 					</p>
-
-					<div className="pt-6 opacity-0 group-hover:opacity-100 transition-all duration-500 transform translate-y-4 group-hover:translate-y-0">
-						<button
-							type="button"
-							className="
-              bg-ink dark:bg-paper-200 text-paper dark:text-ink px-8 py-3
-              font-serif italic text-lg
-              hover:bg-merlot dark:hover:bg-merlot-light dark:hover:text-white transition-colors duration-300
-              shadow-sharp w-full md:w-auto
-            "
-						>
-							{new Intl.NumberFormat("pt-BR", {
-								style: "currency",
-								currency: "BRL",
-							}).format(product.price)}
-						</button>
-					</div>
 				</div>
 			</div>
 		</div>
