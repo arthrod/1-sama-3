@@ -1,6 +1,7 @@
 "use client";
 
 import { AnimatePresence, motion } from "framer-motion";
+import Image from "next/image";
 import { useCallback, useEffect, useRef, useState } from "react";
 
 const SLIDES = [
@@ -70,11 +71,13 @@ export function HeroSlideshow() {
 						className="absolute inset-0"
 					>
 						<div className="absolute inset-0 bg-ink/20 mix-blend-multiply z-10 pointer-events-none"></div>
-						{/* eslint-disable-next-line @next/next/no-img-element */}
-						<img
+						<Image
 							src={SLIDES[currentSlide].url}
 							alt={SLIDES[currentSlide].alt}
-							className="w-full h-full object-cover filter sepia-[0.3] contrast-[1.05]"
+							fill
+							className="object-cover filter sepia-[0.3] contrast-[1.05]"
+							priority
+							sizes="100vw"
 						/>
 					</motion.div>
 				</AnimatePresence>
