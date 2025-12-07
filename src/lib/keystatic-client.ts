@@ -6,12 +6,12 @@ const globalSelf = global || globalThis || this;
 const originalFetch = globalSelf.fetch;
 
 globalSelf.fetch = (input: RequestInfo | URL, init?: RequestInit) => {
-  const requestInit: RequestInit = {
-    ...(init ?? {}),
-    headers: {
-      ...(init?.headers ?? {}),
-      'User-Agent': 'Cloudflare-Workers',
-    }
-  };
-  return originalFetch(input, requestInit);
-}
+	const requestInit: RequestInit = {
+		...init,
+		headers: {
+			...init?.headers,
+			"User-Agent": "Cloudflare-Workers",
+		},
+	};
+	return originalFetch(input, requestInit);
+};

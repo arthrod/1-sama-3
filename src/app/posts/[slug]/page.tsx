@@ -1,11 +1,12 @@
 // Force dynamic rendering
 export const dynamic = "force-dynamic";
 
-import { Footer, Navigation } from "@/components";
 import { createGitHubReader } from "@keystatic/core/reader/github";
 import Markdoc from "@markdoc/markdoc";
+import Image from "next/image";
 import Link from "next/link";
 import React from "react";
+import { Footer, Navigation } from "@/components";
 import keystaticConfig from "../../../../keystatic.config";
 import "../../../lib/keystatic-client";
 
@@ -50,13 +51,15 @@ export default async function Post({ params }: PostParams) {
 					// OPTION A: RICH VISUAL HEADER
 					<div className="relative h-[80vh] w-full">
 						<div className="absolute inset-0">
-							{/* eslint-disable-next-line @next/next/no-img-element */}
-							<img
-								src={post.coverImage!}
-								alt={post.title}
-								className="w-full h-full object-cover"
-							/>
-							<div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent"></div>
+							{post.coverImage && (
+								<Image
+									src={post.coverImage}
+									alt={post.title}
+									fill
+									className="object-cover"
+								/>
+							)}
+							<div className="absolute inset-0 bg-linear-to-t from-black/80 via-black/40 to-transparent"></div>
 						</div>
 						<div className="absolute bottom-0 left-0 w-full p-8 md:p-20 text-paper">
 							<div className="max-w-4xl">

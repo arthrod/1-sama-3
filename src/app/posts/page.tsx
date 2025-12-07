@@ -1,9 +1,10 @@
 // Force this route to be completely dynamic - never evaluated at build time
 export const dynamic = "force-dynamic";
 
-import { Newsletter } from "@/components";
 import { createGitHubReader } from "@keystatic/core/reader/github";
+import Image from "next/image";
 import Link from "next/link";
+import { Newsletter } from "@/components";
 import keystaticConfig from "../../../keystatic.config";
 import "../../lib/keystatic-client";
 
@@ -63,11 +64,11 @@ export default async function BlogPage() {
 									<div className="relative h-[400px] lg:h-[600px] overflow-hidden">
 										<div className="absolute inset-0 bg-merlot/20 group-hover:bg-transparent transition-colors duration-500 z-10"></div>
 										{latestPost.entry.coverImage ? (
-											// eslint-disable-next-line @next/next/no-img-element
-											<img
+											<Image
 												src={latestPost.entry.coverImage}
 												alt={latestPost.entry.title}
-												className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
+												fill
+												className="object-cover transition-transform duration-1000 group-hover:scale-105"
 											/>
 										) : (
 											// Fallback art if no image
@@ -106,18 +107,18 @@ export default async function BlogPage() {
 									href={`/posts/${post.slug}`}
 									className="group block no-underline hover:no-underline"
 								>
-									<div className="relative aspect-[4/3] mb-6 overflow-hidden border border-graphite-lighter bg-paper-200">
+									<div className="relative aspect-4/3 mb-6 overflow-hidden border border-graphite-lighter bg-paper-200">
 										{post.entry.coverImage ? (
-											// eslint-disable-next-line @next/next/no-img-element
-											<img
+											<Image
 												src={post.entry.coverImage}
 												alt={post.entry.title}
-												className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 filter grayscale group-hover:grayscale-0"
+												fill
+												className="object-cover transition-transform duration-700 group-hover:scale-110 filter grayscale group-hover:grayscale-0"
 											/>
 										) : (
 											<div className="w-full h-full bg-paper-300 dark:bg-ink-light flex items-center justify-center">
 												<span className="font-serif text-6xl text-graphite/20">
-													“
+													"
 												</span>
 											</div>
 										)}

@@ -46,9 +46,9 @@ export default function GenaSection() {
 								</span>
 								<div className="w-12 h-0.5 bg-merlot my-6"></div>
 								<p className="font-sans font-light italic text-lg text-ink">
-									&ldquo;Criamos vinho para o futuro, nutrido por nossas raízes. Não é
-									uma questão de escolher entre tradição e inovação, mas de
-									uni-las com respeito e ousadia.&rdquo;
+									&ldquo;Criamos vinho para o futuro, nutrido por nossas raízes.
+									Não é uma questão de escolher entre tradição e inovação, mas
+									de uni-las com respeito e ousadia.&rdquo;
 								</p>
 							</div>
 						</motion.div>

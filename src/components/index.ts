@@ -1,7 +1,7 @@
-export { Navigation } from "./Navigation";
 export { default as Footer } from "./Footer";
 export { HeroSlideshow } from "./HeroSlideshow";
-export { Newsletter } from "./Newsletter";
-export { WineCard } from "./WineCard";
 export { LabelShowcase } from "./LabelShowcase";
+export { Navigation } from "./Navigation";
+export { Newsletter } from "./Newsletter";
 export { ThemeProvider, useTheme } from "./ThemeProvider";
+export { WineCard } from "./WineCard";

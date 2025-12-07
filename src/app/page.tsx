@@ -1,6 +1,7 @@
 export const dynamic = "force-dynamic";
 
 import { createGitHubReader } from "@keystatic/core/reader/github";
+import Image from "next/image";
 import Link from "next/link";
 import { Footer, HeroSlideshow, Navigation, Newsletter } from "@/components";
 import { WineCard } from "@/components/WineCard"; // We will update this
@@ -122,11 +123,11 @@ export default async function Home() {
 										<div className="grid grid-cols-12 gap-6 items-center">
 											<div className="col-span-4 aspect-square relative overflow-hidden bg-paper-200">
 												{post.entry.coverImage && (
-													// eslint-disable-next-line @next/next/no-img-element
-													<img
+													<Image
 														src={post.entry.coverImage}
 														alt=""
-														className="object-cover w-full h-full transition-transform duration-500 group-hover:scale-110 filter grayscale group-hover:grayscale-0"
+														fill
+														className="object-cover transition-transform duration-500 group-hover:scale-110 filter grayscale group-hover:grayscale-0"
 													/>
 												)}
 											</div>

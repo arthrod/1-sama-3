@@ -37,9 +37,9 @@ export default function BernadeteSection() {
 							</span>
 							<div className="w-12 h-0.5 bg-paper opacity-80 my-6 ml-auto"></div>
 							<p className="font-sans font-light italic text-lg text-paper">
-								&ldquo;A tradição nos dá raízes; a inovação nos dá asas. O verdadeiro
-								artesão do vinho sabe quando plantar os pés e quando permitir-se
-								voar.&rdquo;
+								&ldquo;A tradição nos dá raízes; a inovação nos dá asas. O
+								verdadeiro artesão do vinho sabe quando plantar os pés e quando
+								permitir-se voar.&rdquo;
 							</p>
 						</div>
 

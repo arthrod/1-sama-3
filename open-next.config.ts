@@ -5,9 +5,9 @@ const config = defineCloudflareConfig({}) as any;
 
 // Configure Cloudflare-specific options
 config.cloudflare = {
-  // Enable workerd build conditions for proper Cloudflare Workers compatibility
-  // This ensures packages resolve correctly for the Cloudflare runtime
-  useWorkerdCondition: true,
+	// Enable workerd build conditions for proper Cloudflare Workers compatibility
+	// This ensures packages resolve correctly for the Cloudflare runtime
+	useWorkerdCondition: true,
 };
 
 // Add buildCommand to prevent infinite loop

@@ -1,8 +1,8 @@
 export const dynamic = "force-dynamic";
 
+import { createGitHubReader } from "@keystatic/core/reader/github";
 import { Footer, Navigation } from "@/components";
 import { WineCard } from "@/components/WineCard";
-import { createGitHubReader } from "@keystatic/core/reader/github";
 import keystaticConfig from "../../../keystatic.config";
 import "../../lib/keystatic-client";
 
@@ -28,9 +28,9 @@ export default async function WinesPage() {
 							A Garrafeira
 						</h1>
 						<p className="font-serif text-xl text-ink-faint dark:text-graphite-lighter leading-relaxed italic">
-							&ldquo;Vinhos que expressam a alma de Ritápolis. A colheita de inverno
-							concentra os açúcares e acentua os taninos, resultando em um corpo
-							excepcional.&rdquo;
+							&ldquo;Vinhos que expressam a alma de Ritápolis. A colheita de
+							inverno concentra os açúcares e acentua os taninos, resultando em
+							um corpo excepcional.&rdquo;
 						</p>
 					</div>
 

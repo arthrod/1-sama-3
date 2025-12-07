@@ -1,19 +1,19 @@
 {
-  "$schema": "./node_modules/wrangler/config-schema.json",
-  "main": "./worker.ts",
-  "name": "samarias",
-  "compatibility_date": "2025-03-25",
-  "compatibility_flags": ["nodejs_compat"],
-  "assets": {
-    "directory": ".open-next/assets",
-    "binding": "ASSETS"
-  },
-  "vars": {
-    "CMS_CLIENT": "keystatic",
-"PUBLIC_KEYSTATIC_GITHUB_APP_SLUG": "1-sama-3",
-    "NEXT_PUBLIC_KEYSTATIC_STORAGE_KIND": "github",
-    "NEXT_PUBLIC_KEYSTATIC_STORAGE_REPO": "arthrod/1-sama-3",
-    "KEYSTATIC_PATH_PREFIX": "",
-    "NEXT_PUBLIC_KEYSTATIC_CONTENT_PATH": "./src/content"
-  }
+	"$schema": "./node_modules/wrangler/config-schema.json",
+	"main": "./worker.ts",
+	"name": "samarias",
+	"compatibility_date": "2025-03-25",
+	"compatibility_flags": ["nodejs_compat"],
+	"assets": {
+		"directory": ".open-next/assets",
+		"binding": "ASSETS"
+	},
+	"vars": {
+		"CMS_CLIENT": "keystatic",
+		"PUBLIC_KEYSTATIC_GITHUB_APP_SLUG": "1-sama-3",
+		"NEXT_PUBLIC_KEYSTATIC_STORAGE_KIND": "github",
+		"NEXT_PUBLIC_KEYSTATIC_STORAGE_REPO": "arthrod/1-sama-3",
+		"KEYSTATIC_PATH_PREFIX": "",
+		"NEXT_PUBLIC_KEYSTATIC_CONTENT_PATH": "./src/content"
+	}
 }
