@@ -10,7 +10,7 @@ Create a `.env.local` file based on `.env.example` and configure the following:
 - `CMS_CLIENT=keystatic` - Specifies Keystatic as the CMS
 - `NEXT_PUBLIC_KEYSTATIC_STORAGE_KIND=github` - Storage type (github for our setup)
 - `NEXT_PUBLIC_KEYSTATIC_STORAGE_REPO=arthrod/1-sama-3` - Your GitHub repository
-- `NEXT_PUBLIC_KEYSTATIC_CONTENT_PATH=src/content` - Path to content folder
+- `NEXT_PUBLIC_KEYSTATIC_CONTENT_PATH=./src/content` - Path to content folder
 - `KEYSTATIC_GITHUB_TOKEN` - GitHub token with read permissions
 
 ### Getting a GitHub Token:
