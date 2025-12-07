@@ -1,10 +1,10 @@
 export const dynamic = "force-dynamic";
 
+// import { WineCard } from "@/components/WineCard"; // Removed to use custom inline card
+import { Footer, HeroSlideshow, Navigation, Newsletter } from "@/components";
 import { createGitHubReader } from "@keystatic/core/reader/github";
 import Image from "next/image";
 import Link from "next/link";
-import { Footer, HeroSlideshow, Navigation, Newsletter } from "@/components";
-import { WineCard } from "@/components/WineCard"; // We will update this
 import keystaticConfig from "../../keystatic.config";
 import "../lib/keystatic-client";
 
@@ -42,7 +42,8 @@ export default async function Home() {
 		<div className="min-h-screen transition-colors duration-500 bg-paper dark:bg-paper-dark">
 			<Navigation />
 
-			<main className="pt-16 min-h-screen">
+			{/* IMMERSIVE EFFECT: pt-16 removed so Hero slides behind Nav */}
+			<main className="min-h-screen">
 				<div className="animate-fade-in pb-24">
 					<HeroSlideshow />
 
@@ -68,18 +69,42 @@ export default async function Home() {
 						>
 							{wines.length > 0 ? (
 								wines.map((wine) => (
-									<WineCard
+									/* CUSTOM INLINE CARD (No Price, Big Title) */
+									<div
 										key={wine.slug}
-										product={{
-											name: wine.entry.name,
-											year: wine.entry.year,
-											type: wine.entry.type,
-											region: "Ritápolis - MG",
-											price: wine.entry.price || 0,
-											image: wine.entry.image || "",
-											slug: wine.slug,
-										}}
-									/>
+										className="group cursor-pointer flex flex-col gap-6"
+									>
+										<div className="aspect-[3/4] bg-paper-200 overflow-hidden relative border border-paper-300">
+											{wine.entry.image && (
+												<Image
+													src={wine.entry.image}
+													alt={wine.entry.name}
+													fill
+													className="object-cover transition-transform duration-700 group-hover:scale-105"
+												/>
+											)}
+											<div className="absolute bottom-0 left-0 bg-white dark:bg-ink px-3 py-1 text-xs font-sans uppercase tracking-widest text-ink dark:text-paper">
+												{wine.entry.type}
+											</div>
+										</div>
+
+										<div className="flex flex-col">
+											{/* CHANGE TITLE SIZE HERE: 
+                                                Current: text-4xl md:text-5xl (Approx 2.5x standard)
+                                                
+                                                - For 1.5x size: use "text-2xl md:text-3xl"
+                                                - For 3x size: use "text-5xl md:text-6xl"
+                                                - For Massive: use "text-6xl md:text-7xl"
+                                            */}
+											<h3 className="font-serif text-4xl md:text-5xl text-ink dark:text-paper leading-tight group-hover:text-merlot transition-colors mb-2">
+												{wine.entry.name}
+											</h3>
+											<p className="text-sm text-graphite font-sans">
+												{wine.entry.year} • Ritápolis - MG
+											</p>
+											{/* Price removed as requested */}
+										</div>
+									</div>
 								))
 							) : (
 								<div className="col-span-full text-center py-20 bg-paper-200 dark:bg-ink border border-dotted border-graphite">
@@ -104,7 +129,10 @@ export default async function Home() {
 									A Comunidade
 								</span>
 							</div>
-							<Newsletter />
+							{/* Constrain width to fit container (approx 28rem/450px) */}
+							<div className="w-full max-w-md">
+								<Newsletter />
+							</div>
 						</div>
 
 						{/* Right: Latest Posts */}

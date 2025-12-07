@@ -11,7 +11,7 @@
 !.yarn/versions
 package-lock.json
 yarn.lock
-
+dist/
 # testing
 /coverage
 
