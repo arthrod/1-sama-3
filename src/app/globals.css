@@ -54,31 +54,32 @@
   100% { opacity: 1; transform: translateY(0); }
 }
 
-/* Custom Scrollbar */
+/* Discreet Scrollbar - Thinner and lower contrast */
 ::-webkit-scrollbar {
-  width: 6px;
+  width: 4px; /* Reduced from 6px */
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--color-paper);
-}
-
-.dark ::-webkit-scrollbar-track {
-  background: var(--color-paper-dark);
+  background: transparent;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--color-graphite);
-  border-radius: 0px;
+  background: rgba(89, 84, 80, 0.3); /* Low opacity graphite */
+  border-radius: 2px;
+  transition: background 0.3s;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--color-ink);
+  background: rgba(89, 84, 80, 0.6);
 }
 
 /* Utility Classes */
 .text-balance {
   text-wrap: balance;
+}
+
+html {
+    scroll-behavior: smooth;
 }
 
 /* Selection styling */
@@ -119,21 +120,44 @@ a:hover {
 
 /* Prose Styling (Blog) */
 .prose-samarias {
-  --tw-prose-body: var(--color-ink-faint);
-  --tw-prose-headings: var(--color-ink);
-  --tw-prose-links: var(--color-merlot);
-  --tw-prose-bold: var(--color-ink);
-  --tw-prose-quotes: var(--color-graphite);
-  --tw-prose-quote-borders: var(--color-merlot);
-  --tw-prose-hr: var(--color-graphite-lighter);
+  @apply max-w-none;
+  font-family: var(--font-serif);
 }
 
-.dark .prose-samarias {
-  --tw-prose-body: var(--color-graphite-lighter);
-  --tw-prose-headings: var(--color-paper);
-  --tw-prose-links: var(--color-merlot-light);
-  --tw-prose-bold: var(--color-paper);
-  --tw-prose-quotes: var(--color-graphite-light);
-  --tw-prose-quote-borders: var(--color-merlot-light);
-  --tw-prose-hr: var(--color-graphite);
+.prose-samarias p {
+    font-size: 1.125rem;
+    line-height: 1.8;
+    color: var(--color-ink-faint);
+    margin-bottom: 2em;
+}
+
+.dark .prose-samarias p {
+    color: var(--color-graphite-lighter);
+}
+
+.prose-samarias h2 {
+    font-family: var(--font-serif);
+    font-size: 2rem;
+    margin-top: 3rem;
+    margin-bottom: 1.5rem;
+    color: var(--color-ink);
+}
+
+.dark .prose-samarias h2 {
+    color: var(--color-paper);
+}
+
+/* First Letter Drop Cap for impact */
+.prose-samarias > p:first-of-type::first-letter {
+  float: left;
+  font-family: var(--font-script);
+  font-size: 4rem;
+  line-height: 0.8;
+  padding-right: 0.5rem;
+  padding-top: 0.1rem;
+  color: var(--color-merlot);
+}
+
+.dark .prose-samarias > p:first-of-type::first-letter {
+  color: var(--color-merlot-light);
 }
