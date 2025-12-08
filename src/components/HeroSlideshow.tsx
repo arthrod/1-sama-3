@@ -87,7 +87,8 @@ export function HeroSlideshow() {
 						alt={SLIDES[currentSlide].alt}
 						fill
 						className="object-cover"
-						priority
+						loading={currentSlide === 0 ? "eager" : "lazy"}
+						priority={currentSlide === 0}
 						sizes="100vw"
 					/>
 				</motion.div>
