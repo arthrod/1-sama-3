@@ -108,8 +108,8 @@ const jsonLd = {
       petsAllowed: true,
       aggregateRating: {
         "@type": "AggregateRating",
-        ratingValue: "4.89",
-        reviewCount: "47",
+        ratingValue: 4.89,
+        reviewCount: 47,
       },
     },
     {
