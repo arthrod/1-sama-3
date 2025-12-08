@@ -55,7 +55,7 @@ const jsonLd = {
 				contactType: "customer service",
 				email: "contato@samarias.org",
 			},
-			sameAs: [],
+sameAs: ["https://www.facebook.com/your-page", "https://www.instagram.com/your-page"],
 		},
 		{
 			"@type": ["Winery", "TouristAttraction"],
