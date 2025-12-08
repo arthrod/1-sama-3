@@ -15,15 +15,29 @@ export function Newsletter() {
 		}
 
 		setStatus("loading");
-
-		// Simulate API call
-		setTimeout(() => {
-			setStatus("success");
-			setName("");
-			setEmail("");
-			setTimeout(() => setStatus("idle"), 3000);
-		}, 1000);
 	};
+
+	useEffect(() => {
+		let successTimer: NodeJS.Timeout;
+		let idleTimer: NodeJS.Timeout;
+
+		if (status === "loading") {
+			successTimer = setTimeout(() => {
+				setStatus("success");
+				setName("");
+				setEmail("");
+			}, 1000);
+		} else if (status === "success") {
+			idleTimer = setTimeout(() => {
+				setStatus("idle");
+			}, 3000);
+		}
+
+		return () => {
+			clearTimeout(successTimer);
+			clearTimeout(idleTimer);
+		};
+	}, [status]);
 
 	return (
 		<section id="newsletter" className="py-32 bg-ink text-paper relative overflow-hidden">
