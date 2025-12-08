@@ -204,10 +204,10 @@ export default function RootLayout({
 				className={`${playfair.variable} ${lato.variable} ${greatVibes.variable} antialiased`}
 			>
 				{/* JSON-LD structured data for search engines */}
-				<script
-					type="application/ld+json"
-					dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-				/>
+				{/* Prefer Metadata route or framework support; if inline is required: */}
+				<script type="application/ld+json">
+				  {JSON.stringify(jsonLd)}
+				</script>
 				<ThemeProvider>{children}</ThemeProvider>
 			</body>
 		</html>
