@@ -1,88 +1,94 @@
 "use client";
 
-import { motion } from "framer-motion";
 import Link from "next/link";
 
 export default function Footer() {
 	return (
-		<footer
-			id="contato"
-			className="py-12 sm:py-16 bg-paper-dark text-paper border-t border-dotted border-graphite"
-		>
-			<div className="container mx-auto px-6 lg:px-20">
-				<motion.div
-					className="grid grid-cols-1 md:grid-cols-2 gap-12 items-start"
-					initial={{ opacity: 0, y: 30 }}
-					whileInView={{ opacity: 1, y: 0 }}
-					transition={{ duration: 0.8 }}
-					viewport={{ once: true, margin: "-100px" }}
-				>
-					<div>
-						<h2 className="font-serif text-3xl mb-6 lg:text-4xl text-paper">
-							VINHEDO SAMARIAS
-						</h2>
-						<p className="font-sans text-sm opacity-80 leading-relaxed max-w-md text-graphite-lighter">
+		<footer id="contato" className="py-16 bg-black text-paper border-t border-graphite">
+			<div className="max-w-7xl mx-auto px-6">
+				<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
+					{/* Brand */}
+					<div className="lg:col-span-2">
+						<h2 className="font-script text-4xl mb-6 text-paper">Sá Marias</h2>
+						<p className="text-graphite-lighter text-sm leading-relaxed max-w-md mb-6">
 							Localizado nas colinas de Minas Gerais, nosso vinhedo combina
-							tradição mineira e terroir brasileiro em produtos que expressam a
-							alma de nossa terra através de três gerações de conhecimento.
+							tradição mineira e terroir brasileiro em produtos que expressam
+							a alma de nossa terra através de três gerações de conhecimento.
 						</p>
-					</div>
-
-					<div className="font-sans text-sm">
-						<div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
-							<div>
-								<h3 className="uppercase tracking-widest opacity-50 mb-4 text-paper">
-									Contato
-								</h3>
-								<ul className="space-y-3 opacity-80 text-graphite-lighter">
-									<li>contato@samarias.org</li>
-									<li>+55 (32) 99988-8075</li>
-									<li>
-										Rua Belo Horizonte, 74
-										<br />
-										Ritápolis, MG - Brasil
-									</li>
-								</ul>
-							</div>
-							<div>
-								<h3 className="uppercase tracking-widest opacity-50 mb-4 text-paper">
-									Visite-nos
-								</h3>
-								<ul className="space-y-3 opacity-80 text-graphite-lighter">
-									<li>
-										Visitas guiadas com
-										<br />
-										agendamento prévio.
-									</li>
-								</ul>
-							</div>
+						<div className="flex gap-4">
+							<a
+								href="#"
+								className="w-10 h-10 border border-graphite flex items-center justify-center text-graphite-lighter hover:text-paper hover:border-paper transition-colors no-underline"
+							>
+								<span>IG</span>
+							</a>
+							<a
+								href="#"
+								className="w-10 h-10 border border-graphite flex items-center justify-center text-graphite-lighter hover:text-paper hover:border-paper transition-colors no-underline"
+							>
+								<span>FB</span>
+							</a>
 						</div>
 					</div>
-				</motion.div>
 
-				<div className="mt-16 pt-6 border-t border-graphite flex flex-col sm:flex-row justify-between items-center">
-					<p className="font-sans text-xs opacity-50 mb-4 sm:mb-0 text-graphite-lighter">
-						© {new Date().getFullYear()} Vinhedo Samarias. Todos os direitos
+					{/* Contact */}
+					<div>
+						<h3 className="text-xs uppercase tracking-widest text-graphite mb-6">
+							Contato
+						</h3>
+						<ul className="space-y-3 text-graphite-lighter text-sm">
+							<li>contato@samarias.org</li>
+							<li>+55 (32) 99988-8075</li>
+							<li>
+								Rua Belo Horizonte, 74
+								<br />
+								Ritápolis, MG - Brasil
+							</li>
+						</ul>
+					</div>
+
+					{/* Visit */}
+					<div>
+						<h3 className="text-xs uppercase tracking-widest text-graphite mb-6">
+							Visite-nos
+						</h3>
+						<ul className="space-y-3 text-graphite-lighter text-sm">
+							<li>Visitas guiadas com agendamento prévio.</li>
+							<li>
+								<a
+									href="#sitio-dutra"
+									className="text-merlot-light no-underline hover:text-paper transition-colors"
+								>
+									Hospede-se no Sítio Dutra →
+								</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+
+				<div className="pt-8 border-t border-graphite flex flex-col md:flex-row justify-between items-center gap-4">
+					<p className="text-xs text-graphite">
+						© {new Date().getFullYear()} Vinhedo Sá Marias. Todos os direitos
 						reservados.
 					</p>
-					<div className="font-sans text-xs opacity-50">
+					<div className="text-xs text-graphite flex gap-6">
 						<Link
 							href="/termos-e-condicoes"
-							className="mr-4 text-graphite-lighter no-underline hover:opacity-100 transition-opacity hover:text-paper"
+							className="hover:text-paper transition-colors no-underline"
 						>
-							Termos e Condições
+							Termos
 						</Link>
 						<Link
 							href="/politica-de-privacidade"
-							className="mr-4 text-graphite-lighter no-underline hover:opacity-100 transition-opacity hover:text-paper"
+							className="hover:text-paper transition-colors no-underline"
 						>
-							Política de Privacidade
+							Privacidade
 						</Link>
 						<Link
-							href="/keystatic"
-							className="text-graphite-lighter no-underline opacity-30 hover:opacity-100 transition-opacity hover:text-paper"
+							href="/llm.txt"
+							className="hover:text-paper transition-colors no-underline"
 						>
-							Admin
+							llm.txt
 						</Link>
 					</div>
 				</div>
