@@ -33,6 +33,7 @@ export default function Footer() {
 								<span>FB</span>
 							</a>
 						</div>
+					</div>
 
 					{/* Contact */}
 					<div>
