@@ -4,10 +4,12 @@
 	"name": "samarias",
 	"compatibility_date": "2025-03-25",
 	"compatibility_flags": ["nodejs_compat"],
+
 	"assets": {
 		"directory": ".open-next/assets",
 		"binding": "ASSETS"
 	},
+
 	"vars": {
 		"CMS_CLIENT": "keystatic",
 		"PUBLIC_KEYSTATIC_GITHUB_APP_SLUG": "1-sama-3",
@@ -43,5 +45,17 @@
 			"zone_name": "samarias.org",
 			"custom_domain": true
 		}
-	]
+	],
+
+	"env": {
+		"pr": {
+			"name": "samarias-pr-*",
+			"routes": [
+				{
+					"pattern": "pr-*.samarias.org/*",
+					"zone_name": "samarias.org"
+				}
+			]
+		}
+	}
 }
