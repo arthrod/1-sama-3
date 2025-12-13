@@ -17,19 +17,22 @@ export default function Footer() {
 						</p>
 						<div className="flex gap-4">
 							<a
-								href="#"
+								href="https://instagram.com/vinhedosamarias" /* TODO: Substituir pela URL correta */
+								target="_blank"
+								rel="noopener noreferrer"
 								className="w-10 h-10 border border-graphite flex items-center justify-center text-graphite-lighter hover:text-paper hover:border-paper transition-colors no-underline"
 							>
 								<span>IG</span>
 							</a>
 							<a
-								href="#"
+								href="https://facebook.com/vinhedosamarias" /* TODO: Substituir pela URL correta */
+								target="_blank"
+								rel="noopener noreferrer"
 								className="w-10 h-10 border border-graphite flex items-center justify-center text-graphite-lighter hover:text-paper hover:border-paper transition-colors no-underline"
 							>
 								<span>FB</span>
 							</a>
 						</div>
-					</div>
 
 					{/* Contact */}
 					<div>
