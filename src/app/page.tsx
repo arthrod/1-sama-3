@@ -179,7 +179,7 @@ export default async function Home() {
 								</div>
 
 								<a
-									href="https://www.airbnb.com.br"
+									href="https://www.airbnb.com.br/h/sitiodutra"
 									target="_blank"
 									rel="noopener noreferrer"
 									className="btn-merlot animate-pulse-glow no-underline"
