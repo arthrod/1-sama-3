@@ -89,10 +89,10 @@ export default function Footer() {
 							Privacidade
 						</Link>
 						<Link
-							href="/llm.txt"
+							href="/llms.txt"
 							className="hover:text-paper transition-colors no-underline"
 						>
-							llm.txt
+							llms.txt
 						</Link>
 					</div>
 				</div>
