@@ -11,7 +11,16 @@
 		"useIgnoreFile": true
 	},
 	"files": {
-		"ignoreUnknown": false
+		"ignoreUnknown": false,
+		"includes": [
+			"**",
+			"!worker-configuration.d.ts",
+			"!cloudflare-env.d.ts",
+			"!node_modules",
+			"!.open-next",
+			"!.next",
+			"!open-next.config.ts"
+		]
 	},
 	"formatter": {
 		"enabled": true,
