@@ -1,11 +1,40 @@
-export const dynamic = "force-dynamic";
-
+import type { Metadata } from "next";
 import { createGitHubReader } from "@keystatic/core/reader/github";
 import Image from "next/image";
 import Link from "next/link";
 import { Footer, HeroSlideshow, Navigation } from "@/components";
 import keystaticConfig from "../../keystatic.config";
 import "../lib/keystatic-client";
+
+export const dynamic = "force-dynamic";
+
+// Page-specific metadata
+export const metadata: Metadata = {
+	title: "Sá Marias | Vinhos Finos de Ritápolis",
+	description: "Vinhedo familiar em Minas Gerais. Experimente vinhos finos de colheita de inverno, uma experiência única de enoturismo e hospede-se no Sítio Dutra. Três gerações de tradição vinícola.",
+	keywords: [
+		"vinho",
+		"vinhos finos",
+		"vinhedo",
+		"Ritápolis",
+		"Minas Gerais",
+		"vinho brasileiro",
+		"colheita de inverno",
+		"enoturismo",
+		"São João del Rei",
+		"Tiradentes",
+		"vinho mineiro",
+		"Sá Marias",
+		"vinho artesanal",
+		"Sítio Dutra",
+		"hospedagem rural",
+		"vinho de altitude",
+		"vinícola familiar",
+	],
+	alternates: {
+		canonical: "/",
+	},
+};
 
 // Helper to fetch data
 async function getData() {
@@ -37,11 +66,114 @@ async function getData() {
 export default async function Home() {
 	const { wines, posts } = await getData();
 
-	return (
-		<div className="min-h-screen transition-colors duration-500 bg-paper dark:bg-paper-dark">
-			<Navigation />
+	// Structured data for homepage
+	const jsonLd = {
+		"@context": "https://schema.org",
+		"@graph": [
+			{
+				"@type": "WebSite",
+				"@id": "https://samarias.org/#website",
+				url: "https://samarias.org/",
+				name: "Sá Marias",
+				description: "Vinhedo familiar em Minas Gerais. Vinhos finos de colheita de inverno, expressando o terroir único de Ritápolis através de três gerações de conhecimento.",
+				inLanguage: "pt-BR",
+				potentialAction: {
+					"@type": "SearchAction",
+					target: "https://samarias.org/?q={search_term_string}",
+					"query-input": "required name=search_term_string",
+				},
+			},
+			{
+				"@type": "Winery",
+				"@id": "https://samarias.org/#winery",
+				name: "Sá Marias",
+				alternateName: "Vinhedo Sá Marias",
+				description: "Vinhedo familiar pioneiro em colheita de inverno no Brasil, localizado em Ritápolis, Minas Gerais.",
+				url: "https://samarias.org",
+				address: {
+					"@type": "PostalAddress",
+					streetAddress: "Rua Belo Horizonte, 74",
+					addressLocality: "Ritápolis",
+					addressRegion: "MG",
+					addressCountry: "BR",
+				},
+				geo: {
+					"@type": "GeoCoordinates",
+					latitude: -21.016581,
+					longitude: -44.315856,
+				},
+				telephone: "+55 (32) 99988-8075",
+				email: "contato@samarias.org",
+				sameAs: [
+					"https://instagram.com/vinhedosamarias",
+					"https://facebook.com/vinhedosamarias",
+				],
+				amenityFeature: [
+					{
+						"@type": "LocationFeatureSpecification",
+						name: "Adegas",
+						value: true,
+					},
+					{
+						"@type": "LocationFeatureSpecification",
+						name: "Degustação de vinhos",
+						value: true,
+					},
+					{
+						"@type": "LocationFeatureSpecification",
+						name: "Tour guiado",
+						value: true,
+					},
+				],
+			},
+			{
+				"@type": "TouristAttraction",
+				"@id": "https://samarias.org/sitio-dutra/#touristattraction",
+				name: "Sítio Dutra - Hospedagem Rural",
+				description: "Hospedagem rural autêntica no coração do vinhedo Sá Marias. Experiência imersiva de enoturismo em Minas Gerais.",
+				url: "https://samarias.org/sitio-dutra",
+				photo: "https://samarias.org/images/slideshow/vinhedo-por-do-sol-redes.jpeg",
+				amenityFeature: [
+					{
+						"@type": "LocationFeatureSpecification",
+						name: "Capacidade",
+						value: "8 hóspedes",
+					},
+					{
+						"@type": "LocationFeatureSpecification",
+						name: "Quartos",
+						value: 3,
+					},
+					{
+						"@type": "LocationFeatureSpecification",
+						name: "Aceita animais",
+						value: true,
+					},
+					{
+						"@type": "LocationFeatureSpecification",
+						name: "Avaliação",
+						value: "4.89 estrelas",
+					},
+				],
+				geo: {
+					"@type": "GeoCoordinates",
+					latitude: -21.016581,
+					longitude: -44.315856,
+				},
+			},
+		],
+	};
 
-			<main className="min-h-screen">
+	return (
+		<>
+			<script
+				type="application/ld+json"
+				dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+			/>
+			<div className="min-h-screen transition-colors duration-500 bg-paper dark:bg-paper-dark">
+				<Navigation />
+
+				<main className="min-h-screen">
 				{/* HERO SECTION */}
 				<HeroSlideshow />
 
@@ -290,5 +422,6 @@ export default async function Home() {
 
 			<Footer />
 		</div>
+		</>
 	);
 }
