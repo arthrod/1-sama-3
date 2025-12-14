@@ -1,0 +1,21 @@
+{
+	"name": "Sá Marias - Vinhos Finos",
+	"short_name": "Sá Marias",
+	"description": "Vinhedo familiar em Minas Gerais. Vinhos finos de colheita de inverno.",
+	"start_url": "/",
+	"display": "standalone",
+	"background_color": "#faf9f7",
+	"theme_color": "#541e23",
+	"icons": [
+		{
+			"src": "/icon",
+			"sizes": "32x32",
+			"type": "image/png"
+		},
+		{
+			"src": "/apple-icon",
+			"sizes": "180x180",
+			"type": "image/png"
+		}
+	]
+}
