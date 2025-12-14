@@ -3,7 +3,7 @@ export const dynamic = "force-dynamic";
 import { createGitHubReader } from "@keystatic/core/reader/github";
 import Image from "next/image";
 import Link from "next/link";
-import { Footer, HeroSlideshow, Navigation, Newsletter } from "@/components";
+import { Footer, HeroSlideshow, Navigation } from "@/components";
 import keystaticConfig from "../../keystatic.config";
 import "../lib/keystatic-client";
 
@@ -45,185 +45,247 @@ export default async function Home() {
 				{/* HERO SECTION */}
 				<HeroSlideshow />
 
-				{/* WINES SECTION */}
-				<section id="vinhos" className="py-32 bg-paper dark:bg-paper-dark">
+				{/* CRÔNICAS + SÍTIO DUTRA - Side by Side */}
+				<section className="py-24 bg-paper dark:bg-paper-dark">
 					<div className="max-w-7xl mx-auto px-6">
-						<div className="text-center mb-20">
-							<span className="text-xs tracking-[0.3em] uppercase text-graphite mb-4 block font-sans">
-								A Garrafeira
-							</span>
-							<h2 className="font-serif text-5xl md:text-7xl text-ink dark:text-paper mb-6">
-								Nossos Vinhos
-							</h2>
-							<div className="section-divider" />
-						</div>
-
-						<div
-							className={`grid gap-12 ${
-								wines.length === 1 ? "grid-cols-1 max-w-2xl mx-auto" : ""
-							} ${wines.length === 2 ? "grid-cols-1 md:grid-cols-2" : ""} ${wines.length >= 3 ? "grid-cols-1 md:grid-cols-2 lg:grid-cols-3" : ""}`}
-						>
-							{wines.length > 0 ? (
-								wines.map((wine) => (
-									<div
-										key={wine.slug}
-										className="group cursor-pointer"
-									>
-										<div className="aspect-[3/4] bg-paper-200 overflow-hidden relative border border-paper-300 dark:border-graphite mb-6">
-											{wine.entry.image && (
-												<Image
-													src={wine.entry.image}
-													alt={wine.entry.name}
-													fill
-													className="object-cover transition-transform duration-700 group-hover:scale-105 img-hover-color"
-												/>
-											)}
-											<div className="absolute bottom-0 left-0 bg-paper dark:bg-ink px-4 py-2 text-xs font-sans uppercase tracking-widest text-ink dark:text-paper">
-												{wine.entry.type}
-											</div>
-										</div>
-										<span className="text-[10px] uppercase tracking-[0.3em] text-graphite block mb-2">
-											Ritápolis - MG
-										</span>
-										<h3 className="font-script text-5xl text-ink dark:text-paper group-hover:text-merlot transition-colors mb-2">
-											{wine.entry.name}
-										</h3>
-										<p className="text-sm text-graphite">
-											{wine.entry.year} • Vinho Fino Tinto Seco
-										</p>
-									</div>
-								))
-							) : (
-								<div className="col-span-full text-center py-20 bg-paper-200 dark:bg-ink border border-dotted border-graphite">
-									<p className="font-serif italic text-graphite">
-										A próxima safra está descansando...
-									</p>
-								</div>
-							)}
-						</div>
-					</div>
-				</section>
-
-					{/* CRÔNICAS (BLOG) SECTION */}
-				<section id="cronicas" className="py-32 bg-paper-200 dark:bg-paper-dark">
-					<div className="max-w-7xl mx-auto px-6">
-						<div className="grid grid-cols-1 lg:grid-cols-12 gap-16">
-							{/* Latest Posts */}
-							<div className="lg:col-span-7">
-								<div className="flex items-center gap-4 mb-10">
+						<div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+							{/* CRÔNICAS CARD */}
+							<div className="bg-paper-200 dark:bg-ink p-8 lg:p-12 border border-graphite/10 dark:border-graphite">
+								<div className="flex items-center gap-4 mb-8">
 									<span className="w-12 h-px bg-merlot" />
-									<span className="text-xs tracking-[0.3em] uppercase text-graphite">
+									<span className="text-xs tracking-[0.3em] uppercase text-graphite dark:text-graphite-lighter">
 										Blog
 									</span>
 								</div>
-								<h2 className="font-serif text-5xl text-ink dark:text-paper mb-12">
+								<h2 className="font-serif text-4xl lg:text-5xl text-ink dark:text-paper mb-8">
 									Crônicas da Adega
 								</h2>
 
-								<div className="space-y-12">
-									{posts.map((post) => (
+								<div className="space-y-6 mb-8">
+									{posts.slice(0, 2).map((post) => (
 										<Link
 											key={post.slug}
 											href={`/posts/${post.slug}`}
 											className="block group no-underline"
 										>
-											<article className="grid grid-cols-12 gap-6 items-center">
-												<div className="col-span-4">
-													<div className="aspect-square overflow-hidden bg-paper-300 dark:bg-ink">
-														{post.entry.coverImage && (
-															<Image
-																src={post.entry.coverImage}
-																alt={post.entry.title}
-																width={400}
-																height={400}
-																className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110 img-hover-color"
-															/>
-														)}
-													</div>
+											<article className="flex gap-4 items-start">
+												<div className="w-20 h-20 flex-shrink-0 overflow-hidden bg-paper-300 dark:bg-paper-dark">
+													{post.entry.coverImage && (
+														<Image
+															src={post.entry.coverImage}
+															alt={post.entry.title}
+															width={80}
+															height={80}
+															className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+														/>
+													)}
 												</div>
-												<div className="col-span-8">
-													<span className="text-[10px] uppercase tracking-widest text-merlot mb-2 block">
+												<div className="flex-1 min-w-0">
+													<span className="text-[10px] uppercase tracking-widest text-merlot dark:text-merlot-light mb-1 block">
 														{post.entry.publishedDate}
 													</span>
-													<h3 className="font-serif text-2xl text-ink dark:text-paper leading-tight mb-3 group-hover:text-merlot transition-colors">
+													<h3 className="font-serif text-lg text-ink dark:text-paper leading-tight group-hover:text-merlot dark:group-hover:text-merlot-light transition-colors line-clamp-2">
 														{post.entry.title}
 													</h3>
-													<p className="text-sm text-graphite line-clamp-2">
-														{post.entry.excerpt}
-													</p>
 												</div>
 											</article>
 										</Link>
 									))}
 								</div>
 
-								<div className="mt-12">
-									<Link
-										href="/posts"
-										className="inline-flex items-center gap-2 font-serif text-lg text-ink dark:text-paper hover:text-merlot transition-colors no-underline"
-									>
-										Ver todas as histórias <span className="text-xl">→</span>
-									</Link>
-								</div>
+								<Link
+									href="/posts"
+									className="inline-flex items-center gap-2 font-sans text-sm uppercase tracking-widest text-ink dark:text-paper hover:text-merlot dark:hover:text-merlot-light transition-colors no-underline"
+								>
+									Ver todas as histórias <span className="text-lg">→</span>
+								</Link>
 							</div>
 
-							{/* Sítio Dutra Quick Access */}
-							<div className="lg:col-span-5">
-								<div className="sticky top-32">
-									<div className="bg-ink text-paper p-8 mb-8">
-										<span className="text-[10px] uppercase tracking-widest text-merlot-light block mb-4">
-											Hospedagem
+							{/* SÍTIO DUTRA CARD */}
+							<div className="relative overflow-hidden">
+								<div className="absolute inset-0">
+									<Image
+										src="/images/slideshow/vinhedo-por-do-sol-redes.jpeg"
+										alt="Sítio Dutra"
+										fill
+										className="object-cover"
+									/>
+									<div className="absolute inset-0 bg-ink/70" />
+								</div>
+								<div className="relative z-10 p-8 lg:p-12 h-full flex flex-col justify-between min-h-[400px]">
+									<div>
+										<span className="text-xs tracking-[0.3em] uppercase text-merlot-light mb-4 block">
+											Hospedagem Rural
 										</span>
-										<h3 className="font-serif text-3xl mb-4">Sítio Dutra</h3>
-										<p className="text-graphite-lighter text-sm mb-6">
-											Viva a experiência completa. Fique no coração do vinhedo e
-											acorde com a vista das videiras.
+										<h2 className="font-serif text-4xl lg:text-5xl text-paper mb-4">
+											Sítio Dutra
+										</h2>
+										<p className="text-paper/80 text-lg font-serif italic mb-6">
+											Casa na roça, trilha e experiência autêntica
 										</p>
 										<div className="flex items-center gap-4 mb-6">
-											<span className="text-2xl">⭐</span>
-											<div>
-												<span className="font-bold">4.89</span>
-												<span className="text-graphite-lighter text-sm">
-													{" "}
+											<span className="text-xl">⭐</span>
+											<div className="text-paper">
+												<span className="font-bold text-xl">4.89</span>
+												<span className="text-paper/70 text-sm ml-2">
 													• 47 avaliações
 												</span>
 											</div>
 										</div>
-										<Link
-											href="/sitio-dutra"
-											className="block text-center bg-paper text-ink py-3 font-bold uppercase tracking-widest text-xs hover:bg-merlot hover:text-paper transition-colors no-underline"
-										>
-											Conhecer o Sítio
-										</Link>
 									</div>
-
-									{/* Quick Stats */}
-									<div className="grid grid-cols-2 gap-4">
-										<div className="bg-paper dark:bg-ink p-6 text-center border border-paper-300 dark:border-graphite">
-											<span className="block text-4xl font-serif font-bold text-merlot">
-												3
-											</span>
-											<span className="text-xs uppercase tracking-widest text-graphite">
-												Gerações
-											</span>
-										</div>
-										<div className="bg-paper dark:bg-ink p-6 text-center border border-paper-300 dark:border-graphite">
-											<span className="block text-4xl font-serif font-bold text-merlot">
-												1
-											</span>
-											<span className="text-xs uppercase tracking-widest text-graphite">
-												Terroir
-											</span>
-										</div>
+									<div className="flex flex-wrap gap-3 mb-6">
+										<span className="px-3 py-1 border border-paper/30 text-paper/80 text-xs">
+											8 Hóspedes
+										</span>
+										<span className="px-3 py-1 border border-paper/30 text-paper/80 text-xs">
+											3 Quartos
+										</span>
+										<span className="px-3 py-1 border border-paper/30 text-paper/80 text-xs">
+											Aceita Pets
+										</span>
 									</div>
+									<Link
+										href="/sitio-dutra"
+										className="inline-block text-center bg-paper text-ink py-3 px-6 font-bold uppercase tracking-widest text-xs hover:bg-merlot hover:text-paper transition-colors no-underline"
+									>
+										Conhecer o Sítio
+									</Link>
 								</div>
 							</div>
 						</div>
 					</div>
 				</section>
 
-				{/* NEWSLETTER SECTION */}
-				<Newsletter />
+				{/* VINHOS + NEWSLETTER - Side by Side */}
+				<section className="py-24 bg-paper-200 dark:bg-ink">
+					<div className="max-w-7xl mx-auto px-6">
+						<div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+							{/* VINHOS CARD */}
+							<div className="relative overflow-hidden min-h-[500px]">
+								<div className="absolute inset-0">
+									<Image
+										src="/images/slideshow/cachos-uvas-sol.jpeg"
+										alt="Vinhos Sá Marias"
+										fill
+										className="object-cover"
+									/>
+									<div className="absolute inset-0 bg-gradient-to-t from-ink/90 via-ink/50 to-ink/30" />
+								</div>
+								<div className="relative z-10 p-8 lg:p-12 h-full flex flex-col justify-end">
+									<span className="text-xs tracking-[0.3em] uppercase text-merlot-light mb-4 block">
+										A Garrafeira
+									</span>
+									<h2 className="font-serif text-4xl lg:text-5xl text-paper mb-4">
+										Nossos Vinhos
+									</h2>
+									<p className="text-paper/80 mb-8 max-w-md">
+										Vinhos de colheita de inverno, expressando o terroir único de
+										Ritápolis através de três gerações de conhecimento.
+									</p>
+
+									{/* Wine preview */}
+									<div className="flex gap-4 mb-8">
+										{wines.slice(0, 3).map((wine) => (
+											<div
+												key={wine.slug}
+												className="w-16 h-20 bg-paper/10 backdrop-blur-sm border border-paper/20 flex items-center justify-center overflow-hidden"
+											>
+												{wine.entry.image ? (
+													<Image
+														src={wine.entry.image}
+														alt={wine.entry.name}
+														width={60}
+														height={80}
+														className="object-contain"
+													/>
+												) : (
+													<span className="font-script text-paper/50 text-2xl">
+														Sá
+													</span>
+												)}
+											</div>
+										))}
+									</div>
+
+									{/* Stats */}
+									<div className="flex gap-8 mb-8">
+										<div>
+											<span className="block font-serif text-3xl font-bold text-paper">
+												1000m
+											</span>
+											<span className="text-xs uppercase tracking-widest text-paper/60">
+												Altitude
+											</span>
+										</div>
+										<div>
+											<span className="block font-serif text-3xl font-bold text-paper">
+												Inverno
+											</span>
+											<span className="text-xs uppercase tracking-widest text-paper/60">
+												Colheita
+											</span>
+										</div>
+									</div>
+
+									<Link
+										href="/vinhos"
+										className="inline-block text-center bg-merlot text-paper py-3 px-6 font-bold uppercase tracking-widest text-xs hover:bg-merlot-light transition-colors no-underline w-fit"
+									>
+										Explorar Vinhos
+									</Link>
+								</div>
+							</div>
+
+							{/* NEWSLETTER CARD */}
+							<div className="bg-ink text-paper p-8 lg:p-12 flex flex-col justify-center min-h-[500px]">
+								<span className="text-xs tracking-[0.3em] uppercase text-merlot-light mb-4 block">
+									Fique por Dentro
+								</span>
+								<h2 className="font-serif text-4xl lg:text-5xl text-paper mb-6">
+									Newsletter
+								</h2>
+								<p className="text-graphite-lighter mb-8 max-w-md">
+									Receba novidades sobre safras, eventos no vinhedo, receitas
+									harmonizadas e histórias da nossa família direto no seu e-mail.
+								</p>
+
+								<form className="space-y-4">
+									<div>
+										<input
+											type="text"
+											placeholder="Seu nome"
+											className="w-full bg-transparent border-b border-graphite py-3 text-paper placeholder:text-graphite focus:border-merlot-light focus:outline-none transition-colors"
+										/>
+									</div>
+									<div>
+										<input
+											type="email"
+											placeholder="Seu e-mail"
+											className="w-full bg-transparent border-b border-graphite py-3 text-paper placeholder:text-graphite focus:border-merlot-light focus:outline-none transition-colors"
+										/>
+									</div>
+									<button
+										type="submit"
+										className="mt-6 w-full bg-merlot text-paper py-4 font-bold uppercase tracking-widest text-xs hover:bg-merlot-light transition-colors"
+									>
+										Inscrever-se
+									</button>
+								</form>
+
+								<p className="text-xs text-graphite mt-6">
+									Ao se inscrever, você concorda com nossa{" "}
+									<Link
+										href="/politica-de-privacidade"
+										className="text-merlot-light hover:text-paper transition-colors"
+									>
+										Política de Privacidade
+									</Link>
+									.
+								</p>
+							</div>
+						</div>
+					</div>
+				</section>
 			</main>
 
 			<Footer />
