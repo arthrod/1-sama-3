@@ -22,7 +22,7 @@ export default function PoliticaDePrivacidade() {
 					</h1>
 					<div className="w-24 h-1 bg-merlot mx-auto" />
 					<p className="mt-8 text-graphite dark:text-graphite-lighter font-sans text-sm">
-						Última atualização: Dezembro de 2024
+						Última atualização: Dezembro de 2025
 					</p>
 				</div>
 

@@ -23,7 +23,7 @@ const greatVibes = Great_Vibes({
 	display: "swap",
 });
 
-const siteUrl = "https://samarias.com.br";
+const siteUrl = "https://samarias.org";
 
 export const metadata: Metadata = {
 	// Basic metadata

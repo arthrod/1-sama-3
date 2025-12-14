@@ -22,7 +22,7 @@ export default function TermosECondicoes() {
 					</h1>
 					<div className="w-24 h-1 bg-merlot mx-auto" />
 					<p className="mt-8 text-graphite dark:text-graphite-lighter font-sans text-sm">
-						Última atualização: Dezembro de 2024
+						Última atualização: Dezembro de 2025
 					</p>
 				</div>
 
@@ -45,7 +45,7 @@ export default function TermosECondicoes() {
 							</h2>
 							<div className="space-y-4 text-ink-faint dark:text-paper-200">
 								<p>
-									Ao acessar ou usar o site samarias.com.br, você concorda em
+									Ao acessar ou usar o site samarias.org, você concorda em
 									cumprir e estar vinculado a estes Termos e Condições de Uso,
 									bem como à nossa Política de Privacidade. Se você não concordar
 									com qualquer parte destes termos, não deverá usar nosso site.
