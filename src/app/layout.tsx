@@ -32,7 +32,7 @@ export const metadata: Metadata = {
 		template: "%s | Sá Marias",
 	},
 	description:
-		"Vinhedo familiar em Minas Gerais. Vinhos finos de colheita de inverno, expressando o terroir único de Ritápolis através de três gerações de conhecimento.",
+		"Vinhedo familiar em Minas Gerais próximo a Tiradentes. Vinhos finos de colheita de inverno, expressando o terroir único de Ritápolis através de três gerações de conhecimento.",
 	keywords: [
 		"vinho",
 		"vinhos finos",
@@ -44,9 +44,17 @@ export const metadata: Metadata = {
 		"enoturismo",
 		"São João del Rei",
 		"Tiradentes",
+		"próximo a Tiradentes",
+		"vinho perto de Tiradentes",
+		"vinhedo próximo a Tiradentes",
+		"Caminho Real",
+		"Estrada Real",
+		"vinho no Caminho Real",
 		"vinho mineiro",
 		"Sá Marias",
 		"vinho artesanal",
+		"rota do vinho Minas Gerais",
+		"circuito das cidades históricas",
 	],
 	authors: [{ name: "Sá Marias" }],
 	creator: "Sá Marias",
@@ -73,7 +81,7 @@ export const metadata: Metadata = {
 		siteName: "Sá Marias",
 		title: "Sá Marias | Vinhos Finos de Ritápolis",
 		description:
-			"Vinhedo familiar em Minas Gerais. Vinhos finos de colheita de inverno, expressando o terroir único de Ritápolis.",
+			"Vinhedo familiar em Minas Gerais próximo a Tiradentes. Vinhos finos de colheita de inverno, expressando o terroir único de Ritápolis.",
 		images: [
 			{
 				url: `${siteUrl}/opengraph-image`,
@@ -89,7 +97,7 @@ export const metadata: Metadata = {
 		card: "summary_large_image",
 		title: "Sá Marias | Vinhos Finos de Ritápolis",
 		description:
-			"Vinhedo familiar em Minas Gerais. Vinhos finos de colheita de inverno, expressando o terroir único de Ritápolis.",
+			"Vinhedo familiar em Minas Gerais próximo a Tiradentes. Vinhos finos de colheita de inverno, expressando o terroir único de Ritápolis.",
 		images: [`${siteUrl}/opengraph-image`],
 	},
 

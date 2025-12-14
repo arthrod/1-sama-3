@@ -11,7 +11,7 @@ export const dynamic = "force-dynamic";
 // Page-specific metadata
 export const metadata: Metadata = {
 	title: "Sá Marias | Vinhos Finos de Ritápolis",
-	description: "Vinhedo familiar em Minas Gerais. Experimente vinhos finos de colheita de inverno, uma experiência única de enoturismo e hospede-se no Sítio Dutra. Três gerações de tradição vinícola.",
+	description: "Vinhedo familiar em Minas Gerais próximo a Tiradentes. Experimente vinhos finos de colheita de inverno, uma experiência única de enoturismo e hospede-se no Sítio Dutra. Três gerações de tradição vinícola.",
 	keywords: [
 		"vinho",
 		"vinhos finos",
@@ -23,13 +23,22 @@ export const metadata: Metadata = {
 		"enoturismo",
 		"São João del Rei",
 		"Tiradentes",
+		"próximo a Tiradentes",
+		"vinho perto de Tiradentes",
+		"vinhedo próximo a Tiradentes",
+		"Caminho Real",
+		"Estrada Real",
+		"vinho no Caminho Real",
 		"vinho mineiro",
 		"Sá Marias",
 		"vinho artesanal",
 		"Sítio Dutra",
 		"hospedagem rural",
+		"hospedagem perto de Tiradentes",
 		"vinho de altitude",
 		"vinícola familiar",
+		"rota do vinho Minas Gerais",
+		"circuito das cidades históricas",
 	],
 	alternates: {
 		canonical: "/",
