@@ -1,7 +1,7 @@
 // Force this route to be completely dynamic - never evaluated at build time
 export const dynamic = "force-dynamic";
 
-import { Newsletter } from "@/components";
+import { Footer, Navigation, Newsletter } from "@/components";
 import { createGitHubReader } from "@keystatic/core/reader/github";
 import Image from "next/image";
 import Link from "next/link";
@@ -32,9 +32,11 @@ export default async function BlogPage() {
 	const [latestPost, ...otherPosts] = posts;
 
 	return (
-		<div className="min-h-screen bg-paper dark:bg-paper-dark pt-32 pb-24">
-			{/* Header */}
-			<div className="container mx-auto px-6 mb-20 text-center">
+		<div className="min-h-screen bg-paper dark:bg-paper-dark">
+			<Navigation />
+			<div className="pt-32 pb-24">
+				{/* Header */}
+				<div className="container mx-auto px-6 mb-20 text-center">
 				<span className="font-sans text-xs tracking-[0.4em] uppercase text-graphite mb-4 block">
 					Blog
 				</span>
@@ -144,6 +146,8 @@ export default async function BlogPage() {
 			<div className="mt-32">
 				<Newsletter />
 			</div>
+			</div>
+			<Footer />
 		</div>
 	);
 }

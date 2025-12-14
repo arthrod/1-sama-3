@@ -12,12 +12,12 @@ interface NavItem {
 }
 
 const NAV_ITEMS: NavItem[] = [
-	{ label: "Início", path: "#inicio", isHash: true },
-	{ label: "Vinhos", path: "#vinhos", isHash: true },
-	{ label: "Sítio Dutra", path: "#sitio-dutra", isHash: true },
+	{ label: "Início", path: "/", isHash: false },
+	{ label: "Vinhos", path: "/#vinhos", isHash: true },
+	{ label: "Sítio Dutra", path: "/sitio-dutra" },
+	{ label: "As Três Sás", path: "/as-tres-sas" },
 	{ label: "Crônicas", path: "/posts" },
-	{ label: "Newsletter", path: "#newsletter", isHash: true },
-	{ label: "Contato", path: "#contato", isHash: true },
+	{ label: "Contato", path: "/#contato", isHash: true },
 ];
 
 export function Navigation() {
@@ -54,11 +54,18 @@ export function Navigation() {
 		item: NavItem,
 	) => {
 		if (item.isHash) {
-			e.preventDefault();
-			const element = document.querySelector(item.path);
-			if (element) {
-				element.scrollIntoView({ behavior: "smooth", block: "start" });
+			// Extract hash from path (e.g., "/#vinhos" -> "#vinhos")
+			const hash = item.path.includes("#") ? `#${item.path.split("#")[1]}` : item.path;
+
+			// If we're on the home page, scroll to element
+			if (pathname === "/") {
+				e.preventDefault();
+				const element = document.querySelector(hash);
+				if (element) {
+					element.scrollIntoView({ behavior: "smooth", block: "start" });
+				}
 			}
+			// Otherwise, let the browser navigate to the home page with hash
 			setIsMenuOpen(false);
 		}
 	};
