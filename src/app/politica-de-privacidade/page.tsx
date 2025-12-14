@@ -216,7 +216,7 @@ export default function PoliticaDePrivacidade() {
 									</p>
 									<p className="text-sm">Ritápolis, Minas Gerais - Brasil</p>
 									<p className="text-sm mt-2">
-										E-mail: contato@samarias.com.br
+										E-mail: privacidade@samarias.org
 									</p>
 								</div>
 							</div>
