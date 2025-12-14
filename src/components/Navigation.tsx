@@ -12,8 +12,8 @@ interface NavItem {
 }
 
 const NAV_ITEMS: NavItem[] = [
-	{ label: "Início", path: "/", isHash: false },
-	{ label: "Vinhos", path: "/#vinhos", isHash: true },
+	{ label: "Início", path: "/" },
+	{ label: "Vinhos", path: "/vinhos" },
 	{ label: "Sítio Dutra", path: "/sitio-dutra" },
 	{ label: "As Três Sás", path: "/as-tres-sas" },
 	{ label: "Crônicas", path: "/posts" },

@@ -59,12 +59,12 @@ export default function Footer() {
 						<ul className="space-y-3 text-graphite-lighter text-sm">
 							<li>Visitas guiadas com agendamento prévio.</li>
 							<li>
-								<a
-									href="#sitio-dutra"
+								<Link
+									href="/sitio-dutra"
 									className="text-merlot-light no-underline hover:text-paper transition-colors"
 								>
 									Hospede-se no Sítio Dutra →
-								</a>
+								</Link>
 							</li>
 						</ul>
 					</div>

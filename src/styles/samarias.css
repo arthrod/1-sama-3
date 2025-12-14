@@ -218,12 +218,24 @@ body {
 	transition: color 0.2s ease;
 }
 
+.dark .nav-link {
+	color: var(--color-graphite-lighter);
+}
+
 .nav-link:hover {
 	color: var(--color-merlot);
 }
 
+.dark .nav-link:hover {
+	color: var(--color-merlot-light);
+}
+
 .nav-link.active {
 	color: var(--color-merlot);
+}
+
+.dark .nav-link.active {
+	color: var(--color-merlot-light);
 }
 
 /* ============================================
@@ -546,6 +558,11 @@ a:hover {
 	color: var(--color-graphite-lighter);
 }
 
+.dark .amenity-tag {
+	border-color: var(--color-graphite-light);
+	color: var(--color-paper-200);
+}
+
 /* ============================================
    PROSE STYLING (Blog Content)
    ============================================ */
@@ -563,7 +580,7 @@ a:hover {
 }
 
 .dark .prose-samarias p {
-	color: var(--color-graphite-lighter);
+	color: var(--color-paper-200);
 }
 
 .prose-samarias h2 {
@@ -591,4 +608,87 @@ a:hover {
 
 .dark .prose-samarias > p:first-of-type::first-letter {
 	color: var(--color-merlot-light);
+}
+
+/* ============================================
+   DARK MODE CONTRAST ENHANCEMENTS
+   ============================================
+   These styles ensure sufficient contrast for
+   text elements in dark mode
+   ============================================ */
+
+/* Text colors that need higher contrast in dark mode */
+.dark .text-graphite {
+	color: var(--color-graphite-lighter);
+}
+
+.dark .text-graphite-light {
+	color: var(--color-paper-300);
+}
+
+.dark .text-ink-faint {
+	color: var(--color-paper-200);
+}
+
+/* Ensure tracking text and small labels are readable */
+.dark .tracking-widest,
+.dark .tracking-wider,
+.dark .tracking-\[0\.3em\],
+.dark .tracking-\[0\.4em\],
+.dark .tracking-\[0\.2em\] {
+	opacity: 0.95;
+}
+
+/* Input placeholders in dark mode */
+.dark .input-underline::placeholder {
+	color: var(--color-graphite-light);
+}
+
+.dark .input-underline {
+	border-color: var(--color-graphite-light);
+	color: var(--color-paper);
+}
+
+/* Borders that need to be visible in dark mode */
+.dark .border-graphite {
+	border-color: var(--color-graphite-light);
+}
+
+.dark .border-graphite\/20 {
+	border-color: rgba(158, 151, 145, 0.3);
+}
+
+/* Cards and panels with dark backgrounds */
+.dark .bg-paper-200 {
+	background-color: var(--color-ink-light);
+}
+
+/* Line clamp text in dark mode */
+.dark .line-clamp-2,
+.dark .line-clamp-3,
+.dark .line-clamp-4 {
+	color: var(--color-paper-200);
+}
+
+/* Date and metadata text */
+.dark time,
+.dark .text-\[10px\],
+.dark .text-xs {
+	color: var(--color-graphite-lighter);
+}
+
+/* Ensure proper contrast for section headers */
+.dark .uppercase.tracking-widest {
+	color: var(--color-graphite-lighter);
+}
+
+/* List styling in dark mode */
+.dark ul li,
+.dark ol li {
+	color: var(--color-paper-200);
+}
+
+/* Ensure strong/bold text stands out in dark mode */
+.dark strong {
+	color: var(--color-paper);
 }
