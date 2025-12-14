@@ -1,7 +1,6 @@
 export const dynamic = "force-dynamic";
 
 import { createGitHubReader } from "@keystatic/core/reader/github";
-import Image from "next/image";
 import { Footer, Navigation, Newsletter } from "@/components";
 import { WineCard } from "@/components/WineCard";
 import keystaticConfig from "../../../keystatic.config";
@@ -19,41 +18,17 @@ export default async function WinesPage() {
 		<div className="min-h-screen bg-paper dark:bg-paper-dark transition-colors duration-500">
 			<Navigation />
 
-			<main>
-				{/* HERO SECTION */}
-				<section className="relative min-h-[70vh] flex items-center justify-center overflow-hidden">
-					{/* Background Image */}
-					<div className="absolute inset-0">
-						<Image
-							src="/images/slideshow/cachos-uvas-sol.jpeg"
-							alt="Vinhedos Sá Marias"
-							fill
-							className="object-cover"
-							priority
-						/>
-						<div className="absolute inset-0 bg-gradient-to-b from-ink/70 via-ink/50 to-ink/80" />
-					</div>
-
-					{/* Content */}
-					<div className="relative z-10 text-center px-6 max-w-4xl mx-auto">
-						<span className="inline-block text-xs tracking-[0.4em] uppercase text-merlot-light mb-6 border-b border-merlot-light/30 pb-2">
-							Nossa Produção
-						</span>
-						<h1 className="font-serif text-6xl md:text-8xl lg:text-9xl text-paper mb-8 leading-none">
-							A Garrafeira
-						</h1>
-						<p className="font-serif text-xl md:text-2xl text-paper/80 italic max-w-2xl mx-auto leading-relaxed">
-							&ldquo;Vinhos que expressam a alma de Ritápolis. A colheita de
-							inverno concentra os açúcares e acentua os taninos, resultando em
-							um corpo excepcional.&rdquo;
-						</p>
-
-						{/* Scroll indicator */}
-						<div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-float">
-							<div className="w-px h-16 bg-gradient-to-b from-paper/0 via-paper/50 to-paper/0" />
-						</div>
-					</div>
-				</section>
+			<main className="pt-32 pb-24">
+				{/* Header */}
+				<div className="container mx-auto px-6 mb-20 text-center">
+					<span className="font-sans text-xs tracking-[0.4em] uppercase text-graphite dark:text-graphite-lighter mb-4 block">
+						Nossa Produção
+					</span>
+					<h1 className="font-serif text-6xl md:text-8xl text-ink dark:text-paper mb-8">
+						A Garrafeira
+					</h1>
+					<div className="w-24 h-1 bg-merlot mx-auto" />
+				</div>
 
 				{/* TERROIR SECTION */}
 				<section className="py-24 bg-paper-200 dark:bg-ink">

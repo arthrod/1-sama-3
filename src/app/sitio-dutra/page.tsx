@@ -8,32 +8,17 @@ export default function SitioDutraPage() {
 		<div className="min-h-screen transition-colors duration-500 bg-paper dark:bg-paper-dark">
 			<Navigation />
 
-			<main className="pt-20">
-				{/* HERO SECTION */}
-				<section className="relative h-[60vh] min-h-[500px] flex items-center justify-center overflow-hidden">
-					<div className="absolute inset-0">
-						<Image
-							src="/images/slideshow/vinhedo-por-do-sol-redes.jpeg"
-							alt="Sítio Dutra - Vista do Vinhedo"
-							fill
-							className="object-cover"
-							priority
-						/>
-						<div className="absolute inset-0 bg-ink/60" />
-					</div>
-					<div className="relative z-10 text-center px-6">
-						<span className="inline-block text-xs tracking-[0.3em] uppercase text-merlot-light mb-6 border-b border-merlot-light/30 pb-2">
-							Hospedagem Rural
-						</span>
-						<h1 className="font-serif text-6xl md:text-8xl text-paper mb-6 leading-tight">
-							Sítio Dutra
-						</h1>
-						<p className="text-xl text-paper/80 font-serif italic max-w-2xl mx-auto">
-							Casa na roça, trilha e experiência autêntica no coração de
-							Minas Gerais
-						</p>
-					</div>
-				</section>
+			<main className="pt-32 pb-24">
+				{/* Header */}
+				<div className="container mx-auto px-6 mb-20 text-center">
+					<span className="font-sans text-xs tracking-[0.4em] uppercase text-graphite dark:text-graphite-lighter mb-4 block">
+						Hospedagem Rural
+					</span>
+					<h1 className="font-serif text-6xl md:text-8xl text-ink dark:text-paper mb-8">
+						Sítio Dutra
+					</h1>
+					<div className="w-24 h-1 bg-merlot mx-auto" />
+				</div>
 
 				{/* MAIN CONTENT */}
 				<section className="py-24 bg-ink text-paper">

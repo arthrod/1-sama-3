@@ -1,5 +1,4 @@
 import { Footer, Navigation, Newsletter } from "@/components";
-import Image from "next/image";
 
 export const metadata = {
 	title: "As Três Sás | Sá Marias",
@@ -12,32 +11,17 @@ export default function AsTresSasPage() {
 		<div className="min-h-screen bg-paper dark:bg-paper-dark transition-colors duration-500">
 			<Navigation />
 
-			<main>
-				{/* HERO SECTION */}
-				<section className="relative min-h-[60vh] flex items-center justify-center overflow-hidden">
-					<div className="absolute inset-0">
-						<Image
-							src="/images/slideshow/colheita-trabalhadores-aereo.jpeg"
-							alt="As Três Sás"
-							fill
-							className="object-cover"
-							priority
-						/>
-						<div className="absolute inset-0 bg-ink/60" />
-					</div>
-					<div className="relative z-10 text-center px-6 max-w-4xl mx-auto">
-						<span className="inline-block text-xs tracking-[0.4em] uppercase text-merlot-light mb-6 border-b border-merlot-light/30 pb-2">
-							Nossa História
-						</span>
-						<h1 className="font-serif text-6xl md:text-8xl text-paper mb-6 leading-none">
-							As Três Sás
-						</h1>
-						<p className="font-serif text-xl text-paper/80 italic max-w-2xl mx-auto">
-							Três gerações de mulheres que transformaram tradição em arte,
-							paixão em vinho, e família em legado.
-						</p>
-					</div>
-				</section>
+			<main className="pt-32 pb-24">
+				{/* Header */}
+				<div className="container mx-auto px-6 mb-20 text-center">
+					<span className="font-sans text-xs tracking-[0.4em] uppercase text-graphite dark:text-graphite-lighter mb-4 block">
+						Nossa História
+					</span>
+					<h1 className="font-serif text-6xl md:text-8xl text-ink dark:text-paper mb-8">
+						As Três Sás
+					</h1>
+					<div className="w-24 h-1 bg-merlot mx-auto" />
+				</div>
 
 				{/* BERNADETE SECTION */}
 				<section className="py-24 bg-ink text-paper">
