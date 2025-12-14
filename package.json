@@ -7,7 +7,8 @@
 		"dev": "next dev --turbo",
 		"build": "opennextjs-cloudflare build",
 		"start": "next start",
-		"lint": "eslint",
+		"fmt": "biome format --write .",
+		"lint": "biome lint --write .",
 		"preview": "opennextjs-cloudflare preview",
 		"deploy": "opennextjs-cloudflare deploy",
 		"cf-typegen": "wrangler types --env-interface CloudflareEnv cloudflare-env.d.ts"
@@ -17,7 +18,7 @@
 		"@keystatic/next": "^5.0.4",
 		"@markdoc/markdoc": "^0.5.4",
 		"framer-motion": "^12.23.25",
-		"next": "^16.0.7",
+		"next": "^16.0.10",
 		"react": "^19.2.1",
 		"react-dom": "^19.2.1"
 	},
