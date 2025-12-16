@@ -44,9 +44,13 @@ const SLIDES = [
 	},
 ];
 
+const SWIPE_THRESHOLD = 50;
+
 export function HeroSlideshow() {
 	const [currentSlide, setCurrentSlide] = useState(0);
 	const timerRef = useRef<NodeJS.Timeout | null>(null);
+	const touchStartX = useRef<number | null>(null);
+	const touchEndX = useRef<number | null>(null);
 
 	const startTimer = useCallback(() => {
 		if (timerRef.current) clearInterval(timerRef.current);
@@ -55,9 +59,47 @@ export function HeroSlideshow() {
 		}, 6000);
 	}, []);
 
+	const goToNext = useCallback(() => {
+		setCurrentSlide((prev) => (prev + 1) % SLIDES.length);
+		startTimer();
+	}, [startTimer]);
+
+	const goToPrev = useCallback(() => {
+		setCurrentSlide((prev) => (prev - 1 + SLIDES.length) % SLIDES.length);
+		startTimer();
+	}, [startTimer]);
+
 	const handleManualChange = (index: number) => {
 		setCurrentSlide(index);
 		startTimer();
+	};
+
+	const handleTouchStart = (e: React.TouchEvent) => {
+		touchStartX.current = e.touches[0].clientX;
+		touchEndX.current = null;
+	};
+
+	const handleTouchMove = (e: React.TouchEvent) => {
+		touchEndX.current = e.touches[0].clientX;
+	};
+
+	const handleTouchEnd = () => {
+		if (touchStartX.current === null || touchEndX.current === null) return;
+
+		const diff = touchStartX.current - touchEndX.current;
+
+		if (Math.abs(diff) > SWIPE_THRESHOLD) {
+			if (diff > 0) {
+				// Swiped left - go to next
+				goToNext();
+			} else {
+				// Swiped right - go to previous
+				goToPrev();
+			}
+		}
+
+		touchStartX.current = null;
+		touchEndX.current = null;
 	};
 
 	useEffect(() => {
@@ -70,7 +112,10 @@ export function HeroSlideshow() {
 	return (
 		<section
 			id="inicio"
-			className="relative min-h-screen flex items-center justify-center overflow-hidden"
+			className="relative min-h-screen flex items-center justify-center overflow-hidden touch-pan-y"
+			onTouchStart={handleTouchStart}
+			onTouchMove={handleTouchMove}
+			onTouchEnd={handleTouchEnd}
 		>
 			{/* Slideshow Background */}
 			<AnimatePresence mode="popLayout">
