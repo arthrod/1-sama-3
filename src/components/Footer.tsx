@@ -37,7 +37,7 @@ export default function Footer() {
 
 					{/* Contact */}
 					<div>
-						<h3 className="text-xs uppercase tracking-widest text-graphite mb-6">
+						<h3 className="text-xs uppercase tracking-widest text-graphite-light mb-6">
 							Contato
 						</h3>
 						<ul className="space-y-3 text-graphite-lighter text-sm">
@@ -53,7 +53,7 @@ export default function Footer() {
 
 					{/* Visit */}
 					<div>
-						<h3 className="text-xs uppercase tracking-widest text-graphite mb-6">
+						<h3 className="text-xs uppercase tracking-widest text-graphite-light mb-6">
 							Visite-nos
 						</h3>
 						<ul className="space-y-3 text-graphite-lighter text-sm">
@@ -71,11 +71,11 @@ export default function Footer() {
 				</div>
 
 				<div className="pt-8 border-t border-graphite flex flex-col md:flex-row justify-between items-center gap-4">
-					<p className="text-xs text-graphite">
+					<p className="text-xs text-graphite-light">
 						© {new Date().getFullYear()} Vinhedo Sá Marias. Todos os direitos
 						reservados.
 					</p>
-					<div className="text-xs text-graphite flex gap-6">
+					<div className="text-xs text-graphite-light flex gap-6">
 						<Link
 							href="/termos-e-condicoes"
 							className="hover:text-paper transition-colors no-underline"

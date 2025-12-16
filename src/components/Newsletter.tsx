@@ -83,7 +83,7 @@ export function Newsletter() {
 							required
 							value={name}
 							onChange={(e) => setName(e.target.value)}
-							className="flex-1 bg-transparent border-b border-graphite py-3 px-4 text-paper placeholder-graphite focus:outline-none focus:border-merlot transition-colors font-serif"
+							className="flex-1 bg-transparent border-b border-graphite py-3 px-4 text-paper placeholder-graphite-light focus:outline-none focus:border-merlot transition-colors font-serif"
 						/>
 						<input
 							type="email"
@@ -93,7 +93,7 @@ export function Newsletter() {
 							required
 							value={email}
 							onChange={(e) => setEmail(e.target.value)}
-							className="flex-1 bg-transparent border-b border-graphite py-3 px-4 text-paper placeholder-graphite focus:outline-none focus:border-merlot transition-colors font-serif"
+							className="flex-1 bg-transparent border-b border-graphite py-3 px-4 text-paper placeholder-graphite-light focus:outline-none focus:border-merlot transition-colors font-serif"
 						/>
 						<button
 							type="submit"
@@ -105,7 +105,7 @@ export function Newsletter() {
 						</button>
 					</form>
 
-					<p className="mt-6 text-xs text-graphite">
+					<p className="mt-6 text-xs text-graphite-light">
 						Ao se cadastrar, você concorda com nossa{" "}
 						<a href="/politica-de-privacidade" className="text-graphite-lighter underline hover:text-paper">
 							Política de Privacidade
@@ -113,7 +113,7 @@ export function Newsletter() {
 					</p>
 				</div>
 
-				<p className="mt-12 text-[10px] text-graphite uppercase tracking-[0.3em]">
+				<p className="mt-12 text-[10px] text-graphite-light uppercase tracking-[0.3em]">
 					Ritápolis • Minas Gerais • Brasil
 				</p>
 			</div>

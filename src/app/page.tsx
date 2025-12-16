@@ -395,14 +395,14 @@ export default async function Home() {
 										<input
 											type="text"
 											placeholder="Seu nome"
-											className="w-full bg-transparent border-b border-graphite py-3 text-paper placeholder:text-graphite focus:border-merlot-light focus:outline-none transition-colors"
+											className="w-full bg-transparent border-b border-graphite py-3 text-paper placeholder:text-graphite-light focus:border-merlot-light focus:outline-none transition-colors"
 										/>
 									</div>
 									<div>
 										<input
 											type="email"
 											placeholder="Seu e-mail"
-											className="w-full bg-transparent border-b border-graphite py-3 text-paper placeholder:text-graphite focus:border-merlot-light focus:outline-none transition-colors"
+											className="w-full bg-transparent border-b border-graphite py-3 text-paper placeholder:text-graphite-light focus:border-merlot-light focus:outline-none transition-colors"
 										/>
 									</div>
 									<button
@@ -413,7 +413,7 @@ export default async function Home() {
 									</button>
 								</form>
 
-								<p className="text-xs text-graphite mt-6">
+								<p className="text-xs text-graphite-light mt-6">
 									Ao se inscrever, você concorda com nossa{" "}
 									<Link
 										href="/politica-de-privacidade"

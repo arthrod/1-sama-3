@@ -149,10 +149,10 @@ export function HeroSlideshow() {
 					transition={{ delay: 0.8, duration: 0.8 }}
 					className="flex flex-col sm:flex-row gap-4 justify-center"
 				>
-					<Link href="#vinhos" className="btn-primary no-underline">
-						Descobrir Vinhos
+					<Link href="/vinhos" className="btn-primary no-underline">
+						Conheça Vinhos
 					</Link>
-					<Link href="#sitio-dutra" className="btn-outline no-underline">
+					<Link href="/sitio-dutra" className="btn-outline no-underline">
 						Visitar o Sítio
 					</Link>
 				</motion.div>

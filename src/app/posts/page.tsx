@@ -37,7 +37,7 @@ export default async function BlogPage() {
 			<div className="pt-32 pb-24">
 				{/* Header */}
 				<div className="container mx-auto px-6 mb-20 text-center">
-				<span className="font-sans text-xs tracking-[0.4em] uppercase text-graphite mb-4 block">
+				<span className="font-sans text-xs tracking-[0.4em] uppercase text-graphite dark:text-graphite-lighter mb-4 block">
 					Blog
 				</span>
 				<h1 className="font-serif text-6xl md:text-8xl text-ink dark:text-paper mb-8">
@@ -48,8 +48,8 @@ export default async function BlogPage() {
 
 			<div className="container mx-auto px-6 max-w-7xl">
 				{posts.length === 0 ? (
-					<div className="text-center py-20 border border-dotted border-graphite">
-						<p className="font-serif text-xl italic text-graphite">
+					<div className="text-center py-20 border border-dotted border-graphite dark:border-graphite-light">
+						<p className="font-serif text-xl italic text-graphite dark:text-graphite-lighter">
 							Nossas histórias estão sendo escritas...
 						</p>
 					</div>
@@ -119,14 +119,14 @@ export default async function BlogPage() {
 											/>
 										) : (
 											<div className="w-full h-full bg-paper-300 dark:bg-ink-light flex items-center justify-center">
-												<span className="font-serif text-6xl text-graphite/20">
+												<span className="font-serif text-6xl text-graphite/20 dark:text-paper/10">
 													&amp;quot;
 												</span>
 											</div>
 										)}
 									</div>
 									<div className="pr-4">
-										<span className="block font-sans text-[10px] tracking-widest uppercase text-graphite mb-3">
+										<span className="block font-sans text-[10px] tracking-widest uppercase text-graphite dark:text-graphite-lighter mb-3">
 											{post.entry.publishedDate}
 										</span>
 										<h3 className="font-serif text-2xl text-ink dark:text-paper mb-3 leading-tight group-hover:text-merlot transition-colors">
