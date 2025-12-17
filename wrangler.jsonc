@@ -41,6 +41,10 @@
 			"zone_name": "samarias.org"
 		},
 		{
+			"pattern": "www.samarias.org",
+			"custom_domain": true
+		},
+		{
 			"pattern": "samarias.org",
 			"zone_name": "samarias.org",
 			"custom_domain": true
