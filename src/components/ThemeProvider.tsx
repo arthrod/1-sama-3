@@ -26,8 +26,8 @@ const getThemeFromStorage = (): boolean => {
 	if (saved !== null) {
 		return saved === "dark";
 	}
-	// Detect browser/system preference
-	return window.matchMedia("(prefers-color-scheme: dark)").matches;
+	// Default to light mode if no user preference is set
+	return false;
 };
 
 // Apply theme to document
