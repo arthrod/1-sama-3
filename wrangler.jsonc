@@ -37,15 +37,16 @@
 
 	"routes": [
 		{
-			"pattern": "*.samarias.org/*",
+			"pattern": "old.samarias.org/*",
 			"zone_name": "samarias.org"
 		},
 		{
-			"pattern": "www.samarias.org",
+			"pattern": "old.samarias.org",
+			"zone_name": "samarias.org",
 			"custom_domain": true
 		},
 		{
-			"pattern": "samarias.org",
+			"pattern": "keystatic.samarias.org",
 			"zone_name": "samarias.org",
 			"custom_domain": true
 		}
