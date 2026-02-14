@@ -75,6 +75,7 @@ export function Newsletter() {
 						onSubmit={handleSubmit}
 						className="flex flex-col md:flex-row gap-4 max-w-md mx-auto"
 					>
+						<label htmlFor="subscriber-name" className="sr-only">Seu Nome</label>
 						<input
 							type="text"
 							id="subscriber-name"
@@ -85,6 +86,7 @@ export function Newsletter() {
 							onChange={(e) => setName(e.target.value)}
 							className="flex-1 bg-transparent border-b border-graphite py-3 px-4 text-paper placeholder-graphite-light focus:outline-none focus:border-merlot transition-colors font-serif"
 						/>
+						<label htmlFor="subscriber-email" className="sr-only">Seu E-mail</label>
 						<input
 							type="email"
 							id="subscriber-email"
