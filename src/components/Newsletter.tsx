@@ -75,6 +75,11 @@ export function Newsletter() {
 						onSubmit={handleSubmit}
 						className="flex flex-col md:flex-row gap-4 max-w-md mx-auto"
 					>
+						<output className="sr-only">
+							{status === "loading" && "Enviando inscrição..."}
+							{status === "success" && "Inscrição realizada com sucesso!"}
+							{status === "error" && "Erro ao realizar inscrição. Tente novamente."}
+						</output>
 						<label htmlFor="subscriber-name" className="sr-only">Seu Nome</label>
 						<input
 							type="text"
@@ -101,9 +106,37 @@ export function Newsletter() {
 							type="submit"
 							id="subscribe-btn"
 							disabled={status === "loading"}
-							className="bg-paper text-ink hover:bg-merlot hover:text-white font-sans font-bold uppercase tracking-widest text-xs py-4 px-8 transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+							aria-disabled={status === "loading"}
+							className="bg-paper text-ink hover:bg-merlot hover:text-white font-sans font-bold uppercase tracking-widest text-xs py-4 px-8 transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
 						>
-							{status === "loading" ? "Enviando..." : status === "success" ? "Enviado!" : "Cadastrar"}
+							{status === "loading" && (
+								<svg
+									className="animate-spin h-3 w-3"
+									xmlns="http://www.w3.org/2000/svg"
+									fill="none"
+									viewBox="0 0 24 24"
+									aria-hidden="true"
+								>
+									<circle
+										className="opacity-25"
+										cx="12"
+										cy="12"
+										r="10"
+										stroke="currentColor"
+										strokeWidth="4"
+									/>
+									<path
+										className="opacity-75"
+										fill="currentColor"
+										d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+									/>
+								</svg>
+							)}
+							{status === "loading"
+								? "Enviando..."
+								: status === "success"
+									? "Enviado!"
+									: "Cadastrar"}
 						</button>
 					</form>
 
