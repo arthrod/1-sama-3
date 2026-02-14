@@ -20,8 +20,8 @@ export function Newsletter() {
 	};
 
 	useEffect(() => {
-		let successTimer: NodeJS.Timeout;
-		let idleTimer: NodeJS.Timeout;
+		let successTimer: ReturnType<typeof setTimeout> | undefined;
+		let idleTimer: ReturnType<typeof setTimeout> | undefined;
 
 		if (status === "loading") {
 			successTimer = setTimeout(() => {
@@ -36,8 +36,8 @@ export function Newsletter() {
 		}
 
 		return () => {
-			clearTimeout(successTimer);
-			clearTimeout(idleTimer);
+			if (successTimer) clearTimeout(successTimer);
+			if (idleTimer) clearTimeout(idleTimer);
 		};
 	}, [status]);
 
