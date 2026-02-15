@@ -36,20 +36,20 @@ export default function AsTresSasPage() {
 								</h2>
 								<div className="w-16 h-1 bg-merlot-light mb-8" />
 								<p className="text-paper/80 leading-relaxed mb-6">
-									A Samaria que transformou tradição em ciência. Bernadete trouxe
-									os estudos formais em enologia para o Vinhedo Samarias,
+									A Samaria que transformou tradição em ciência. Bernadete
+									trouxe os estudos formais em enologia para o Vinhedo Samarias,
 									mesclando o conhecimento empírico de sua terra com técnicas
 									contemporâneas de viticultura.
 								</p>
 								<p className="text-paper/80 leading-relaxed mb-8">
-									Seu sabor é o equilíbrio, a transformação cuidadosa, o respeito
-									ao passado com olhos no futuro. Cada taça é um testemunho de
-									tradição que não teme a evolução.
+									Seu sabor é o equilíbrio, a transformação cuidadosa, o
+									respeito ao passado com olhos no futuro. Cada taça é um
+									testemunho de tradição que não teme a evolução.
 								</p>
 								<blockquote className="border-l-2 border-merlot-light pl-6 italic text-paper/70">
 									&ldquo;A tradição nos dá raízes; a inovação nos dá asas. O
-									verdadeiro artesão do vinho sabe quando plantar os pés e quando
-									permitir-se voar.&rdquo;
+									verdadeiro artesão do vinho sabe quando plantar os pés e
+									quando permitir-se voar.&rdquo;
 								</blockquote>
 							</div>
 							<div className="order-1 lg:order-2 relative">
@@ -155,8 +155,8 @@ export default function AsTresSasPage() {
 						<p className="text-paper/80 leading-relaxed mb-12 max-w-2xl mx-auto">
 							Juntas, Bernadete, Gena e Maria Rita representam a essência do
 							Vinhedo Sá Marias: a harmonia entre tradição e inovação, o
-							respeito à terra e a ousadia de sonhar. Cada garrafa que produzimos
-							carrega um pouco de cada uma delas.
+							respeito à terra e a ousadia de sonhar. Cada garrafa que
+							produzimos carrega um pouco de cada uma delas.
 						</p>
 						<div className="grid grid-cols-3 gap-8">
 							<div className="text-center">

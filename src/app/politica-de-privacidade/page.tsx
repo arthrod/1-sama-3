@@ -32,10 +32,11 @@ export default function PoliticaDePrivacidade() {
 						{/* Introduction */}
 						<section>
 							<p className="text-lg text-ink-faint dark:text-paper-200 leading-relaxed">
-								A Sá Marias Vinhos Finos (&ldquo;nós&rdquo;, &ldquo;nosso&rdquo; ou &ldquo;Sá Marias&rdquo;)
-								está comprometida em proteger a privacidade dos visitantes do nosso site.
-								Esta Política de Privacidade explica como coletamos, usamos e protegemos
-								suas informações pessoais quando você visita nosso site.
+								A Sá Marias Vinhos Finos (&ldquo;nós&rdquo;, &ldquo;nosso&rdquo;
+								ou &ldquo;Sá Marias&rdquo;) está comprometida em proteger a
+								privacidade dos visitantes do nosso site. Esta Política de
+								Privacidade explica como coletamos, usamos e protegemos suas
+								informações pessoais quando você visita nosso site.
 							</p>
 						</section>
 
@@ -46,15 +47,24 @@ export default function PoliticaDePrivacidade() {
 							</h2>
 							<div className="space-y-4 text-ink-faint dark:text-paper-200">
 								<p>
-									<strong className="text-ink dark:text-paper">Informações fornecidas voluntariamente:</strong>
+									<strong className="text-ink dark:text-paper">
+										Informações fornecidas voluntariamente:
+									</strong>
 								</p>
 								<ul className="list-disc list-inside space-y-2 ml-4">
-									<li>Nome e endereço de e-mail (quando você se inscreve em nossa newsletter)</li>
-									<li>Informações de contato (quando você nos envia uma mensagem)</li>
+									<li>
+										Nome e endereço de e-mail (quando você se inscreve em nossa
+										newsletter)
+									</li>
+									<li>
+										Informações de contato (quando você nos envia uma mensagem)
+									</li>
 									<li>Comentários e feedback sobre nossos produtos</li>
 								</ul>
 								<p className="mt-4">
-									<strong className="text-ink dark:text-paper">Informações coletadas automaticamente:</strong>
+									<strong className="text-ink dark:text-paper">
+										Informações coletadas automaticamente:
+									</strong>
 								</p>
 								<ul className="list-disc list-inside space-y-2 ml-4">
 									<li>Endereço IP</li>
@@ -73,10 +83,16 @@ export default function PoliticaDePrivacidade() {
 							<div className="space-y-4 text-ink-faint dark:text-paper-200">
 								<p>Utilizamos as informações coletadas para:</p>
 								<ul className="list-disc list-inside space-y-2 ml-4">
-									<li>Enviar nossa newsletter com novidades sobre vinhos, eventos e promoções</li>
+									<li>
+										Enviar nossa newsletter com novidades sobre vinhos, eventos
+										e promoções
+									</li>
 									<li>Responder às suas perguntas e solicitações</li>
 									<li>Melhorar a experiência do usuário em nosso site</li>
-									<li>Analisar o tráfego e uso do site para aprimorar nossos serviços</li>
+									<li>
+										Analisar o tráfego e uso do site para aprimorar nossos
+										serviços
+									</li>
 									<li>Cumprir obrigações legais</li>
 								</ul>
 							</div>
@@ -89,11 +105,15 @@ export default function PoliticaDePrivacidade() {
 							</h2>
 							<div className="space-y-4 text-ink-faint dark:text-paper-200">
 								<p>
-									Não vendemos, alugamos ou compartilhamos suas informações pessoais com
-									terceiros para fins de marketing. Podemos compartilhar informações apenas:
+									Não vendemos, alugamos ou compartilhamos suas informações
+									pessoais com terceiros para fins de marketing. Podemos
+									compartilhar informações apenas:
 								</p>
 								<ul className="list-disc list-inside space-y-2 ml-4">
-									<li>Com prestadores de serviços que nos auxiliam na operação do site (hospedagem, e-mail marketing)</li>
+									<li>
+										Com prestadores de serviços que nos auxiliam na operação do
+										site (hospedagem, e-mail marketing)
+									</li>
 									<li>Quando exigido por lei ou ordem judicial</li>
 									<li>Para proteger nossos direitos legais</li>
 								</ul>
@@ -107,8 +127,9 @@ export default function PoliticaDePrivacidade() {
 							</h2>
 							<div className="space-y-4 text-ink-faint dark:text-paper-200">
 								<p>
-									Nosso site utiliza cookies para melhorar sua experiência de navegação.
-									Cookies são pequenos arquivos de texto armazenados em seu dispositivo que nos ajudam a:
+									Nosso site utiliza cookies para melhorar sua experiência de
+									navegação. Cookies são pequenos arquivos de texto armazenados
+									em seu dispositivo que nos ajudam a:
 								</p>
 								<ul className="list-disc list-inside space-y-2 ml-4">
 									<li>Lembrar suas preferências (como modo escuro/claro)</li>
@@ -116,7 +137,8 @@ export default function PoliticaDePrivacidade() {
 									<li>Personalizar conteúdo e anúncios</li>
 								</ul>
 								<p className="mt-4">
-									Você pode controlar e/ou excluir cookies através das configurações do seu navegador.
+									Você pode controlar e/ou excluir cookies através das
+									configurações do seu navegador.
 								</p>
 							</div>
 						</section>
@@ -128,10 +150,11 @@ export default function PoliticaDePrivacidade() {
 							</h2>
 							<div className="space-y-4 text-ink-faint dark:text-paper-200">
 								<p>
-									Implementamos medidas de segurança técnicas e organizacionais apropriadas
-									para proteger suas informações pessoais contra acesso não autorizado,
-									alteração, divulgação ou destruição. No entanto, nenhum método de
-									transmissão pela Internet é 100% seguro.
+									Implementamos medidas de segurança técnicas e organizacionais
+									apropriadas para proteger suas informações pessoais contra
+									acesso não autorizado, alteração, divulgação ou destruição. No
+									entanto, nenhum método de transmissão pela Internet é 100%
+									seguro.
 								</p>
 							</div>
 						</section>
@@ -143,13 +166,19 @@ export default function PoliticaDePrivacidade() {
 							</h2>
 							<div className="space-y-4 text-ink-faint dark:text-paper-200">
 								<p>
-									De acordo com a Lei Geral de Proteção de Dados (LGPD), você tem direito a:
+									De acordo com a Lei Geral de Proteção de Dados (LGPD), você
+									tem direito a:
 								</p>
 								<ul className="list-disc list-inside space-y-2 ml-4">
 									<li>Confirmar a existência de tratamento de seus dados</li>
 									<li>Acessar seus dados pessoais</li>
-									<li>Corrigir dados incompletos, inexatos ou desatualizados</li>
-									<li>Solicitar a anonimização, bloqueio ou eliminação de dados desnecessários</li>
+									<li>
+										Corrigir dados incompletos, inexatos ou desatualizados
+									</li>
+									<li>
+										Solicitar a anonimização, bloqueio ou eliminação de dados
+										desnecessários
+									</li>
 									<li>Solicitar a portabilidade dos dados</li>
 									<li>Revogar o consentimento a qualquer momento</li>
 								</ul>
@@ -163,9 +192,10 @@ export default function PoliticaDePrivacidade() {
 							</h2>
 							<div className="space-y-4 text-ink-faint dark:text-paper-200">
 								<p>
-									Mantemos suas informações pessoais apenas pelo tempo necessário para
-									cumprir as finalidades para as quais foram coletadas, incluindo
-									obrigações legais, contábeis ou de relatórios.
+									Mantemos suas informações pessoais apenas pelo tempo
+									necessário para cumprir as finalidades para as quais foram
+									coletadas, incluindo obrigações legais, contábeis ou de
+									relatórios.
 								</p>
 							</div>
 						</section>
@@ -177,10 +207,10 @@ export default function PoliticaDePrivacidade() {
 							</h2>
 							<div className="space-y-4 text-ink-faint dark:text-paper-200">
 								<p>
-									Nosso site pode conter links para sites externos (como Airbnb para
-									reservas no Sítio Dutra). Não somos responsáveis pelas práticas de
-									privacidade desses sites. Recomendamos que você leia as políticas
-									de privacidade de cada site que visitar.
+									Nosso site pode conter links para sites externos (como Airbnb
+									para reservas no Sítio Dutra). Não somos responsáveis pelas
+									práticas de privacidade desses sites. Recomendamos que você
+									leia as políticas de privacidade de cada site que visitar.
 								</p>
 							</div>
 						</section>
@@ -207,8 +237,9 @@ export default function PoliticaDePrivacidade() {
 							</h2>
 							<div className="space-y-4 text-ink-faint dark:text-paper-200">
 								<p>
-									Se você tiver dúvidas sobre esta Política de Privacidade ou sobre
-									como tratamos seus dados pessoais, entre em contato conosco:
+									Se você tiver dúvidas sobre esta Política de Privacidade ou
+									sobre como tratamos seus dados pessoais, entre em contato
+									conosco:
 								</p>
 								<div className="bg-paper-200 dark:bg-ink p-6 mt-6 border border-graphite/20 dark:border-graphite">
 									<p className="font-serif text-lg text-ink dark:text-paper mb-2">
