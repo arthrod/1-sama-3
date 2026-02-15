@@ -23,7 +23,7 @@ jobs:
         run: bun run build
 
       - name: Deploy to Cloudflare Workers
-        run: bun run wrangler deploy --env pr --name samarias-pr-${{ github.event.number }} --route pr-${{ github.event.number }}.samarias.org/*
+        run: ./node_modules/.bin/wrangler deploy --env pr --name samarias-pr-${{ github.event.number }} --route pr-${{ github.event.number }}.samarias.org/*
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
@@ -57,7 +57,7 @@ jobs:
         run: bun install --ignore-scripts
 
       - name: Delete Preview
-        run: bun run wrangler delete --env pr --name samarias-pr-${{ github.event.number }}
+        run: ./node_modules/.bin/wrangler delete --env pr --name samarias-pr-${{ github.event.number }}
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
