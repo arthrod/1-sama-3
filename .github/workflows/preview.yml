@@ -12,16 +12,15 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - uses: actions/setup-node@v4
+      - uses: oven-sh/setup-bun@v2
         with:
-          node-version: '20'
-          cache: 'npm'
+          bun-version: latest
 
       - name: Install dependencies
-        run: npm ci
+        run: bun install --ignore-scripts
 
       - name: Build
-        run: npm run build
+        run: bun run build
 
       - name: Deploy to Cloudflare Workers
         uses: cloudflare/wrangler-action@v3
@@ -29,7 +28,7 @@ jobs:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           command: deploy --env pr-${{ github.event.number }}
-          packageManager: npm
+          packageManager: bun
 
       - name: Comment PR
         uses: actions/github-script@v7
@@ -51,6 +50,9 @@ jobs:
     name: Cleanup Preview
     steps:
       - uses: actions/checkout@v4
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
 
       - name: Delete Preview
         uses: cloudflare/wrangler-action@v3
@@ -58,3 +60,4 @@ jobs:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           command: delete --name samarias-pr-${{ github.event.number }}
+          packageManager: bun
