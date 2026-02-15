@@ -27,7 +27,7 @@ jobs:
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          command: deploy --name samarias-pr-${{ github.event.number }} --route pr-${{ github.event.number }}.samarias.org/*
+          command: deploy --env pr --name samarias-pr-${{ github.event.number }} --route pr-${{ github.event.number }}.samarias.org/*
           packageManager: bun
 
       - name: Comment PR
