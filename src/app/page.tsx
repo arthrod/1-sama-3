@@ -1,12 +1,8 @@
 import type { Metadata } from "next";
-import { createGitHubReader } from "@keystatic/core/reader/github";
 import Image from "next/image";
 import Link from "next/link";
 import { Footer, HeroSlideshow, Navigation } from "@/components";
-import keystaticConfig from "../../keystatic.config";
-import "../lib/keystatic-client";
-
-export const dynamic = "force-dynamic";
+import { reader } from "@/lib/reader";
 
 // Page-specific metadata
 export const metadata: Metadata = {
@@ -47,11 +43,6 @@ export const metadata: Metadata = {
 
 // Helper to fetch data
 async function getData() {
-	const reader = createGitHubReader(keystaticConfig, {
-		repo: "arthrod/1-sama-3",
-		token: process.env.KEYSTATIC_GITHUB_TOKEN,
-	});
-
 	const [wines, posts] = await Promise.all([
 		reader.collections.wines.all(),
 		reader.collections.posts.all(),
