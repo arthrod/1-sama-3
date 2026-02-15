@@ -62,7 +62,7 @@
 		"KEYSTATIC_PATH_PREFIX": "",
 		"NEXT_PUBLIC_KEYSTATIC_CONTENT_PATH": "./src/content"
 	},
-			"name": "samarias-pr-*",
+			"name": "samarias-pr-preview",
 			"routes": [
 				{
 					"pattern": "pr-*.samarias.org/*",
