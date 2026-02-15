@@ -19,7 +19,6 @@ export function Newsletter() {
 
 	useEffect(() => {
 		let successTimer: NodeJS.Timeout;
-		let idleTimer: NodeJS.Timeout;
 
 		if (status === "loading") {
 			successTimer = setTimeout(() => {
@@ -27,15 +26,10 @@ export function Newsletter() {
 				setName("");
 				setEmail("");
 			}, 1000);
-		} else if (status === "success") {
-			idleTimer = setTimeout(() => {
-				setStatus("idle");
-			}, 3000);
 		}
 
 		return () => {
 			clearTimeout(successTimer);
-			clearTimeout(idleTimer);
 		};
 	}, [status]);
 
@@ -48,7 +42,7 @@ export function Newsletter() {
 			</div>
 
 			<div className="max-w-4xl mx-auto px-6 text-center relative z-10">
-				<div className="inline-block border-2 border-dotted border-graphite px-8 py-16 bg-black/50 backdrop-blur-sm relative">
+				<div className="inline-block border-2 border-dotted border-graphite px-8 py-16 bg-black/50 backdrop-blur-sm relative w-full">
 					{/* Corner Accents */}
 					<div className="absolute top-0 left-0 w-3 h-3 border-t-2 border-l-2 border-paper" />
 					<div className="absolute top-0 right-0 w-3 h-3 border-t-2 border-r-2 border-paper" />
@@ -70,49 +64,88 @@ export function Newsletter() {
 						2025.
 					</p>
 
-					<form
-						id="newsletter-form"
-						onSubmit={handleSubmit}
-						className="flex flex-col md:flex-row gap-4 max-w-md mx-auto"
-					>
-						<label htmlFor="subscriber-name" className="sr-only">Seu Nome</label>
-						<input
-							type="text"
-							id="subscriber-name"
-							name="name"
-							placeholder="Seu Nome"
-							required
-							value={name}
-							onChange={(e) => setName(e.target.value)}
-							className="flex-1 bg-transparent border-b border-graphite py-3 px-4 text-paper placeholder-graphite-light focus:outline-none focus:border-merlot transition-colors font-serif"
-						/>
-						<label htmlFor="subscriber-email" className="sr-only">Seu E-mail</label>
-						<input
-							type="email"
-							id="subscriber-email"
-							name="email"
-							placeholder="Seu E-mail"
-							required
-							value={email}
-							onChange={(e) => setEmail(e.target.value)}
-							className="flex-1 bg-transparent border-b border-graphite py-3 px-4 text-paper placeholder-graphite-light focus:outline-none focus:border-merlot transition-colors font-serif"
-						/>
-						<button
-							type="submit"
-							id="subscribe-btn"
-							disabled={status === "loading"}
-							className="bg-paper text-ink hover:bg-merlot hover:text-white font-sans font-bold uppercase tracking-widest text-xs py-4 px-8 transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+					{status === "success" ? (
+						<output
+							aria-live="polite"
+							className="block py-6 animate-fade-in"
 						>
-							{status === "loading" ? "Enviando..." : status === "success" ? "Enviado!" : "Cadastrar"}
-						</button>
-					</form>
-
-					<p className="mt-6 text-xs text-graphite-light">
-						Ao se cadastrar, você concorda com nossa{" "}
-						<a href="/politica-de-privacidade" className="text-graphite-lighter underline hover:text-paper">
-							Política de Privacidade
-						</a>
-					</p>
+							<div className="text-3xl mb-4 text-paper">✨</div>
+							<h3 className="font-serif text-2xl mb-4 text-paper">
+								Inscrição Confirmada!
+							</h3>
+							<p className="font-sans text-sm text-graphite-lighter mb-6">
+								Obrigado por se juntar à nossa comunidade.
+							</p>
+							<button
+								type="button"
+								onClick={() => setStatus("idle")}
+								className="text-xs uppercase tracking-widest text-merlot-light hover:text-paper transition-colors underline"
+							>
+								Cadastrar outro e-mail
+							</button>
+						</output>
+					) : (
+						<>
+							<form
+								id="newsletter-form"
+								onSubmit={handleSubmit}
+								className="flex flex-col md:flex-row gap-4 max-w-md mx-auto relative"
+								aria-busy={status === "loading"}
+							>
+								<label htmlFor="subscriber-name" className="sr-only">
+									Seu Nome
+								</label>
+								<input
+									type="text"
+									id="subscriber-name"
+									name="name"
+									placeholder="Seu Nome"
+									required
+									value={name}
+									onChange={(e) => setName(e.target.value)}
+									className="flex-1 bg-transparent border-b border-graphite py-3 px-4 text-paper placeholder-graphite-light focus:outline-none focus:border-merlot transition-colors font-serif"
+								/>
+								<label htmlFor="subscriber-email" className="sr-only">
+									Seu E-mail
+								</label>
+								<input
+									type="email"
+									id="subscriber-email"
+									name="email"
+									placeholder="Seu E-mail"
+									required
+									value={email}
+									onChange={(e) => setEmail(e.target.value)}
+									className="flex-1 bg-transparent border-b border-graphite py-3 px-4 text-paper placeholder-graphite-light focus:outline-none focus:border-merlot transition-colors font-serif"
+								/>
+								<button
+									type="submit"
+									id="subscribe-btn"
+									disabled={status === "loading"}
+									className="bg-paper text-ink hover:bg-merlot hover:text-white font-sans font-bold uppercase tracking-widest text-xs py-4 px-8 transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed min-w-[140px]"
+								>
+									{status === "loading" ? "Enviando..." : "Cadastrar"}
+								</button>
+							</form>
+							{status === "error" && (
+								<p
+									role="alert"
+									className="mt-4 text-red-400 text-sm font-sans animate-fade-in"
+								>
+									Ocorreu um erro. Por favor, tente novamente.
+								</p>
+							)}
+							<p className="mt-6 text-xs text-graphite-light">
+								Ao se cadastrar, você concorda com nossa{" "}
+								<a
+									href="/politica-de-privacidade"
+									className="text-graphite-lighter underline hover:text-paper"
+								>
+									Política de Privacidade
+								</a>
+							</p>
+						</>
+					)}
 				</div>
 
 				<p className="mt-12 text-[10px] text-graphite-light uppercase tracking-[0.3em]">
