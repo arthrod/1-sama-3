@@ -54,13 +54,7 @@
 
 	"env": {
 		"pr": {
-			"name": "samarias-pr-*",
-			"routes": [
-				{
-					"pattern": "pr-*.samarias.org/*",
-					"zone_name": "samarias.org"
-				}
-			]
+			// Name and routes are dynamically set by CI
 		}
 	}
 }
