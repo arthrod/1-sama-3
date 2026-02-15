@@ -1,17 +1,8 @@
-export const dynamic = "force-dynamic";
-
-import { createGitHubReader } from "@keystatic/core/reader/github";
 import { Footer, Navigation, Newsletter } from "@/components";
 import { WineCard } from "@/components/WineCard";
-import keystaticConfig from "../../../keystatic.config";
-import "../../lib/keystatic-client";
+import { reader } from "@/lib/reader";
 
 export default async function WinesPage() {
-	const reader = createGitHubReader(keystaticConfig, {
-		repo: "arthrod/1-sama-3",
-		token: process.env.KEYSTATIC_GITHUB_TOKEN,
-	});
-
 	const wines = await reader.collections.wines.all();
 
 	return (
