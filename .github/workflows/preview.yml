@@ -27,7 +27,8 @@ jobs:
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          command: deploy --env pr-${{ github.event.number }}
+          # Use the 'pr' environment but override the name and routes for this specific PR
+          command: deploy --env pr --name samarias-pr-${{ github.event.number }} --route pr-${{ github.event.number }}.samarias.org/*
           packageManager: bun
 
       - name: Comment PR
@@ -59,5 +60,5 @@ jobs:
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          command: delete --name samarias-pr-${{ github.event.number }}
+          command: delete --env pr --name samarias-pr-${{ github.event.number }}
           packageManager: bun
