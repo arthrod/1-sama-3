@@ -55,7 +55,9 @@ export function Navigation() {
 	) => {
 		if (item.isHash) {
 			// Extract hash from path (e.g., "/#vinhos" -> "#vinhos")
-			const hash = item.path.includes("#") ? `#${item.path.split("#")[1]}` : item.path;
+			const hash = item.path.includes("#")
+				? `#${item.path.split("#")[1]}`
+				: item.path;
 
 			// If we're on the home page, scroll to element
 			if (pathname === "/") {
