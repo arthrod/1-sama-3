@@ -4,7 +4,10 @@ import Link from "next/link";
 
 export default function Footer() {
 	return (
-		<footer id="contato" className="py-16 bg-black text-paper border-t border-graphite">
+		<footer
+			id="contato"
+			className="py-16 bg-black text-paper border-t border-graphite"
+		>
 			<div className="max-w-7xl mx-auto px-6">
 				<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
 					{/* Brand */}
@@ -12,8 +15,8 @@ export default function Footer() {
 						<h2 className="font-script text-4xl mb-6 text-paper">Sá Marias</h2>
 						<p className="text-graphite-lighter text-sm leading-relaxed max-w-md mb-6">
 							Localizado nas colinas de Minas Gerais, nosso vinhedo combina
-							tradição mineira e terroir brasileiro em produtos que expressam
-							a alma de nossa terra através de três gerações de conhecimento.
+							tradição mineira e terroir brasileiro em produtos que expressam a
+							alma de nossa terra através de três gerações de conhecimento.
 						</p>
 						<div className="flex gap-4">
 							<a

@@ -186,7 +186,10 @@ export default function RootLayout({
 		<html lang="pt-BR" suppressHydrationWarning>
 			<head>
 				{/* Google Analytics */}
-				<script async src="https://www.googletagmanager.com/gtag/js?id=G-6W2C54R7EF" />
+				<script
+					async
+					src="https://www.googletagmanager.com/gtag/js?id=G-6W2C54R7EF"
+				/>
 				<script
 					dangerouslySetInnerHTML={{
 						__html: `
