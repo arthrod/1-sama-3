@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cicero - Legal Analysis Workspace</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+
+    <style>
+        /* Design Tokens (Extracted from src/styles/samarias.css) */
+        :root {
+            /* Colors */
+            --color-paper: #faf9f7;
+            --color-paper-dark: #ebeae8;
+            --color-paper-light: #ffffff;
+
+            --color-ink: #1a1818;
+            --color-ink-light: #2e2b29;
+
+            --color-graphite: #595450;
+            --color-graphite-light: #9e9791;
+            --color-graphite-lighter: #d1cdc9;
+            --color-graphite-faint: #e5e5e5;
+
+            --color-merlot: #541e23;
+            --color-merlot-hover: #3e161a;
+            --color-merlot-light: #8c3b44; /* Used for alerts/highlights */
+
+            /* Typography */
+            --font-serif: 'Playfair Display', serif;
+            --font-sans: 'Lato', sans-serif;
+
+            /* Spacing */
+            --spacing-unit: 8px;
+
+            /* Shadows */
+            --shadow-sharp: 0 1px 2px rgba(26, 24, 24, 0.1);
+            --shadow-float: 0 10px 30px -10px rgba(26, 24, 24, 0.15);
+        }
+
+        /* Reset & Base Styles */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: var(--font-sans);
+            background-color: var(--color-paper);
+            color: var(--color-ink);
+            line-height: 1.6;
+            font-size: 16px;
+            height: 100vh;
+            overflow: hidden; /* App-like layout */
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Utility Classes */
+        .font-serif { font-family: var(--font-serif); }
+        .font-sans { font-family: var(--font-sans); }
+        .text-merlot { color: var(--color-merlot); }
+        .bg-merlot { background-color: var(--color-merlot); color: white; }
+        .border-merlot { border-color: var(--color-merlot); }
+
+        .uppercase { text-transform: uppercase; letter-spacing: 0.1em; }
+        .bold { font-weight: 700; }
+        .italic { font-style: italic; }
+
+        /* Layout */
+        .app-container {
+            display: grid;
+            grid-template-columns: 260px 1fr 320px;
+            grid-template-rows: 60px 1fr;
+            height: 100vh;
+            width: 100vw;
+        }
+
+        /* Header */
+        header {
+            grid-column: 1 / -1;
+            background-color: var(--color-paper-light);
+            border-bottom: 1px solid var(--color-graphite-lighter);
+            display: flex;
+            align-items: center;
+            padding: 0 24px;
+            justify-content: space-between;
+            z-index: 10;
+        }
+
+        .brand {
+            font-family: var(--font-serif);
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--color-ink);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .brand-mark {
+            width: 32px;
+            height: 32px;
+            background-color: var(--color-merlot);
+            color: white; /* Paper */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--font-serif);
+            font-weight: 700;
+            font-size: 20px;
+        }
+
+        .top-nav a {
+            text-decoration: none;
+            color: var(--color-graphite);
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-left: 24px;
+            font-weight: 700;
+            transition: color 0.2s;
+        }
+        .top-nav a:hover, .top-nav a.active {
+            color: var(--color-merlot);
+        }
+
+        .user-profile {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .avatar {
+            width: 32px;
+            height: 32px;
+            background-color: var(--color-graphite-lighter);
+            border-radius: 50%; /* Only circular element */
+        }
+
+        /* Sidebar (Left) */
+        aside.left-sidebar {
+            background-color: var(--color-paper);
+            border-right: 1px solid var(--color-graphite-lighter);
+            padding: 24px 0;
+            overflow-y: auto;
+        }
+
+        .nav-section {
+            margin-bottom: 32px;
+        }
+        .nav-header {
+            padding: 0 24px;
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--color-graphite);
+            margin-bottom: 12px;
+            font-weight: 700;
+        }
+        .nav-item {
+            display: flex;
+            align-items: center;
+            padding: 10px 24px;
+            color: var(--color-ink-light);
+            text-decoration: none;
+            font-size: 14px;
+            border-left: 3px solid transparent;
+            transition: all 0.2s;
+        }
+        .nav-item:hover {
+            background-color: var(--color-paper-dark);
+            color: var(--color-ink);
+        }
+        .nav-item.active {
+            background-color: var(--color-paper-dark);
+            color: var(--color-merlot);
+            border-left-color: var(--color-merlot);
+            font-weight: 700;
+        }
+        .nav-icon {
+            margin-right: 12px;
+            width: 16px;
+            height: 16px;
+            background-color: var(--color-graphite-lighter); /* Placeholder for icon */
+        }
+        .nav-item.active .nav-icon {
+            background-color: var(--color-merlot);
+        }
+
+        /* Main Content */
+        main {
+            background-color: var(--color-paper-dark); /* Slightly darker paper for canvas */
+            padding: 32px 48px;
+            overflow-y: auto;
+            display: flex;
+            justify-content: center;
+        }
+
+        .document-canvas {
+            background-color: white;
+            width: 100%;
+            max-width: 800px;
+            min-height: 1000px; /* A4-ish ratio */
+            box-shadow: var(--shadow-float);
+            padding: 64px;
+            position: relative;
+        }
+
+        /* Document Typography */
+        .doc-title {
+            font-family: var(--font-serif);
+            font-size: 32px;
+            color: var(--color-ink);
+            margin-bottom: 8px;
+            text-align: center;
+        }
+        .doc-subtitle {
+            font-family: var(--font-sans);
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--color-graphite);
+            text-align: center;
+            margin-bottom: 48px;
+            padding-bottom: 24px;
+            border-bottom: 1px solid var(--color-graphite-lighter);
+        }
+        .doc-section-title {
+            font-family: var(--font-sans);
+            font-size: 14px;
+            font-weight: 700;
+            text-transform: uppercase;
+            margin-top: 32px;
+            margin-bottom: 16px;
+            color: var(--color-ink);
+        }
+        .doc-text {
+            font-family: 'Times New Roman', serif; /* Standard legal font inside doc */
+            font-size: 18px;
+            line-height: 1.8;
+            color: var(--color-ink-light);
+            margin-bottom: 24px;
+            text-align: justify;
+        }
+
+        /* Analysis Highlights */
+        .highlight {
+            background-color: rgba(84, 30, 35, 0.1); /* Merlot transparent */
+            border-bottom: 2px solid var(--color-merlot);
+            cursor: pointer;
+            position: relative;
+            transition: background 0.2s;
+        }
+        .highlight:hover {
+            background-color: rgba(84, 30, 35, 0.2);
+        }
+        .highlight.risk-high {
+            background-color: rgba(84, 30, 35, 0.15);
+            border-bottom-color: var(--color-merlot);
+        }
+
+        /* Right Sidebar (Analysis) */
+        aside.right-sidebar {
+            background-color: white;
+            border-left: 1px solid var(--color-graphite-lighter);
+            display: flex;
+            flex-direction: column;
+            overflow-y: auto;
+        }
+
+        .panel-header {
+            padding: 24px;
+            border-bottom: 1px solid var(--color-graphite-lighter);
+        }
+        .panel-title {
+            font-family: var(--font-serif);
+            font-size: 20px;
+            color: var(--color-ink);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .ai-badge {
+            font-family: var(--font-sans);
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            background-color: var(--color-ink);
+            color: white;
+            padding: 4px 8px;
+            font-weight: 700;
+        }
+
+        .analysis-content {
+            padding: 24px;
+        }
+
+        .insight-card {
+            background-color: var(--color-paper);
+            border: 1px solid var(--color-graphite-lighter);
+            padding: 16px;
+            margin-bottom: 16px;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .insight-card:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-sharp);
+            border-color: var(--color-merlot);
+        }
+
+        .insight-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--color-graphite);
+        }
+        .risk-tag {
+            color: var(--color-merlot);
+            font-weight: 700;
+        }
+
+        .insight-body {
+            font-size: 14px;
+            color: var(--color-ink);
+            line-height: 1.5;
+        }
+        .insight-footer {
+            margin-top: 12px;
+            padding-top: 12px;
+            border-top: 1px solid var(--color-graphite-lighter);
+            font-size: 12px;
+            color: var(--color-graphite);
+            display: flex;
+            gap: 12px;
+        }
+        .action-link {
+            color: var(--color-merlot);
+            text-decoration: none;
+            font-weight: 700;
+        }
+        .action-link:hover {
+            text-decoration: underline;
+        }
+
+        /* Floating Controls */
+        .floating-controls {
+            position: fixed;
+            bottom: 32px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: var(--color-ink);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 4px; /* Minimal radius */
+            display: flex;
+            gap: 24px;
+            box-shadow: var(--shadow-float);
+            z-index: 100;
+        }
+        .control-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+        .control-item:hover {
+            color: var(--color-graphite-lighter);
+        }
+        .separator {
+            width: 1px;
+            height: 16px;
+            background-color: var(--color-graphite);
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="app-container">
+        <!-- Header -->
+        <header>
+            <div class="brand">
+                <div class="brand-mark">C</div>
+                Cicero
+            </div>
+            <nav class="top-nav">
+                <a href="#" class="active">Workspace</a>
+                <a href="#">Knowledge Base</a>
+                <a href="#">Team</a>
+                <a href="#">Analytics</a>
+            </nav>
+            <div class="user-profile">
+                <span class="font-sans text-xs uppercase tracking-widest text-graphite">J. Smith, Esq.</span>
+                <div class="avatar"></div>
+            </div>
+        </header>
+
+        <!-- Sidebar -->
+        <aside class="left-sidebar">
+            <div class="nav-section">
+                <div class="nav-header">Active Matter</div>
+                <a href="#" class="nav-item active">
+                    <span class="nav-icon"></span>
+                    Smith v. Jones Industries
+                </a>
+                <a href="#" class="nav-item">
+                    <span class="nav-icon"></span>
+                    Discovery Documents (42)
+                </a>
+                <a href="#" class="nav-item">
+                    <span class="nav-icon"></span>
+                    Draft Motions (3)
+                </a>
+            </div>
+
+            <div class="nav-section">
+                <div class="nav-header">Recent Files</div>
+                <a href="#" class="nav-item">
+                    <span class="nav-icon"></span>
+                    Settlement Agreement_v4
+                </a>
+                <a href="#" class="nav-item">
+                    <span class="nav-icon"></span>
+                    Deposition Summary - Doe
+                </a>
+                <a href="#" class="nav-item">
+                    <span class="nav-icon"></span>
+                    Expert Witness Report
+                </a>
+            </div>
+
+            <div class="nav-section">
+                <div class="nav-header">Tools</div>
+                <a href="#" class="nav-item">
+                    <span class="nav-icon"></span>
+                    Clause Library
+                </a>
+                <a href="#" class="nav-item">
+                    <span class="nav-icon"></span>
+                    Precedent Search
+                </a>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main>
+            <div class="document-canvas">
+                <h1 class="doc-title">Settlement Agreement and Mutual Release</h1>
+                <div class="doc-subtitle">Case No. 24-CV-01928 • Last Edited 14 mins ago</div>
+
+                <div class="doc-section-title">1. Recitals</div>
+                <p class="doc-text">
+                    This Settlement Agreement and Mutual Release ("Agreement") is entered into as of October 14, 2024, by and between <strong>Smith Holdings, LLC</strong> ("Plaintiff") and <strong>Jones Industries, Inc.</strong> ("Defendant").
+                </p>
+                <p class="doc-text">
+                    WHEREAS, Plaintiff filed a civil action against Defendant in the Superior Court of California, County of San Francisco, styled <em>Smith Holdings, LLC v. Jones Industries, Inc.</em>, Case No. CGC-23-123456 (the "Action");
+                </p>
+                <p class="doc-text">
+                    WHEREAS, the Parties desire to resolve the Action and all claims and disputes between them without further litigation, admission of liability, or expense;
+                </p>
+
+                <div class="doc-section-title">2. Payment Terms</div>
+                <p class="doc-text">
+                    <span class="highlight risk-high">Defendant agrees to pay Plaintiff the sum of Two Million Five Hundred Thousand Dollars ($2,500,000.00) (the "Settlement Amount") within thirty (30) days of the Effective Date.</span> Payment shall be made by wire transfer to the trust account of Plaintiff's counsel.
+                </p>
+                <p class="doc-text">
+                    Failure to make payment within the specified timeframe shall result in the accrual of interest at a rate of 10% per annum. <span class="highlight">The Parties agree that time is of the essence with respect to this payment obligation.</span>
+                </p>
+
+                <div class="doc-section-title">3. Release of Claims</div>
+                <p class="doc-text">
+                    Upon receipt of the Settlement Amount, Plaintiff hereby releases, acquits, and forever discharges Defendant and its officers, directors, employees, and agents from any and all claims, demands, damages, actions, causes of action, or suits of any kind or nature whatsoever, known or unknown, which Plaintiff now has or may hereafter have against Defendant, arising out of or relating to the facts alleged in the Action.
+                </p>
+                <p class="doc-text">
+                    <span class="highlight">Plaintiff expressly waives the provisions of California Civil Code Section 1542</span>, which provides: "A GENERAL RELEASE DOES NOT EXTEND TO CLAIMS THAT THE CREDITOR OR RELEASING PARTY DOES NOT KNOW OR SUSPECT TO EXIST IN HIS OR HER FAVOR AT THE TIME OF EXECUTING THE RELEASE AND THAT, IF KNOWN BY HIM OR HER, WOULD HAVE MATERIALLY AFFECTED HIS OR HER SETTLEMENT WITH THE DEBTOR OR RELEASED PARTY."
+                </p>
+
+                <div class="doc-section-title">4. Confidentiality</div>
+                <p class="doc-text">
+                    The Parties agree to keep the terms and conditions of this Agreement confidential. Neither Party shall disclose the Settlement Amount to any third party, except as required by law or to their respective legal and financial advisors.
+                </p>
+            </div>
+        </main>
+
+        <!-- Right Sidebar -->
+        <aside class="right-sidebar">
+            <div class="panel-header">
+                <h2 class="panel-title">
+                    Cicero Analysis
+                    <span class="ai-badge">AI Active</span>
+                </h2>
+            </div>
+
+            <div class="analysis-content">
+                <div class="insight-card" style="border-left: 3px solid var(--color-merlot);">
+                    <div class="insight-header">
+                        <span>Risk Detected</span>
+                        <span class="risk-tag">High</span>
+                    </div>
+                    <div class="insight-body">
+                        <strong>Payment Deadline Ambiguity</strong><br>
+                        "Effective Date" is not clearly defined in Section 1. This could delay the 30-day payment window triggers.
+                    </div>
+                    <div class="insight-footer">
+                        <a href="#" class="action-link">Review Definitions</a>
+                        <a href="#" class="action-link">Suggest Edit</a>
+                    </div>
+                </div>
+
+                <div class="insight-card">
+                    <div class="insight-header">
+                        <span>Standard Clause</span>
+                        <span style="color: var(--color-ink);">Match: 98%</span>
+                    </div>
+                    <div class="insight-body">
+                        <strong>Section 1542 Waiver</strong><br>
+                        This waiver is standard in California settlement agreements. The language matches the statutory text exactly.
+                    </div>
+                    <div class="insight-footer">
+                        <a href="#" class="action-link">View Statute</a>
+                    </div>
+                </div>
+
+                <div class="insight-card">
+                    <div class="insight-header">
+                        <span>Optimization</span>
+                        <span style="color: var(--color-graphite);">Low Priority</span>
+                    </div>
+                    <div class="insight-body">
+                        <strong>Confidentiality Exceptions</strong><br>
+                        Consider adding an exception for disclosures required by "tax authorities" explicitly to avoid ambiguity.
+                    </div>
+                    <div class="insight-footer">
+                        <a href="#" class="action-link">Apply Suggestion</a>
+                    </div>
+                </div>
+
+                <div style="margin-top: 24px; padding-top: 24px; border-top: 1px solid var(--color-graphite-faint);">
+                    <h3 class="font-serif" style="font-size: 16px; margin-bottom: 12px;">Citations Found</h3>
+                    <ul style="list-style: none; font-size: 12px; color: var(--color-ink-light);">
+                        <li style="margin-bottom: 8px; padding-left: 12px; border-left: 1px solid var(--color-merlot);">
+                            <em>Casey v. Proctor</em> (1963) 59 Cal.2d 97
+                        </li>
+                        <li style="margin-bottom: 8px; padding-left: 12px; border-left: 1px solid var(--color-graphite-lighter);">
+                            <em>Jefferson v. California Dept. of Youth Authority</em> (2002) 28 Cal.4th 299
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Floating Controls -->
+        <div class="floating-controls">
+            <div class="control-item">
+                <span>Accept All</span>
+            </div>
+            <div class="separator"></div>
+            <div class="control-item">
+                <span>Reject</span>
+            </div>
+            <div class="separator"></div>
+            <div class="control-item">
+                <span>Comment</span>
+            </div>
+        </div>
+
+    </div>
+
+</body>
+</html>
