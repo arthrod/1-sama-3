@@ -34,7 +34,7 @@ export default async function BlogPage() {
 	return (
 		<div className="min-h-screen bg-paper dark:bg-paper-dark">
 			<Navigation />
-			<div className="pt-32 pb-24">
+			<main id="main-content" className="pt-32 pb-24">
 				{/* Header */}
 				<div className="container mx-auto px-6 mb-20 text-center">
 				<span className="font-sans text-xs tracking-[0.4em] uppercase text-graphite dark:text-graphite-lighter mb-4 block">
@@ -146,7 +146,7 @@ export default async function BlogPage() {
 			<div className="mt-32">
 				<Newsletter />
 			</div>
-			</div>
+			</main>
 			<Footer />
 		</div>
 	);

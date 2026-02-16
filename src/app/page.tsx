@@ -182,7 +182,7 @@ export default async function Home() {
 			<div className="min-h-screen transition-colors duration-500 bg-paper dark:bg-paper-dark">
 				<Navigation />
 
-				<main className="min-h-screen">
+				<main id="main-content" className="min-h-screen">
 				{/* HERO SECTION */}
 				<HeroSlideshow />
 

@@ -45,7 +45,7 @@ export default async function Post({ params }: PostParams) {
 		<div className="min-h-screen bg-paper dark:bg-paper-dark transition-colors duration-500">
 			<Navigation />
 
-			<main>
+			<main id="main-content">
 				{/* HEADER SECTION - DISTINCTIVE IMPACT */}
 				{hasCover ? (
 					// OPTION A: RICH VISUAL HEADER
