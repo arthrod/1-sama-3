@@ -21,7 +21,7 @@ jobs:
         run: bun run build
 
       - name: Deploy to Cloudflare Workers
-        run: ./node_modules/.bin/wrangler deploy --env pr --name samarias-pr-${{ github.event.number }}
+        run: ./node_modules/.bin/wrangler deploy --env pr
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
@@ -39,19 +39,3 @@ jobs:
               repo: context.repo.repo,
               body: `🚀 Preview deployed to: ${previewUrl}`
             });
-
-  cleanup-preview:
-    if: github.event.action == 'closed'
-    runs-on: ubuntu-latest
-    name: Cleanup Preview
-    steps:
-      - uses: actions/checkout@v4
-      - uses: oven-sh/setup-bun@v2
-      - name: Install dependencies
-        run: bun install --ignore-scripts
-
-      - name: Delete Preview
-        run: ./node_modules/.bin/wrangler delete --name samarias-pr-${{ github.event.number }}
-        env:
-          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
