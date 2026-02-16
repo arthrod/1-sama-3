@@ -8,7 +8,7 @@ export default function SitioDutraPage() {
 		<div className="min-h-screen transition-colors duration-500 bg-paper dark:bg-paper-dark">
 			<Navigation />
 
-			<main id="main-content" className="pt-32 pb-24">
+			<main className="pt-32 pb-24">
 				{/* Header */}
 				<div className="container mx-auto px-6 mb-20 text-center">
 					<span className="font-sans text-xs tracking-[0.4em] uppercase text-graphite dark:text-graphite-lighter mb-4 block">

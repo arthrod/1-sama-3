@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Great_Vibes, Lato, Playfair_Display } from "next/font/google";
 import "./globals.css";
-import { SkipLink } from "@/components/SkipLink";
 import { ThemeProvider } from "@/components/ThemeProvider";
 
 const playfair = Playfair_Display({
@@ -206,7 +205,6 @@ export default function RootLayout({
 			<body
 				className={`${playfair.variable} ${lato.variable} ${greatVibes.variable} antialiased`}
 			>
-				<SkipLink />
 				<ThemeProvider>{children}</ThemeProvider>
 			</body>
 		</html>
