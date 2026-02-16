@@ -1,5 +1,6 @@
 export { default as Footer } from "./Footer";
 export { HeroSlideshow } from "./HeroSlideshow";
+export { InlineNewsletterForm } from "./InlineNewsletterForm";
 export { LabelShowcase } from "./LabelShowcase";
 export { Navigation } from "./Navigation";
 export { Newsletter } from "./Newsletter";
