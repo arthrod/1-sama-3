@@ -5,7 +5,9 @@ import { useEffect, useState } from "react";
 export function Newsletter() {
 	const [name, setName] = useState("");
 	const [email, setEmail] = useState("");
-	const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+	const [status, setStatus] = useState<
+		"idle" | "loading" | "success" | "error"
+	>("idle");
 
 	const handleSubmit = async (e: React.FormEvent) => {
 		e.preventDefault();
@@ -40,7 +42,10 @@ export function Newsletter() {
 	}, [status]);
 
 	return (
-		<section id="newsletter" className="py-32 bg-ink text-paper relative overflow-hidden">
+		<section
+			id="newsletter"
+			className="py-32 bg-ink text-paper relative overflow-hidden"
+		>
 			{/* Decorative Elements */}
 			<div className="absolute top-0 left-0 w-full h-full opacity-5 pointer-events-none">
 				<div className="absolute top-1/4 left-1/4 w-96 h-96 border border-paper rounded-full" />
@@ -75,7 +80,9 @@ export function Newsletter() {
 						onSubmit={handleSubmit}
 						className="flex flex-col md:flex-row gap-4 max-w-md mx-auto"
 					>
-						<label htmlFor="subscriber-name" className="sr-only">Seu Nome</label>
+						<label htmlFor="subscriber-name" className="sr-only">
+							Seu Nome
+						</label>
 						<input
 							type="text"
 							id="subscriber-name"
@@ -86,7 +93,9 @@ export function Newsletter() {
 							onChange={(e) => setName(e.target.value)}
 							className="flex-1 bg-transparent border-b border-graphite py-3 px-4 text-paper placeholder-graphite-light focus:outline-none focus:border-merlot transition-colors font-serif"
 						/>
-						<label htmlFor="subscriber-email" className="sr-only">Seu E-mail</label>
+						<label htmlFor="subscriber-email" className="sr-only">
+							Seu E-mail
+						</label>
 						<input
 							type="email"
 							id="subscriber-email"
@@ -103,13 +112,20 @@ export function Newsletter() {
 							disabled={status === "loading"}
 							className="bg-paper text-ink hover:bg-merlot hover:text-white font-sans font-bold uppercase tracking-widest text-xs py-4 px-8 transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
 						>
-							{status === "loading" ? "Enviando..." : status === "success" ? "Enviado!" : "Cadastrar"}
+							{status === "loading"
+								? "Enviando..."
+								: status === "success"
+									? "Enviado!"
+									: "Cadastrar"}
 						</button>
 					</form>
 
 					<p className="mt-6 text-xs text-graphite-light">
 						Ao se cadastrar, você concorda com nossa{" "}
-						<a href="/politica-de-privacidade" className="text-graphite-lighter underline hover:text-paper">
+						<a
+							href="/politica-de-privacidade"
+							className="text-graphite-lighter underline hover:text-paper"
+						>
 							Política de Privacidade
 						</a>
 					</p>
