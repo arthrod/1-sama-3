@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cicero — Legal Intelligence Dashboard</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            /* Palette derived from Sá Marias codebase but applied to Cicero context */
+            --color-scarlet: #541e23;        /* Was Merlot */
+            --color-scarlet-light: #8c3b44;  /* Was Merlot Light */
+            --color-ink: #1a1818;            /* Was Ink */
+            --color-ink-light: #2e2b29;      /* Was Ink Light */
+            --color-ink-faint: #4a4644;      /* Was Ink Faint */
+            --color-paper: #faf9f7;          /* Was Paper */
+            --color-paper-dark: #0a0909;     /* Was Paper Dark */
+            --color-paper-100: #ffffff;      /* Was Paper 100 */
+            --color-paper-200: #f5f4f0;      /* Was Paper 200 */
+            --color-paper-300: #ebeae8;      /* Was Paper 300 */
+            --color-graphite: #595450;       /* Was Graphite */
+            --color-graphite-light: #9e9791; /* Was Graphite Light */
+
+            /* Typography */
+            --font-display: 'Cormorant Garamond', serif;
+            --font-body: 'DM Sans', sans-serif;
+
+            /* Spacing scale */
+            --space-1: 0.25rem;
+            --space-2: 0.5rem;
+            --space-3: 0.75rem;
+            --space-4: 1rem;
+            --space-6: 1.5rem;
+            --space-8: 2rem;
+            --space-12: 3rem;
+            --space-16: 4rem;
+            --space-24: 6rem;
+
+            /* Borders */
+            --border-width: 1px;
+            --border-radius: 0px; /* Sharp geometry as requested */
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background-color: var(--color-paper);
+            color: var(--color-ink);
+            line-height: 1.5;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Utility Classes */
+        .container {
+            max-width: 1440px;
+            margin: 0 auto;
+            padding: 0 var(--space-8);
+        }
+
+        .flex { display: flex; }
+        .flex-col { flex-direction: column; }
+        .items-center { align-items: center; }
+        .justify-between { justify-content: space-between; }
+        .gap-4 { gap: var(--space-4); }
+        .gap-8 { gap: var(--space-8); }
+
+        .grid { display: grid; }
+        .grid-cols-12 { grid-template-columns: repeat(12, 1fr); }
+        .col-span-3 { grid-column: span 3; }
+        .col-span-4 { grid-column: span 4; }
+        .col-span-8 { grid-column: span 8; }
+        .col-span-9 { grid-column: span 9; }
+
+        .text-scarlet { color: var(--color-scarlet); }
+        .text-ink { color: var(--color-ink); }
+        .text-graphite { color: var(--color-graphite); }
+        .bg-white { background-color: var(--color-paper-100); }
+        .bg-paper-200 { background-color: var(--color-paper-200); }
+
+        .font-display { font-family: var(--font-display); }
+        .font-body { font-family: var(--font-body); }
+
+        .uppercase { text-transform: uppercase; }
+        .tracking-wide { letter-spacing: 0.05em; }
+        .tracking-widest { letter-spacing: 0.15em; }
+
+        .border { border: var(--border-width) solid var(--color-paper-300); }
+        .border-t { border-top: var(--border-width) solid var(--color-paper-300); }
+        .border-b { border-bottom: var(--border-width) solid var(--color-paper-300); }
+        .border-r { border-right: var(--border-width) solid var(--color-paper-300); }
+
+        /* Component Styles */
+
+        /* Typography */
+        h1, h2, h3, h4, h5, h6 {
+            font-family: var(--font-display);
+            font-weight: 400;
+            line-height: 1.1;
+        }
+
+        .text-display-lg { font-size: 3.5rem; }
+        .text-display-md { font-size: 2.5rem; }
+        .text-display-sm { font-size: 1.75rem; }
+
+        .text-body-sm { font-size: 0.875rem; }
+        .text-body-xs { font-size: 0.75rem; }
+
+        /* Buttons */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            padding: var(--space-3) var(--space-6);
+            font-family: var(--font-body);
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-decoration: none;
+            border: 1px solid transparent;
+        }
+
+        .btn-primary {
+            background-color: var(--color-scarlet);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--color-scarlet-light);
+        }
+
+        .btn-outline {
+            border-color: var(--color-ink);
+            color: var(--color-ink);
+            background: transparent;
+        }
+
+        .btn-outline:hover {
+            background-color: var(--color-ink);
+            color: white;
+        }
+
+        /* Layout Structure */
+        .app-shell {
+            min-height: 100vh;
+            display: grid;
+            grid-template-columns: 280px 1fr;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            background-color: var(--color-paper-200);
+            border-right: 1px solid var(--color-paper-300);
+            padding: var(--space-8);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            height: 100vh;
+            position: sticky;
+            top: 0;
+        }
+
+        .logo {
+            font-family: var(--font-display);
+            font-size: 2rem;
+            color: var(--color-scarlet);
+            margin-bottom: var(--space-12);
+            font-style: italic;
+            display: flex;
+            align-items: center;
+            gap: var(--space-2);
+        }
+
+        .nav-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-4);
+        }
+
+        .nav-item a {
+            display: flex;
+            align-items: center;
+            gap: var(--space-3);
+            text-decoration: none;
+            color: var(--color-ink-faint);
+            font-size: 0.9rem;
+            font-weight: 500;
+            padding: var(--space-2) 0;
+            transition: color 0.2s;
+        }
+
+        .nav-item a:hover, .nav-item a.active {
+            color: var(--color-scarlet);
+        }
+
+        .nav-item a.active {
+            font-weight: 700;
+        }
+
+        .nav-divider {
+            height: 1px;
+            background-color: var(--color-paper-300);
+            margin: var(--space-6) 0;
+        }
+
+        /* Main Content */
+        .main-content {
+            padding: var(--space-12) var(--space-16);
+            background-color: var(--color-paper);
+        }
+
+        /* Header Area */
+        .page-header {
+            margin-bottom: var(--space-12);
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            padding-bottom: var(--space-8);
+            border-bottom: 1px solid var(--color-paper-300);
+        }
+
+        /* Metrics Bar */
+        .metrics-bar {
+            display: flex;
+            gap: var(--space-12);
+            margin-bottom: var(--space-12);
+        }
+
+        .metric {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-1);
+        }
+
+        .metric-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--color-graphite);
+        }
+
+        .metric-value {
+            font-family: var(--font-display);
+            font-size: 2.5rem;
+            color: var(--color-ink);
+            line-height: 1;
+        }
+
+        /* Case Cards Grid */
+        .case-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: var(--space-6);
+        }
+
+        .case-card {
+            background: white;
+            border: 1px solid var(--color-paper-300);
+            padding: var(--space-6);
+            transition: transform 0.2s, box-shadow 0.2s;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .case-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px -10px rgba(84, 30, 35, 0.1); /* Subtle Scarlet shadow */
+            border-color: var(--color-scarlet);
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 2px 8px;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            border: 1px solid var(--color-paper-300);
+            color: var(--color-graphite);
+            margin-bottom: var(--space-4);
+            align-self: flex-start;
+        }
+
+        .status-urgent {
+            border-color: var(--color-scarlet);
+            color: var(--color-scarlet);
+            background-color: rgba(84, 30, 35, 0.05);
+        }
+
+        .case-meta {
+            margin-top: auto;
+            padding-top: var(--space-4);
+            border-top: 1px solid var(--color-paper-200);
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.8rem;
+            color: var(--color-graphite);
+        }
+
+        /* Drafts List */
+        .draft-list {
+            margin-top: var(--space-12);
+        }
+
+        .draft-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: var(--space-4);
+            border-bottom: 1px solid var(--color-paper-300);
+            transition: background 0.2s;
+        }
+
+        .draft-item:hover {
+            background-color: white;
+        }
+
+        .draft-title {
+            font-family: var(--font-display);
+            font-size: 1.25rem;
+            color: var(--color-ink);
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .animate-in {
+            animation: fadeIn 0.6s ease-out forwards;
+        }
+
+        .delay-1 { animation-delay: 0.1s; }
+        .delay-2 { animation-delay: 0.2s; }
+        .delay-3 { animation-delay: 0.3s; }
+
+    </style>
+</head>
+<body>
+
+<div class="app-shell">
+
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar">
+        <div>
+            <div class="logo">
+                <span>Cicero</span>
+            </div>
+
+            <nav>
+                <ul class="nav-list">
+                    <li class="nav-item">
+                        <a href="#" class="active">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+                            Dashboard
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+                            Matters
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                            Research
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
+                            Library
+                        </a>
+                    </li>
+                </ul>
+
+                <div class="nav-divider"></div>
+
+                <ul class="nav-list">
+                    <li class="nav-item">
+                        <a href="#">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                            Timekeeping
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+                            Communications
+                            <span style="margin-left: auto; font-size: 0.7rem; background: var(--color-scarlet); color: white; padding: 2px 6px; border-radius: 0;">3</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+
+        <div class="user-profile">
+            <div style="font-size: 0.8rem; color: var(--color-graphite); margin-bottom: var(--space-2);">Signed in as</div>
+            <div style="font-weight: 700; color: var(--color-ink);">Eleanor Vance</div>
+            <div style="font-size: 0.75rem; color: var(--color-ink-faint);">Partner, Corporate</div>
+        </div>
+    </aside>
+
+    <!-- Main Workspace -->
+    <main class="main-content">
+
+        <!-- Header -->
+        <header class="page-header animate-in">
+            <div>
+                <div style="font-family: var(--font-display); font-style: italic; color: var(--color-scarlet); margin-bottom: var(--space-2);">Wednesday, October 25</div>
+                <h1 class="text-display-lg">Good morning, Eleanor.</h1>
+            </div>
+            <div>
+                <a href="#" class="btn btn-primary">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" style="margin-right: 8px;"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                    New Matter
+                </a>
+            </div>
+        </header>
+
+        <!-- Metrics -->
+        <section class="metrics-bar animate-in delay-1">
+            <div class="metric">
+                <span class="metric-label">Active Matters</span>
+                <span class="metric-value">14</span>
+            </div>
+            <div class="metric">
+                <span class="metric-label">Pending Review</span>
+                <span class="metric-value text-scarlet">3</span>
+            </div>
+            <div class="metric">
+                <span class="metric-label">Billable Hours (MTD)</span>
+                <span class="metric-value">128.5</span>
+            </div>
+            <div class="metric">
+                <span class="metric-label">Briefs Drafted</span>
+                <span class="metric-value">7</span>
+            </div>
+        </section>
+
+        <!-- Active Matters Grid -->
+        <section class="animate-in delay-2">
+            <div class="flex justify-between items-center" style="margin-bottom: var(--space-6);">
+                <h2 class="text-display-sm">Priority Matters</h2>
+                <a href="#" style="font-size: 0.875rem; color: var(--color-scarlet); text-decoration: none; border-bottom: 1px solid var(--color-scarlet);">View Docket →</a>
+            </div>
+
+            <div class="case-grid">
+                <!-- Card 1 -->
+                <article class="case-card">
+                    <span class="status-badge status-urgent">Response Due: Today</span>
+                    <h3 class="font-display text-display-sm" style="margin-bottom: var(--space-2);">Mercer v. Tyrell Corp</h3>
+                    <p class="text-body-sm text-ink-faint" style="margin-bottom: var(--space-4);">Intellectual Property / Patent Infringement</p>
+                    <p class="text-body-sm" style="margin-bottom: var(--space-4);">Reviewing opposing counsel's motion for summary judgment regarding claim construction.</p>
+                    <div class="case-meta">
+                        <span>SDNY (Civil)</span>
+                        <span>Case #23-cv-4829</span>
+                    </div>
+                </article>
+
+                <!-- Card 2 -->
+                <article class="case-card">
+                    <span class="status-badge">Deposition Prep</span>
+                    <h3 class="font-display text-display-sm" style="margin-bottom: var(--space-2);">Estate of C. Foster</h3>
+                    <p class="text-body-sm text-ink-faint" style="margin-bottom: var(--space-4);">Probate / Asset Dispute</p>
+                    <p class="text-body-sm" style="margin-bottom: var(--space-4);">Preparing outline for witness examination of executor regarding asset valuation.</p>
+                    <div class="case-meta">
+                        <span>Surrogate's Court, NY</span>
+                        <span>File #2023-1102</span>
+                    </div>
+                </article>
+
+                <!-- Card 3 -->
+                <article class="case-card">
+                    <span class="status-badge">Briefing</span>
+                    <h3 class="font-display text-display-sm" style="margin-bottom: var(--space-2);">Helix Systems Acquisition</h3>
+                    <p class="text-body-sm text-ink-faint" style="margin-bottom: var(--space-4);">Corporate / M&A</p>
+                    <p class="text-body-sm" style="margin-bottom: var(--space-4);">Drafting definitive agreement and scheduling closing conditions review.</p>
+                    <div class="case-meta">
+                        <span>Delaware Chancery</span>
+                        <span>Deal Value: $45M</span>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <!-- Recent Drafts -->
+        <section class="animate-in delay-3" style="margin-top: var(--space-16);">
+            <div class="flex justify-between items-center" style="margin-bottom: var(--space-6);">
+                <h2 class="text-display-sm">Recent Drafts</h2>
+                <span class="text-body-xs text-graphite uppercase tracking-widest">Last synced 2m ago</span>
+            </div>
+
+            <div class="border-t">
+                <div class="draft-item">
+                    <div class="flex items-center gap-4">
+                        <div style="width: 40px; height: 40px; background: var(--color-paper-200); display: flex; align-items: center; justify-content: center; font-family: var(--font-display); color: var(--color-scarlet);">DOC</div>
+                        <div>
+                            <h4 class="draft-title" style="font-size: 1.1rem;">Motion to Dismiss - Mercer</h4>
+                            <span class="text-body-xs text-graphite">Edited 14m ago by Eleanor Vance</span>
+                        </div>
+                    </div>
+                    <div>
+                        <span class="status-badge" style="margin: 0;">v3.2</span>
+                    </div>
+                </div>
+
+                <div class="draft-item">
+                    <div class="flex items-center gap-4">
+                        <div style="width: 40px; height: 40px; background: var(--color-paper-200); display: flex; align-items: center; justify-content: center; font-family: var(--font-display); color: var(--color-scarlet);">PDF</div>
+                        <div>
+                            <h4 class="draft-title" style="font-size: 1.1rem;">Settlement Agreement - Redacted</h4>
+                            <span class="text-body-xs text-graphite">Edited 2h ago by J. Smith</span>
+                        </div>
+                    </div>
+                    <div>
+                        <span class="status-badge" style="margin: 0;">Final</span>
+                    </div>
+                </div>
+
+                <div class="draft-item">
+                    <div class="flex items-center gap-4">
+                        <div style="width: 40px; height: 40px; background: var(--color-paper-200); display: flex; align-items: center; justify-content: center; font-family: var(--font-display); color: var(--color-scarlet);">MEMO</div>
+                        <div>
+                            <h4 class="draft-title" style="font-size: 1.1rem;">Research Memo: Piercing Corporate Veil</h4>
+                            <span class="text-body-xs text-graphite">Edited yesterday by Research Associate</span>
+                        </div>
+                    </div>
+                    <div>
+                        <span class="status-badge" style="margin: 0;">Draft</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+</div>
+
+<!--
+    DESIGN THINKING:
+    - Codebase Mismatch: The provided codebase was for "Sá Marias" (winery), but the prompt requested "Cicero" (legal tech).
+    - Strategy: I adapted the existing design tokens (Merlot -> Scarlet, Ink -> Ink, Paper -> Paper) to the new context.
+    - Typography: Switched from Playfair/Lato to Cormorant Garamond/DM Sans as requested.
+    - Geometry: Adopted a sharp, 0px border-radius aesthetic to convey the precision required in legal work.
+    - Content: Reimagined the "premium product grid" of the winery as a "premium case dashboard" for the lawyer.
+-->
+
+</body>
+</html>
