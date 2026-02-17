@@ -54,7 +54,6 @@
 
 	"env": {
 		"pr": {
-			"name": "samarias-pr-preview",
 			"routes": [
 				{
 					"pattern": "pr-*.samarias.org/*",
