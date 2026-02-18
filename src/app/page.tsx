@@ -2,7 +2,12 @@ import type { Metadata } from "next";
 import { createGitHubReader } from "@keystatic/core/reader/github";
 import Image from "next/image";
 import Link from "next/link";
-import { Footer, HeroSlideshow, Navigation } from "@/components";
+import {
+	Footer,
+	HeroSlideshow,
+	InlineNewsletterForm,
+	Navigation,
+} from "@/components";
 import keystaticConfig from "../../keystatic.config";
 import "../lib/keystatic-client";
 
@@ -390,28 +395,7 @@ export default async function Home() {
 									harmonizadas e histórias da nossa família direto no seu e-mail.
 								</p>
 
-								<form className="space-y-4">
-									<div>
-										<input
-											type="text"
-											placeholder="Seu nome"
-											className="w-full bg-transparent border-b border-graphite py-3 text-paper placeholder:text-graphite-light focus:border-merlot-light focus:outline-none transition-colors"
-										/>
-									</div>
-									<div>
-										<input
-											type="email"
-											placeholder="Seu e-mail"
-											className="w-full bg-transparent border-b border-graphite py-3 text-paper placeholder:text-graphite-light focus:border-merlot-light focus:outline-none transition-colors"
-										/>
-									</div>
-									<button
-										type="submit"
-										className="mt-6 w-full bg-merlot text-paper py-4 font-bold uppercase tracking-widest text-xs hover:bg-merlot-light transition-colors"
-									>
-										Inscrever-se
-									</button>
-								</form>
+								<InlineNewsletterForm />
 
 								<p className="text-xs text-graphite-light mt-6">
 									Ao se inscrever, você concorda com nossa{" "}
