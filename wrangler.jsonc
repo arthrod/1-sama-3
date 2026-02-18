@@ -54,6 +54,7 @@
 
 	"env": {
 		"pr": {
+			"name": "samarias",
 			"vars": {
 				"CMS_CLIENT": "keystatic",
 				"PUBLIC_KEYSTATIC_GITHUB_APP_SLUG": "1-sama-3",

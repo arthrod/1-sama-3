@@ -5,4 +5,3 @@ export { Navigation } from "./Navigation";
 export { Newsletter } from "./Newsletter";
 export { ThemeProvider, useTheme } from "./ThemeProvider";
 export { WineCard } from "./WineCard";
-export { InlineNewsletterForm } from "./InlineNewsletterForm";
