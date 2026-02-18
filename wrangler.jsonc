@@ -54,10 +54,9 @@
 
 	"env": {
 		"pr": {
-			"name": "samarias-pr-*",
 			"routes": [
 				{
-					"pattern": "pr-*.samarias.org/*",
+					"pattern": "pr.samarias.org/*",
 					"zone_name": "samarias.org"
 				}
 			]
