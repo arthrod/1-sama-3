@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { Great_Vibes, Lato, Playfair_Display } from "next/font/google";
-import Script from "next/script";
 import "./globals.css";
 import { ThemeProvider } from "@/components/ThemeProvider";
 
@@ -186,28 +185,26 @@ export default function RootLayout({
 	return (
 		<html lang="pt-BR" suppressHydrationWarning>
 			<head>
+				{/* Google Analytics */}
+				<script async src="https://www.googletagmanager.com/gtag/js?id=G-6W2C54R7EF" />
+				<script
+					dangerouslySetInnerHTML={{
+						__html: `
+							window.dataLayer = window.dataLayer || [];
+							function gtag(){dataLayer.push(arguments);}
+							gtag('js', new Date());
+							gtag('config', 'G-6W2C54R7EF');
+						`,
+					}}
+				/>
 				<script
 					type="application/ld+json"
-					// biome-ignore lint/security/noDangerouslySetInnerHtml: JSON-LD needs this
 					dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
 				/>
 			</head>
 			<body
 				className={`${playfair.variable} ${lato.variable} ${greatVibes.variable} antialiased`}
 			>
-				{/* Google Analytics */}
-				<Script
-					src="https://www.googletagmanager.com/gtag/js?id=G-6W2C54R7EF"
-					strategy="afterInteractive"
-				/>
-				<Script id="google-analytics" strategy="afterInteractive">
-					{`
-						window.dataLayer = window.dataLayer || [];
-						function gtag(){dataLayer.push(arguments);}
-						gtag('js', new Date());
-						gtag('config', 'G-6W2C54R7EF');
-					`}
-				</Script>
 				<ThemeProvider>{children}</ThemeProvider>
 			</body>
 		</html>

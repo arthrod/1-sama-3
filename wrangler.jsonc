@@ -55,17 +55,7 @@
 	"env": {
 		"pr": {
 			"name": "samarias",
-			"routes": [
-				{
-					"pattern": "pr.samarias.org/*",
-					"zone_name": "samarias.org"
-				},
-				{
-					"pattern": "pr.samarias.org",
-					"zone_name": "samarias.org",
-					"custom_domain": true
-				}
-			],
+			"workers_dev": true,
 			"vars": {
 				"CMS_CLIENT": "keystatic",
 				"PUBLIC_KEYSTATIC_GITHUB_APP_SLUG": "1-sama-3",
