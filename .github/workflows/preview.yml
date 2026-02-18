@@ -34,7 +34,7 @@ jobs:
         with:
           script: |
             const prNumber = context.issue.number;
-            const previewUrl = `https://pr.samarias.org`;
+            const previewUrl = `https://samarias.arthrod.workers.dev`;
 
             github.rest.issues.createComment({
               issue_number: prNumber,
