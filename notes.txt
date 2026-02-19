@@ -1,0 +1,21 @@
+# Cicero Email Service Design Notes
+
+## Selection: Option G - The Standalone Email Service Page
+I chose to design a full standalone page because the email service is Cicero's core product and deserves a dedicated narrative arc. This format allows us to walk the user through the entire journey—from the initial "messy" input to the "clarification" safety net, and finally to the polished deliverables. It combines the strongest elements of the other options (the Before/After contrast, the Timeline workflow, and the Use Case gallery) into a single, convincing argument.
+
+## Key Design Decisions
+
+### 1. The Email Address as Hero
+`assistant@cicero.im` is not just contact information; it is the product interface. I treated it as the primary call-to-action (CTA), styling it in `JetBrains Mono` to give it a technical, "command-line" feel that separates it from the marketing copy. It appears prominently in the hero (above the fold) and as the final action in the footer, ensuring the user always knows exactly what to do.
+
+### 2. The "Trust Signal" (Clarification Step)
+A major barrier to adopting legal AI is the fear of incorrect assumptions. I explicitly designed the "Cicero Clarifies" step in the workflow to address this. By showing a realistic example of the system asking a pointed question ("Do you want to strike it entirely, or narrow the scope?"), we prove that the system is "smart enough to know what it doesn't know." This turns a potential friction point (answering questions) into a trust-building feature.
+
+### 3. The "Messy to Perfect" Transformation
+The "Before/After" section visualizes the core value proposition: low-effort input yields high-quality output. I used a split layout with a chaotic, informal email on the left (gray background) and a structured, professional response on the right (white background with shadow). This visual contrast communicates the value instantly, even without reading the text.
+
+### 4. The Deliverable Pair Motif
+Every time the output is shown, I included both the DOCX icon ("The Work Product") and the PDF icon ("The Workflow"). This repeated visual motif reinforces the idea that Cicero doesn't just do the task; it also helps manage the process around the task.
+
+### 5. Strict Brand Adherence
+The design strictly adheres to the 'Scarlet, Black, White, Gray, No Blue' palette. Even the standard Microsoft Word icon color was adapted to Black/Ink () to maintain visual consistency and obey the 'No Blue' rule.
