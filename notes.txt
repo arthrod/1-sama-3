@@ -1,0 +1,13 @@
+Design Explanation:
+
+1. Selling Angle:
+   I focused heavily on **"Send it messy, get it back perfect"** and **"Just email"**. The split-screen comparison immediately validates the user's pain (messy inputs, lack of time) and offers the solution (perfect deliverables) without friction. The "No portals, no logins" copy reinforces the convenience angle.
+
+2. Email Prominence:
+   `assistant@cicero.im` is treated as the primary interface. I placed it in the Hero as a large, clickable `mailto:` link, and repeated it in the Footer as the final CTA. It also appears in every example card, reinforcing that the email address *is* the product. I used a monospace font for the address to give it a technical, tool-like feel, distinguishing it from the marketing copy.
+
+3. Standalone Page Rationale:
+   I chose **Option G (The Standalone Email Service Page)** because this service is a distinct product offering that deserves its own focused narrative. A standalone page allows for a complete story arc: Problem (Messy inputs) -> Solution (Cicero workflow) -> Proof (Deliverables & Use Cases) -> Action (Email now). This structure builds trust and understanding more effectively than a single section on a general landing page could.
+
+4. Trust Signals:
+   I explicitly included the "Clarify" step in the workflow to address the skepticism that an AI might "guess" wrong. Showing that Cicero asks questions builds confidence in its accuracy. The "DOCX + PDF" deliverable pair is used consistently to show concrete value.
