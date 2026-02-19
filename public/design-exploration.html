@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cicero — Legal Intelligence</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&display=swap" rel="stylesheet">
+    <style>
+        /* DESIGN TOKENS */
+        :root {
+            --color-scarlet: #541e23; /* Sá Marias Merlot repurposed */
+            --color-black: #1a1818;   /* Sá Marias Ink repurposed */
+            --color-white: #faf9f7;   /* Sá Marias Paper repurposed */
+            --color-gray: #595450;    /* Sá Marias Graphite repurposed */
+            --font-display: 'Cormorant Garamond', serif;
+            --font-body: 'DM Sans', sans-serif;
+            --spacing-unit: 8px;
+        }
+
+        /* RESET & BASE */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background-color: var(--color-white);
+            color: var(--color-black);
+            line-height: 1.5;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: var(--font-display);
+            font-weight: 400;
+            line-height: 1.1;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* UTILITIES */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .text-scarlet { color: var(--color-scarlet); }
+        .bg-scarlet { background-color: var(--color-scarlet); color: var(--color-white); }
+        .bg-black { background-color: var(--color-black); color: var(--color-white); }
+        .bg-white { background-color: var(--color-white); color: var(--color-black); }
+
+        .btn {
+            display: inline-block;
+            padding: 1rem 2rem;
+            font-family: var(--font-body);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            font-size: 0.875rem;
+            border: 1px solid currentColor;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            /* Sharp geometry constraint */
+            border-radius: 0;
+        }
+
+        .btn-primary {
+            background-color: var(--color-scarlet);
+            border-color: var(--color-scarlet);
+            color: var(--color-white);
+        }
+
+        .btn-primary:hover {
+            background-color: var(--color-black);
+            border-color: var(--color-black);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            border-color: var(--color-black);
+            color: var(--color-black);
+        }
+
+        .btn-outline:hover {
+            background-color: var(--color-black);
+            color: var(--color-white);
+        }
+
+        /* HEADER */
+        header {
+            padding: 2rem 0;
+            border-bottom: 1px solid rgba(26, 24, 24, 0.1);
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+        }
+
+        nav ul {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        nav a {
+            font-size: 0.875rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            position: relative;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 1px;
+            bottom: -4px;
+            left: 0;
+            background-color: var(--color-scarlet);
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        /* HERO SECTION */
+        .hero {
+            padding: 8rem 0;
+            text-align: left;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero h1 {
+            font-size: clamp(3rem, 8vw, 6rem);
+            max-width: 14ch;
+            margin-bottom: 2rem;
+            letter-spacing: -0.03em;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            max-width: 60ch;
+            margin-bottom: 3rem;
+            color: var(--color-gray);
+        }
+
+        .hero-stats {
+            display: flex;
+            gap: 4rem;
+            margin-top: 4rem;
+            border-top: 1px solid rgba(26, 24, 24, 0.1);
+            padding-top: 2rem;
+        }
+
+        .stat-item span {
+            display: block;
+        }
+
+        .stat-value {
+            font-family: var(--font-display);
+            font-size: 2.5rem;
+            color: var(--color-scarlet);
+        }
+
+        .stat-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--color-gray);
+            margin-top: 0.5rem;
+        }
+
+        /* FEATURE SECTION - DARK MODE */
+        .features {
+            background-color: var(--color-black);
+            color: var(--color-white);
+            padding: 6rem 0;
+        }
+
+        .section-header {
+            margin-bottom: 4rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+        }
+
+        .section-title {
+            font-size: 3rem;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 2rem;
+        }
+
+        .feature-card {
+            border: 1px solid rgba(250, 249, 247, 0.1); /* White/Paper mostly transparent */
+            padding: 2rem;
+            /* Sharp geometry constraint */
+            border-radius: 0;
+            transition: border-color 0.3s ease;
+        }
+
+        .feature-card:hover {
+            border-color: var(--color-scarlet);
+        }
+
+        /* Large feature takes 8 columns */
+        .feature-large {
+            grid-column: span 8;
+            background-color: #242222; /* Slightly lighter black */
+            position: relative;
+            min-height: 400px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        /* Small feature takes 4 columns */
+        .feature-small {
+            grid-column: span 4;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            min-height: 400px;
+        }
+
+        .feature-icon {
+            font-size: 2rem;
+            color: var(--color-scarlet);
+            margin-bottom: 1rem;
+        }
+
+        .feature-content h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .feature-content p {
+            color: rgba(250, 249, 247, 0.7);
+            font-size: 1rem;
+        }
+
+        /* UI MOCKUP in CSS */
+        .ui-mockup {
+            margin-top: 2rem;
+            background-color: var(--color-white);
+            padding: 1rem;
+            border: 1px solid #333;
+            width: 100%;
+            height: 200px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .ui-header {
+            height: 20px;
+            background-color: #e5e5e5;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            padding: 0 0.5rem;
+            gap: 4px;
+        }
+
+        .ui-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%; /* Tiny exception for UI elements inside mockup? Or keep sharp? Prompt says minimal border radius. Let's make them square. */
+            background-color: #ccc;
+            border-radius: 0;
+        }
+
+        .ui-body {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .ui-sidebar {
+            width: 20%;
+            height: 140px;
+            background-color: #f0f0f0;
+        }
+
+        .ui-main {
+            flex: 1;
+            height: 140px;
+            background-color: #fff;
+            border: 1px solid #eee;
+            padding: 0.5rem;
+        }
+
+        .ui-line {
+            height: 8px;
+            background-color: #eee;
+            margin-bottom: 6px;
+            width: 100%;
+        }
+
+        .ui-line.highlight {
+            background-color: rgba(84, 30, 35, 0.2); /* Scarlet light */
+            border-left: 2px solid var(--color-scarlet);
+        }
+
+        .ui-line.short { width: 60%; }
+
+        /* PRICING / DATA SECTION */
+        .data-section {
+            padding: 6rem 0;
+            background-color: var(--color-white);
+        }
+
+        .data-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0; /* Sharp geometry - border collapse style */
+            border: 1px solid var(--color-black);
+        }
+
+        .data-card {
+            padding: 3rem;
+            border-right: 1px solid var(--color-black);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .data-card:last-child {
+            border-right: none;
+        }
+
+        .data-highlight {
+            font-family: var(--font-display);
+            font-size: 4rem;
+            line-height: 1;
+            margin-bottom: 1rem;
+        }
+
+        /* FOOTER */
+        footer {
+            background-color: var(--color-black);
+            color: rgba(250, 249, 247, 0.5);
+            padding: 4rem 0;
+            font-size: 0.875rem;
+        }
+
+        footer .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 3rem; }
+            .hero-stats { flex-direction: column; gap: 2rem; }
+            .feature-grid { grid-template-columns: 1fr; }
+            .feature-large, .feature-small { grid-column: span 1; }
+            .data-grid { grid-template-columns: 1fr; border: none; }
+            .data-card { border: 1px solid var(--color-black); margin-bottom: -1px; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container">
+            <div class="logo">CICERO</div>
+            <nav>
+                <ul>
+                    <li><a href="#">Platform</a></li>
+                    <li><a href="#">Solutions</a></li>
+                    <li><a href="#">Pricing</a></li>
+                    <li><a href="#">Log In</a></li>
+                </ul>
+            </nav>
+            <a href="#" class="btn btn-primary" style="padding: 0.75rem 1.5rem;">Get Started</a>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <span class="text-scarlet" style="text-transform: uppercase; letter-spacing: 0.1em; font-size: 0.75rem; font-weight: 700; display: block; margin-bottom: 1.5rem;">Legal Intelligence Platform</span>
+            <h1>The architecture of legal reasoning, digitized.</h1>
+            <p>Cicero transforms unstructured legal data into actionable intelligence. Analyze thousands of precedents in seconds with precision that rivals your best associates.</p>
+            <div class="cta-group">
+                <a href="#" class="btn btn-primary">Start Free Trial</a>
+                <a href="#" class="btn btn-outline" style="margin-left: 1rem;">View Demo</a>
+            </div>
+
+            <div class="hero-stats">
+                <div class="stat-item">
+                    <span class="stat-value">50M+</span>
+                    <span class="stat-label">Documents Indexed</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-value">0.02s</span>
+                    <span class="stat-label">Query Latency</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-value">99.9%</span>
+                    <span class="stat-label">Accuracy Rate</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="features">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Designed for rigor.</h2>
+                <p style="max-width: 40ch; color: rgba(250,249,247,0.7);">Built by litigators for litigators. Our interface respects the density of legal work while removing the friction.</p>
+            </div>
+
+            <div class="feature-grid">
+                <!-- Large Feature: Visual Analysis -->
+                <div class="feature-card feature-large">
+                    <div class="feature-content">
+                        <div class="feature-icon">✦</div>
+                        <h3>Semantic Precedent Mapping</h3>
+                        <p>Visualize the relationship between case laws not just by citation, but by argumentative logic. Cicero identifies contradiction and support patterns across jurisdictions.</p>
+                    </div>
+
+                    <!-- CSS Mockup of the UI -->
+                    <div class="ui-mockup">
+                        <div class="ui-header">
+                            <div class="ui-dot"></div>
+                            <div class="ui-dot"></div>
+                            <div class="ui-dot"></div>
+                        </div>
+                        <div class="ui-body">
+                            <div class="ui-sidebar"></div>
+                            <div class="ui-main">
+                                <div class="ui-line"></div>
+                                <div class="ui-line highlight"></div>
+                                <div class="ui-line highlight"></div>
+                                <div class="ui-line"></div>
+                                <div class="ui-line short"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Small Feature: Drafting -->
+                <div class="feature-card feature-small">
+                    <div class="feature-content">
+                        <div class="feature-icon">✎</div>
+                        <h3>Automated Drafting</h3>
+                        <p>Generate first drafts of motions and briefs based on your research trail. Maintain your voice while accelerating output.</p>
+                    </div>
+                </div>
+
+                <!-- Small Feature: Security -->
+                <div class="feature-card feature-small">
+                    <div class="feature-content">
+                        <div class="feature-icon">🔒</div>
+                        <h3>Client-Side Encryption</h3>
+                        <p>Your firm's data never leaves your control unencrypted. Enterprise-grade security protocols standard.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="data-section">
+        <div class="container">
+            <h2 class="section-title" style="margin-bottom: 3rem; text-align: center;">Trusted by the Am Law 100</h2>
+            <div class="data-grid">
+                <div class="data-card">
+                    <span class="data-highlight">10x</span>
+                    <p>Faster Research Cycles</p>
+                </div>
+                <div class="data-card">
+                    <span class="data-highlight">40%</span>
+                    <p>Reduction in Billable Drag</p>
+                </div>
+                <div class="data-card">
+                    <span class="data-highlight">24/7</span>
+                    <p>AI Associate Availability</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div>© 2025 Cicero Legal Technologies. All rights reserved.</div>
+            <div style="display: flex; gap: 1rem;">
+                <a href="#">Privacy</a>
+                <a href="#">Terms</a>
+                <a href="#">Security</a>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
