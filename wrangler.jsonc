@@ -54,7 +54,7 @@
 
 	"env": {
 		"pr": {
-			"name": "samarias",
+			"name": "samarias-pr",
 			"workers_dev": true,
 			"routes": [],
 			"vars": {
