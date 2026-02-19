@@ -1,19 +1,9 @@
-// Force this route to be completely dynamic - never evaluated at build time
-export const dynamic = "force-dynamic";
-
 import { Footer, Navigation, Newsletter } from "@/components";
-import { createGitHubReader } from "@keystatic/core/reader/github";
+import { reader } from "../../lib/reader";
 import Image from "next/image";
 import Link from "next/link";
-import keystaticConfig from "../../../keystatic.config";
-import "../../lib/keystatic-client";
 
 async function getPosts() {
-	const reader = createGitHubReader(keystaticConfig, {
-		repo: "arthrod/1-sama-3",
-		token: process.env.KEYSTATIC_GITHUB_TOKEN,
-	});
-
 	const posts = await reader.collections.posts.all();
 
 	// Filter published posts and sort by date descending
