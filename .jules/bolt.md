@@ -9,3 +9,7 @@
 ## 2025-02-18 - Wrangler Config for PRs
 **Learning:** Wrangler Environments (`env.*`) in `wrangler.jsonc` do NOT inherit `vars` from the top level. They must be explicitly duplicated. Also, `name` fields in environments cannot contain wildcards (e.g., `samarias-pr-*`). For PR previews using a shared token, use a static name (e.g., `samarias-preview`), set `workers_dev: true`, and empty `routes: []` to avoid zone-level authentication errors.
 **Action:** When configuring `wrangler.jsonc` for CI environments, always explicitly copy `vars` and use valid, static names for environments.
+
+## 2025-02-18 - Wrangler Auth & Environments
+**Learning:** When using Cloudflare API Tokens scoped to a specific Worker Service (e.g., 'samarias'), you CANNOT change the `name` field in `wrangler.jsonc` environments (e.g., `env.pr.name = 'samarias-preview'`) because the token lacks permission to deploy to a new service name. Instead, omit the `name` override in the environment configuration so it defaults to the authorized service name. Use `workers_dev: true` and `routes: []` to deploy a preview instance that does not affect production routes/domains.
+**Action:** For CI/PR environments with scoped tokens, always use the authorized service name (by omitting `name` override) and isolate traffic via `workers_dev` and empty `routes`.

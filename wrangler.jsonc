@@ -54,7 +54,6 @@
 
 	"env": {
 		"pr": {
-			"name": "samarias-preview",
 			"workers_dev": true,
 			"routes": [],
 			"vars": {
