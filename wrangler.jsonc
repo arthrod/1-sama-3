@@ -54,8 +54,11 @@
 
 	"env": {
 		"pr": {
+			// Explicitly set name to match production service to avoid creation errors
 			"name": "samarias",
+			// Enable workers.dev subdomain for previews
 			"workers_dev": true,
+			// Explicitly clear routes to avoid inheriting production custom domains
 			"routes": [],
 			"vars": {
 				"CMS_CLIENT": "keystatic",
