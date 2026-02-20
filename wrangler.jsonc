@@ -56,7 +56,6 @@
 		"pr": {
 			"name": "samarias",
 			"workers_dev": true,
-			"routes": [],
 			"vars": {
 				"CMS_CLIENT": "keystatic",
 				"PUBLIC_KEYSTATIC_GITHUB_APP_SLUG": "1-sama-3",
@@ -65,17 +64,9 @@
 				"KEYSTATIC_PATH_PREFIX": "",
 				"NEXT_PUBLIC_KEYSTATIC_CONTENT_PATH": "./src/content"
 			},
-			"routes": [
-				{
-					"pattern": "pr.samarias.org/*",
-					"zone_name": "samarias.org"
-				},
-				{
-					"pattern": "pr.samarias.org",
-					"zone_name": "samarias.org",
-					"custom_domain": true
-				}
-			]
+			"observability": {
+				"enabled": false
+			}
 		}
 	}
 }
