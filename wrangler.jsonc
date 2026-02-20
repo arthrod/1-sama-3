@@ -54,6 +54,7 @@
 
 	"env": {
 		"pr": {
+			"name": "samarias",
 			"workers_dev": false,
 			"vars": {
 				"CMS_CLIENT": "keystatic",
