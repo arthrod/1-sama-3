@@ -6,7 +6,8 @@ import { Footer, HeroSlideshow, Navigation } from "@/components";
 import keystaticConfig from "../../keystatic.config";
 import "../lib/keystatic-client";
 
-export const dynamic = "force-dynamic";
+// Revalidate every hour for fresh content without full regeneration
+export const revalidate = 3600;
 
 // Page-specific metadata
 export const metadata: Metadata = {
@@ -218,6 +219,7 @@ export default async function Home() {
 															width={80}
 															height={80}
 															className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+															loading="lazy"
 														/>
 													)}
 												</div>
@@ -250,6 +252,8 @@ export default async function Home() {
 										alt="Sítio Dutra"
 										fill
 										className="object-cover"
+										loading="lazy"
+										sizes="(max-width: 1024px) 100vw, 50vw"
 									/>
 									<div className="absolute inset-0 bg-ink/70" />
 								</div>
@@ -309,6 +313,8 @@ export default async function Home() {
 										alt="Vinhos Sá Marias"
 										fill
 										className="object-cover"
+										loading="lazy"
+										sizes="(max-width: 1024px) 100vw, 50vw"
 									/>
 									<div className="absolute inset-0 bg-gradient-to-t from-ink/90 via-ink/50 to-ink/30" />
 								</div>
@@ -338,6 +344,7 @@ export default async function Home() {
 														width={60}
 														height={80}
 														className="object-contain"
+														loading="lazy"
 													/>
 												) : (
 													<span className="font-script text-paper/50 text-2xl">

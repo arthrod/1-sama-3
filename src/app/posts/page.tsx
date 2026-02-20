@@ -1,3 +1,6 @@
+// Revalidate every hour for fresh content without full regeneration
+export const revalidate = 3600;
+
 import { Footer, Navigation, Newsletter } from "@/components";
 import { reader } from "../../lib/reader";
 import Image from "next/image";
@@ -61,6 +64,9 @@ export default async function BlogPage() {
 												alt={latestPost.entry.title}
 												fill
 												className="object-cover transition-transform duration-1000 group-hover:scale-105"
+												loading="eager"
+												priority
+												sizes="(max-width: 1024px) 100vw, 50vw"
 											/>
 										) : (
 											// Fallback art if no image
@@ -106,6 +112,8 @@ export default async function BlogPage() {
 												alt={post.entry.title}
 												fill
 												className="object-cover transition-transform duration-700 group-hover:scale-110 filter grayscale group-hover:grayscale-0"
+												loading="lazy"
+												sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
 											/>
 										) : (
 											<div className="w-full h-full bg-paper-300 dark:bg-ink-light flex items-center justify-center">

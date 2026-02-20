@@ -61,16 +61,22 @@ export function HeroSlideshow() {
 
 	const goToNext = useCallback(() => {
 		setCurrentSlide((prev) => (prev + 1) % SLIDES.length);
+		// Reset timer on navigation
+		if (timerRef.current) clearInterval(timerRef.current);
 		startTimer();
-	}, [startTimer]);
+	}, []);
 
 	const goToPrev = useCallback(() => {
 		setCurrentSlide((prev) => (prev - 1 + SLIDES.length) % SLIDES.length);
+		// Reset timer on navigation
+		if (timerRef.current) clearInterval(timerRef.current);
 		startTimer();
-	}, [startTimer]);
+	}, []);
 
 	const handleManualChange = (index: number) => {
 		setCurrentSlide(index);
+		// Reset timer on manual change
+		if (timerRef.current) clearInterval(timerRef.current);
 		startTimer();
 	};
 
@@ -107,7 +113,8 @@ export function HeroSlideshow() {
 		return () => {
 			if (timerRef.current) clearInterval(timerRef.current);
 		};
-	}, [startTimer]);
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, []);
 
 	return (
 		<section

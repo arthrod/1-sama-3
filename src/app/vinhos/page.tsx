@@ -1,3 +1,6 @@
+// Revalidate every hour for fresh content without full regeneration
+export const revalidate = 3600;
+
 import { Footer, Navigation, Newsletter } from "@/components";
 import { WineCard } from "@/components/WineCard";
 import { reader } from "../../lib/reader";

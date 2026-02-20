@@ -49,6 +49,7 @@ export function WineCard({ product }: WineCardProps) {
                 scale-100 group-hover:scale-110 drop-shadow-xl
             `}
 						sizes="(min-width: 768px) 20rem, 16rem"
+						loading="lazy"
 					/>
 				) : (
 					<div className="flex flex-col items-center justify-center z-10 opacity-50">

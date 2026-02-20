@@ -1,3 +1,6 @@
+// Revalidate every hour for fresh content without full regeneration
+export const revalidate = 3600;
+
 import { Footer, Navigation } from "@/components";
 import Markdoc from "@markdoc/markdoc";
 import Image from "next/image";
@@ -53,6 +56,8 @@ export default async function Post({ params }: PostParams) {
 									alt={post.title}
 									fill
 									className="object-cover"
+									priority
+									sizes="100vw"
 								/>
 							)}
 							<div className="absolute inset-0 bg-linear-to-t from-black/80 via-black/40 to-transparent"></div>

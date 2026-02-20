@@ -1,5 +1,3 @@
-export const dynamic = "force-dynamic";
-
 import Image from "next/image";
 import { Footer, Navigation, Newsletter } from "@/components";
 
@@ -103,6 +101,8 @@ export default function SitioDutraPage() {
 												alt="Sítio Dutra - Vista"
 												fill
 												className="object-cover img-hover-color"
+												loading="lazy"
+												sizes="(max-width: 1024px) 50vw, 25vw"
 											/>
 										</div>
 										<div className="aspect-square relative overflow-hidden">
@@ -111,6 +111,8 @@ export default function SitioDutraPage() {
 												alt="Sítio Dutra - Interior"
 												fill
 												className="object-cover img-hover-color"
+												loading="lazy"
+												sizes="(max-width: 1024px) 50vw, 25vw"
 											/>
 										</div>
 									</div>
@@ -121,6 +123,8 @@ export default function SitioDutraPage() {
 												alt="Sítio Dutra - Natureza"
 												fill
 												className="object-cover img-hover-color"
+												loading="lazy"
+												sizes="(max-width: 1024px) 50vw, 25vw"
 											/>
 										</div>
 										<div className="aspect-[4/5] relative overflow-hidden">
@@ -129,6 +133,8 @@ export default function SitioDutraPage() {
 												alt="Sítio Dutra - Varanda"
 												fill
 												className="object-cover img-hover-color"
+												loading="lazy"
+												sizes="(max-width: 1024px) 50vw, 25vw"
 											/>
 										</div>
 									</div>
