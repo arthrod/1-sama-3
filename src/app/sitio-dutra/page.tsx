@@ -1,5 +1,3 @@
-export const dynamic = "force-dynamic";
-
 import Image from "next/image";
 import { Footer, Navigation, Newsletter } from "@/components";
 
@@ -32,8 +30,8 @@ export default function SitioDutraPage() {
 										<span className="text-3xl font-serif font-bold">4.89</span>
 									</div>
 									<div className="text-sm text-graphite-lighter">
-										<span className="text-paper font-bold">47 avaliações</span> •
-										Guest Favorite no Airbnb
+										<span className="text-paper font-bold">47 avaliações</span>{" "}
+										• Guest Favorite no Airbnb
 									</div>
 								</div>
 

@@ -1,17 +1,9 @@
-export const dynamic = "force-dynamic";
-
-import { createGitHubReader } from "@keystatic/core/reader/github";
 import { Footer, Navigation, Newsletter } from "@/components";
 import { WineCard } from "@/components/WineCard";
-import keystaticConfig from "../../../keystatic.config";
-import "../../lib/keystatic-client";
+import { getReader } from "@/lib/reader";
 
 export default async function WinesPage() {
-	const reader = createGitHubReader(keystaticConfig, {
-		repo: "arthrod/1-sama-3",
-		token: process.env.KEYSTATIC_GITHUB_TOKEN,
-	});
-
+	const reader = await getReader();
 	const wines = await reader.collections.wines.all();
 
 	return (
@@ -56,9 +48,9 @@ export default async function WinesPage() {
 										concentração de açúcares e intensidade de sabores únicos.
 									</p>
 									<p>
-										O solo argiloso e rico em minerais, combinado com a
-										tradição de três gerações de viticultores, resulta em
-										vinhos de personalidade marcante e autenticidade inconfundível.
+										O solo argiloso e rico em minerais, combinado com a tradição
+										de três gerações de viticultores, resulta em vinhos de
+										personalidade marcante e autenticidade inconfundível.
 									</p>
 								</div>
 							</div>
@@ -165,8 +157,8 @@ export default async function WinesPage() {
 								</div>
 								<h4 className="font-serif text-lg mb-2">Corpo</h4>
 								<p className="text-sm text-graphite-lighter">
-									Nossos tintos apresentam corpo médio a encorpado, com estrutura
-									marcante e final persistente.
+									Nossos tintos apresentam corpo médio a encorpado, com
+									estrutura marcante e final persistente.
 								</p>
 							</div>
 							<div className="p-6">
@@ -175,8 +167,8 @@ export default async function WinesPage() {
 								</div>
 								<h4 className="font-serif text-lg mb-2">Temperatura</h4>
 								<p className="text-sm text-graphite-lighter">
-									Sirva entre 16°C e 18°C para apreciar todos os aromas e sabores
-									em sua plenitude.
+									Sirva entre 16°C e 18°C para apreciar todos os aromas e
+									sabores em sua plenitude.
 								</p>
 							</div>
 							<div className="p-6">

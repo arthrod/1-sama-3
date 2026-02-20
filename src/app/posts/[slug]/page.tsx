@@ -1,14 +1,17 @@
-// Force dynamic rendering
-export const dynamic = "force-dynamic";
-
-import { createGitHubReader } from "@keystatic/core/reader/github";
 import Markdoc from "@markdoc/markdoc";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import { Footer, Navigation } from "@/components";
-import keystaticConfig from "../../../../keystatic.config";
-import "../../../lib/keystatic-client";
+import { getReader } from "@/lib/reader";
+
+export async function generateStaticParams() {
+	const reader = await getReader();
+	const posts = await reader.collections.posts.all();
+	return posts.map((post) => ({
+		slug: post.slug,
+	}));
+}
 
 type PostParams = {
 	params: Promise<{
@@ -17,11 +20,7 @@ type PostParams = {
 };
 
 export default async function Post({ params }: PostParams) {
-	const reader = createGitHubReader(keystaticConfig, {
-		repo: "arthrod/1-sama-3",
-		token: process.env.KEYSTATIC_GITHUB_TOKEN,
-	});
-
+	const reader = await getReader();
 	const { slug } = await params;
 	const post = await reader.collections.posts.read(slug);
 

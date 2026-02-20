@@ -32,9 +32,10 @@ export default function TermosECondicoes() {
 						{/* Introduction */}
 						<section>
 							<p className="text-lg text-ink-faint dark:text-paper-200 leading-relaxed">
-								Bem-vindo ao site da Sá Marias Vinhos Finos. Ao acessar e utilizar
-								este site, você concorda com os seguintes termos e condições.
-								Por favor, leia-os atentamente antes de continuar navegando.
+								Bem-vindo ao site da Sá Marias Vinhos Finos. Ao acessar e
+								utilizar este site, você concorda com os seguintes termos e
+								condições. Por favor, leia-os atentamente antes de continuar
+								navegando.
 							</p>
 						</section>
 
@@ -47,8 +48,9 @@ export default function TermosECondicoes() {
 								<p>
 									Ao acessar ou usar o site samarias.org, você concorda em
 									cumprir e estar vinculado a estes Termos e Condições de Uso,
-									bem como à nossa Política de Privacidade. Se você não concordar
-									com qualquer parte destes termos, não deverá usar nosso site.
+									bem como à nossa Política de Privacidade. Se você não
+									concordar com qualquer parte destes termos, não deverá usar
+									nosso site.
 								</p>
 							</div>
 						</section>
@@ -67,12 +69,13 @@ export default function TermosECondicoes() {
 								<p>É proibido:</p>
 								<ul className="list-disc list-inside space-y-2 ml-4">
 									<li>
-										Usar o site de qualquer forma que possa danificar, desabilitar,
-										sobrecarregar ou prejudicar o servidor ou a rede
+										Usar o site de qualquer forma que possa danificar,
+										desabilitar, sobrecarregar ou prejudicar o servidor ou a
+										rede
 									</li>
 									<li>
-										Tentar obter acesso não autorizado ao site, contas de usuários
-										ou sistemas de computador
+										Tentar obter acesso não autorizado ao site, contas de
+										usuários ou sistemas de computador
 									</li>
 									<li>
 										Usar qualquer robô, spider ou outro dispositivo automático
@@ -93,16 +96,18 @@ export default function TermosECondicoes() {
 							</h2>
 							<div className="space-y-4 text-ink-faint dark:text-paper-200">
 								<p>
-									Todo o conteúdo presente neste site, incluindo mas não limitado
-									a textos, gráficos, logotipos, ícones, imagens, clipes de áudio,
-									downloads digitais e compilações de dados, é propriedade da
-									Sá Marias ou de seus fornecedores de conteúdo e está protegido
-									pelas leis brasileiras e internacionais de direitos autorais.
+									Todo o conteúdo presente neste site, incluindo mas não
+									limitado a textos, gráficos, logotipos, ícones, imagens,
+									clipes de áudio, downloads digitais e compilações de dados, é
+									propriedade da Sá Marias ou de seus fornecedores de conteúdo e
+									está protegido pelas leis brasileiras e internacionais de
+									direitos autorais.
 								</p>
 								<p>
-									A marca &ldquo;Sá Marias&rdquo;, o logotipo e todos os nomes de produtos
-									relacionados são marcas registradas da Sá Marias. Não é
-									permitido usar essas marcas sem autorização prévia por escrito.
+									A marca &ldquo;Sá Marias&rdquo;, o logotipo e todos os nomes
+									de produtos relacionados são marcas registradas da Sá Marias.
+									Não é permitido usar essas marcas sem autorização prévia por
+									escrito.
 								</p>
 							</div>
 						</section>
@@ -115,15 +120,15 @@ export default function TermosECondicoes() {
 							<div className="space-y-4 text-ink-faint dark:text-paper-200">
 								<p>
 									Ao enviar comentários, avaliações ou qualquer outro conteúdo
-									para o site, você concede à Sá Marias uma licença não exclusiva,
-									livre de royalties, perpétua e irrevogável para usar, reproduzir,
-									modificar, adaptar, publicar, traduzir e distribuir tal conteúdo
-									em qualquer mídia.
+									para o site, você concede à Sá Marias uma licença não
+									exclusiva, livre de royalties, perpétua e irrevogável para
+									usar, reproduzir, modificar, adaptar, publicar, traduzir e
+									distribuir tal conteúdo em qualquer mídia.
 								</p>
 								<p>
-									Você declara e garante que possui ou controla todos os direitos
-									sobre o conteúdo que envia e que tal conteúdo não viola os
-									direitos de terceiros.
+									Você declara e garante que possui ou controla todos os
+									direitos sobre o conteúdo que envia e que tal conteúdo não
+									viola os direitos de terceiros.
 								</p>
 							</div>
 						</section>
@@ -153,9 +158,9 @@ export default function TermosECondicoes() {
 							</h2>
 							<div className="space-y-4 text-ink-faint dark:text-paper-200">
 								<p>
-									As reservas de hospedagem no Sítio Dutra são realizadas através
-									da plataforma Airbnb. Ao fazer uma reserva, você está sujeito
-									aos termos e condições do Airbnb, além destes termos.
+									As reservas de hospedagem no Sítio Dutra são realizadas
+									através da plataforma Airbnb. Ao fazer uma reserva, você está
+									sujeito aos termos e condições do Airbnb, além destes termos.
 								</p>
 								<p>
 									Políticas de cancelamento, reembolso e regras da casa são
@@ -172,10 +177,11 @@ export default function TermosECondicoes() {
 							</h2>
 							<div className="space-y-4 text-ink-faint dark:text-paper-200">
 								<p>
-									Este site é fornecido &ldquo;como está&rdquo; e &ldquo;conforme disponível&rdquo;.
-									A Sá Marias não faz representações ou garantias de qualquer
-									tipo, expressas ou implícitas, quanto à operação do site ou
-									às informações, conteúdo, materiais ou produtos incluídos nele.
+									Este site é fornecido &ldquo;como está&rdquo; e
+									&ldquo;conforme disponível&rdquo;. A Sá Marias não faz
+									representações ou garantias de qualquer tipo, expressas ou
+									implícitas, quanto à operação do site ou às informações,
+									conteúdo, materiais ou produtos incluídos nele.
 								</p>
 								<p>
 									Na extensão máxima permitida pela lei aplicável, a Sá Marias
@@ -225,9 +231,10 @@ export default function TermosECondicoes() {
 							<div className="space-y-4 text-ink-faint dark:text-paper-200">
 								<p>
 									A Sá Marias reserva-se o direito de modificar estes termos a
-									qualquer momento. As alterações entrarão em vigor imediatamente
-									após a publicação no site. O uso continuado do site após
-									quaisquer alterações constitui sua aceitação dos novos termos.
+									qualquer momento. As alterações entrarão em vigor
+									imediatamente após a publicação no site. O uso continuado do
+									site após quaisquer alterações constitui sua aceitação dos
+									novos termos.
 								</p>
 							</div>
 						</section>
@@ -254,17 +261,15 @@ export default function TermosECondicoes() {
 							</h2>
 							<div className="space-y-4 text-ink-faint dark:text-paper-200">
 								<p>
-									Se você tiver dúvidas sobre estes Termos e Condições, entre
-									em contato conosco:
+									Se você tiver dúvidas sobre estes Termos e Condições, entre em
+									contato conosco:
 								</p>
 								<div className="bg-paper-200 dark:bg-ink p-6 mt-6 border border-graphite/20 dark:border-graphite">
 									<p className="font-serif text-lg text-ink dark:text-paper mb-2">
 										Sá Marias Vinhos Finos
 									</p>
 									<p className="text-sm">Ritápolis, Minas Gerais - Brasil</p>
-									<p className="text-sm mt-2">
-										E-mail: contato@samarias.org
-									</p>
+									<p className="text-sm mt-2">E-mail: contato@samarias.org</p>
 								</div>
 							</div>
 						</section>
