@@ -48,6 +48,7 @@ const SWIPE_THRESHOLD = 50;
 
 export function HeroSlideshow() {
 	const [currentSlide, setCurrentSlide] = useState(0);
+	const nextSlide = (currentSlide + 1) % SLIDES.length;
 	const timerRef = useRef<NodeJS.Timeout | null>(null);
 	const touchStartX = useRef<number | null>(null);
 	const touchEndX = useRef<number | null>(null);
@@ -124,6 +125,17 @@ export function HeroSlideshow() {
 			onTouchMove={handleTouchMove}
 			onTouchEnd={handleTouchEnd}
 		>
+			{/* Preload Next Slide Image */}
+			<div className="hidden relative" aria-hidden="true">
+				<Image
+					src={SLIDES[nextSlide].url}
+					alt="preload"
+					fill
+					sizes="100vw"
+					priority
+				/>
+			</div>
+
 			{/* Slideshow Background */}
 			<AnimatePresence mode="popLayout">
 				<motion.div

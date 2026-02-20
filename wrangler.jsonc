@@ -54,9 +54,14 @@
 
 	"env": {
 		"pr": {
-			"name": "samarias",
-			"workers_dev": true,
+			"workers_dev": false,
 			"routes": [],
+			"observability": {
+				"enabled": false,
+				"logs": {
+					"enabled": false
+				}
+			},
 			"vars": {
 				"CMS_CLIENT": "keystatic",
 				"PUBLIC_KEYSTATIC_GITHUB_APP_SLUG": "1-sama-3",
@@ -64,18 +69,7 @@
 				"NEXT_PUBLIC_KEYSTATIC_STORAGE_REPO": "arthrod/1-sama-3",
 				"KEYSTATIC_PATH_PREFIX": "",
 				"NEXT_PUBLIC_KEYSTATIC_CONTENT_PATH": "./src/content"
-			},
-			"routes": [
-				{
-					"pattern": "pr.samarias.org/*",
-					"zone_name": "samarias.org"
-				},
-				{
-					"pattern": "pr.samarias.org",
-					"zone_name": "samarias.org",
-					"custom_domain": true
-				}
-			]
+			}
 		}
 	}
 }
