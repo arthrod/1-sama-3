@@ -119,7 +119,7 @@ export function HeroSlideshow() {
 			onTouchEnd={handleTouchEnd}
 		>
 			{/* Preload Next Slide Image */}
-			<div className="hidden" aria-hidden="true">
+			<div className="hidden relative" aria-hidden="true">
 				<Image
 					src={SLIDES[nextSlide].url}
 					alt="preload"
