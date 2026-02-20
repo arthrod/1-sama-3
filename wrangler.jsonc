@@ -54,6 +54,7 @@
 
 	"env": {
 		"pr": {
+			"name": "samarias",
 			"workers_dev": false,
 			"observability": {
 				"enabled": false

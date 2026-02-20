@@ -37,3 +37,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+Note: Using Python/Playwright due to environment constraints (no internet for npm install puppeteer).
