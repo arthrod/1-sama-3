@@ -56,7 +56,7 @@
 			]
 		},
 		"pr": {
-			"name": "samarias",
+			"name": "samarias-pr",
 			"workers_dev": false,
 			"routes": [],
 			"vars": {
