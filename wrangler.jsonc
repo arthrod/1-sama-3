@@ -2,7 +2,7 @@
 	"$schema": "./node_modules/wrangler/config-schema.json",
 	"main": "./worker.ts",
 	"name": "samarias",
-	"compatibility_date": "2025-03-25",
+	"compatibility_date": "2024-03-25",
 	"compatibility_flags": ["nodejs_compat"],
 
 	"assets": {
@@ -65,17 +65,9 @@
 				"KEYSTATIC_PATH_PREFIX": "",
 				"NEXT_PUBLIC_KEYSTATIC_CONTENT_PATH": "./src/content"
 			},
-			"routes": [
-				{
-					"pattern": "pr.samarias.org/*",
-					"zone_name": "samarias.org"
-				},
-				{
-					"pattern": "pr.samarias.org",
-					"zone_name": "samarias.org",
-					"custom_domain": true
-				}
-			]
+			"observability": {
+				"enabled": false
+			}
 		}
 	}
 }
