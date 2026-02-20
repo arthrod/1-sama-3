@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cicero — The Email-First Legal Assistant</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=DM+Sans:wght@400;500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --color-scarlet: #9d0208;
+            --color-ink: #1a1818;
+            --color-warm-white: #f5f4f0;
+            --color-white: #ffffff;
+            --color-gray: #e5e4e0;
+            --color-gray-dark: #a3a29e;
+
+            --font-heading: 'Cormorant Garamond', serif;
+            --font-body: 'DM Sans', sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+
+            --radius-sharp: 0px;
+            --radius-soft: 2px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--color-warm-white);
+            color: var(--color-ink);
+            font-family: var(--font-body);
+            line-height: 1.5;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: var(--font-heading);
+            font-weight: 700;
+            line-height: 1.1;
+            letter-spacing: -0.02em;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Utility */
+        .text-scarlet { color: var(--color-scarlet); }
+        .bg-scarlet { background-color: var(--color-scarlet); color: white; }
+        .bg-white { background-color: var(--color-white); }
+        .font-mono { font-family: var(--font-mono); }
+        .uppercase { text-transform: uppercase; letter-spacing: 0.05em; font-size: 0.85rem; font-weight: 700; }
+        .border-b { border-bottom: 1px solid var(--color-gray); }
+
+        /* Hero */
+        .hero {
+            padding: 8rem 0 6rem;
+            text-align: center;
+        }
+        .hero h1 {
+            font-size: 4.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--color-ink);
+        }
+        .hero p {
+            font-size: 1.25rem;
+            max-width: 600px;
+            margin: 0 auto 3rem;
+            color: var(--color-ink);
+            opacity: 0.8;
+        }
+        .email-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 1rem;
+            background: var(--color-white);
+            padding: 1rem 2rem;
+            border: 1px solid var(--color-ink);
+            border-radius: var(--radius-soft);
+            box-shadow: 4px 4px 0 var(--color-scarlet);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .email-cta:hover {
+            transform: translate(-2px, -2px);
+            box-shadow: 6px 6px 0 var(--color-scarlet);
+        }
+        .email-cta:active {
+            transform: translate(0, 0);
+            box-shadow: 0 0 0 var(--color-scarlet);
+        }
+        .email-address {
+            font-family: var(--font-mono);
+            font-size: 1.1rem;
+            font-weight: 500;
+        }
+
+        /* Comparison Section */
+        .comparison {
+            padding: 6rem 0;
+            background: var(--color-white);
+            border-top: 1px solid var(--color-gray);
+            border-bottom: 1px solid var(--color-gray);
+        }
+        .split-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: start;
+        }
+        .panel-header {
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .email-mockup {
+            background: var(--color-warm-white);
+            border: 1px solid var(--color-gray);
+            padding: 2rem;
+            border-radius: var(--radius-soft);
+            font-family: var(--font-body);
+            position: relative;
+        }
+        .email-meta {
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--color-gray);
+            font-size: 0.9rem;
+            color: var(--color-gray-dark);
+        }
+        .email-body {
+            font-size: 1rem;
+            white-space: pre-wrap;
+        }
+        .clarification-bubble {
+            position: absolute;
+            bottom: -2rem;
+            right: -2rem;
+            background: var(--color-scarlet);
+            color: white;
+            padding: 1.5rem;
+            max-width: 300px;
+            border-radius: var(--radius-soft);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            font-size: 0.9rem;
+        }
+        .clarification-bubble::before {
+            content: "CICERO ASKS:";
+            display: block;
+            font-family: var(--font-mono);
+            font-size: 0.7rem;
+            opacity: 0.7;
+            margin-bottom: 0.5rem;
+            letter-spacing: 0.05em;
+        }
+
+        .deliverable-stack {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+        .file-card {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            background: var(--color-warm-white);
+            border: 1px solid var(--color-gray);
+            padding: 1.5rem;
+            border-radius: var(--radius-soft);
+            transition: border-color 0.2s;
+        }
+        .file-card:hover {
+            border-color: var(--color-scarlet);
+        }
+        .file-icon {
+            width: 48px;
+            height: 64px;
+            background: var(--color-white);
+            border: 1px solid var(--color-gray);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: var(--color-ink);
+            position: relative;
+        }
+        .file-icon.docx { border-top: 4px solid #2b579a; }
+        .file-icon.pdf { border-top: 4px solid #d93025; }
+        .file-info h4 {
+            font-family: var(--font-body);
+            font-weight: 700;
+            margin-bottom: 0.25rem;
+        }
+        .file-info p {
+            font-size: 0.9rem;
+            color: var(--color-gray-dark);
+        }
+
+        /* Features Grid */
+        .features {
+            padding: 6rem 0;
+        }
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 3rem;
+            margin-top: 4rem;
+        }
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--color-scarlet);
+        }
+        .feature-card p {
+            color: var(--color-ink);
+            opacity: 0.8;
+        }
+
+        /* Timeline / Workflow */
+        .workflow {
+            background: var(--color-ink);
+            color: var(--color-warm-white);
+            padding: 6rem 0;
+        }
+        .workflow h2 {
+            color: var(--color-white);
+            text-align: center;
+            margin-bottom: 4rem;
+            font-size: 3rem;
+        }
+        .timeline {
+            display: flex;
+            justify-content: space-between;
+            position: relative;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        .timeline::before {
+            content: '';
+            position: absolute;
+            top: 24px;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: rgba(255,255,255,0.2);
+            z-index: 0;
+        }
+        .step {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            width: 30%;
+        }
+        .step-number {
+            width: 48px;
+            height: 48px;
+            background: var(--color-ink);
+            border: 1px solid var(--color-scarlet);
+            color: var(--color-scarlet);
+            border-radius: 50%; /* Just for the circle number, maybe restrict to 2px if strict */
+            border-radius: var(--radius-soft);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            font-family: var(--font-mono);
+            font-weight: 700;
+        }
+        .step h3 {
+            color: var(--color-white);
+            margin-bottom: 0.75rem;
+            font-size: 1.25rem;
+        }
+        .step p {
+            color: rgba(255,255,255,0.6);
+            font-size: 0.95rem;
+        }
+
+        /* Footer CTA */
+        .footer-cta {
+            padding: 8rem 0;
+            text-align: center;
+            background: var(--color-warm-white);
+        }
+        .footer-cta h2 {
+            font-size: 3.5rem;
+            margin-bottom: 2rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .split-grid, .features-grid, .timeline {
+                grid-template-columns: 1fr;
+                flex-direction: column;
+                gap: 2rem;
+            }
+            .hero h1 { font-size: 3rem; }
+            .timeline::before { display: none; }
+            .step { width: 100%; margin-bottom: 2rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Hero -->
+    <section class="hero">
+        <div class="container">
+            <div class="uppercase text-scarlet" style="margin-bottom: 1rem;">Email-Based Legal Assistant</div>
+            <h1>Send it messy.<br>Get it back perfect.</h1>
+            <p>Lawyers email <strong>assistant@cicero.im</strong>. Professional legal documents come back. No apps, no logins, just email.</p>
+
+            <a href="mailto:assistant@cicero.im" class="email-cta">
+                <span class="email-address">assistant@cicero.im</span>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                    <polyline points="22,6 12,13 2,6"></polyline>
+                </svg>
+            </a>
+
+            <div style="margin-top: 1rem; font-size: 0.85rem; color: var(--color-gray-dark); font-family: var(--font-mono);">
+                Average turnaround: 45 minutes
+            </div>
+        </div>
+    </section>
+
+    <!-- Comparison -->
+    <section class="comparison">
+        <div class="container">
+            <div class="split-grid">
+                <!-- Left: The Messy Input -->
+                <div>
+                    <div class="panel-header">
+                        <div class="uppercase">The Input</div>
+                    </div>
+                    <div class="email-mockup">
+                        <div class="email-meta">
+                            <strong>From:</strong> J. Miller (Partner)<br>
+                            <strong>To:</strong> assistant@cicero.im<br>
+                            <strong>Subject:</strong> Fwd: MSA from opposing counsel
+                        </div>
+                        <div class="email-body">
+                            Hey, just got this back from them. Attached.<br><br>
+
+                            Honestly didn't have time to read the whole thing but section 4 looks weird and I think they snuck in an exclusivity clause somewhere in the back. Can you review and redline? <br><br>
+
+                            Need to push back hard on the indemnity too. Keep it friendly though, we want to close this week.<br><br>
+
+                            Thx,<br>
+                            J
+                        </div>
+
+                        <!-- Clarification Bubble -->
+                        <div class="clarification-bubble">
+                            <strong>Question:</strong> "Is this governed by NY or DE law? The draft is silent."<br><br>
+                            <em style="opacity: 0.8;">Reply: "DE please."</em>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right: The Polished Output -->
+                <div>
+                    <div class="panel-header">
+                        <div class="uppercase text-scarlet">The Deliverable</div>
+                    </div>
+
+                    <div class="deliverable-stack">
+                        <!-- DOCX -->
+                        <div class="file-card">
+                            <div class="file-icon docx">DOCX</div>
+                            <div class="file-info">
+                                <h4>Redlined MSA_v2.docx</h4>
+                                <p>Professional markup with tracked changes. Comments explaining strategic revisions.</p>
+                            </div>
+                        </div>
+
+                        <!-- PDF -->
+                        <div class="file-card">
+                            <div class="file-icon pdf">PDF</div>
+                            <div class="file-info">
+                                <h4>Review Summary & Checklist.pdf</h4>
+                                <p>Executive summary of risks, decision points, and a checklist of open items.</p>
+                            </div>
+                        </div>
+
+                        <div style="margin-top: 1.5rem; padding: 1.5rem; background: var(--color-warm-white); border-left: 2px solid var(--color-scarlet);">
+                            <p style="font-size: 0.95rem; margin-bottom: 0.5rem;"><strong>Analysis Note:</strong></p>
+                            <p style="font-size: 0.9rem; line-height: 1.6;">"I've redlined the exclusivity clause in Section 12.3 as requested. Regarding indemnity (Section 9), I've reverted to standard mutual indemnification suitable for Delaware law. See attached PDF for a list of 3 other minor risks found in the definitions."</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Workflow -->
+    <section class="workflow">
+        <div class="container">
+            <h2>How it works</h2>
+            <div class="timeline">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3>Forward Email</h3>
+                    <p>Send your messy instructions, forwarded threads, or raw attachments to <code>assistant@cicero.im</code>.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3>Clarify</h3>
+                    <p>Cicero identifies ambiguities and asks pointed questions if needed. You reply briefly.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3>Receive</h3>
+                    <p>Get back a perfect DOCX work product and a PDF action checklist. Ready to file or send.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features -->
+    <section class="features">
+        <div class="container">
+            <div class="features-grid">
+                <div class="feature-card">
+                    <h3>No new apps</h3>
+                    <p>You don't need another dashboard. You don't need to learn a new interface. You just need to send an email.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Built for Law</h3>
+                    <p>Understands jurisdiction, privilege, and proper citation. Drafts like a senior associate, not a chatbot.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Two Attachments</h3>
+                    <p>Always a DOCX for the work and a PDF for the workflow. The perfect handoff package.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Clarification First</h3>
+                    <p>Cicero doesn't guess. If your instructions are vague, it asks the right questions before starting work.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Secure by Default</h3>
+                    <p>Enterprise-grade encryption for all attachments. Your client data never trains public models.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>24/7 Availability</h3>
+                    <p>Need a redline at 3 AM? A research memo on Sunday? Cicero is always ready.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer CTA -->
+    <section class="footer-cta">
+        <div class="container">
+            <h2>Stop drafting from scratch.</h2>
+            <p style="font-size: 1.25rem; margin-bottom: 3rem; max-width: 600px; margin-left: auto; margin-right: auto; opacity: 0.8;">
+                Join the partners who have reclaimed their evenings.
+            </p>
+            <a href="mailto:assistant@cicero.im" class="email-cta">
+                <span class="email-address">assistant@cicero.im</span>
+            </a>
+            <div style="margin-top: 4rem; padding-top: 2rem; border-top: 1px solid var(--color-gray); color: var(--color-gray-dark); font-size: 0.9rem;">
+                &copy; 2024 Cicero Legal Intelligence. All rights reserved.
+            </div>
+        </div>
+    </section>
+
+</body>
+</html>
