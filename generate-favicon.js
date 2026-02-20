@@ -1,5 +1,5 @@
 import { createCanvas } from "canvas";
-import fs from "node:fs";
+import fs from "fs";
 
 // Create a 32x32 canvas
 const canvas = createCanvas(32, 32);
