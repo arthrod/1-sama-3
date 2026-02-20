@@ -2,10 +2,39 @@
 
 import { useEffect, useState } from "react";
 
+function Spinner() {
+	return (
+		<svg
+			className="animate-spin -ml-1 mr-3 h-4 w-4 text-current"
+			xmlns="http://www.w3.org/2000/svg"
+			fill="none"
+			viewBox="0 0 24 24"
+			role="presentation"
+			aria-hidden="true"
+		>
+			<circle
+				className="opacity-25"
+				cx="12"
+				cy="12"
+				r="10"
+				stroke="currentColor"
+				strokeWidth="4"
+			/>
+			<path
+				className="opacity-75"
+				fill="currentColor"
+				d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+			/>
+		</svg>
+	);
+}
+
 export function Newsletter() {
 	const [name, setName] = useState("");
 	const [email, setEmail] = useState("");
-	const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+	const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">(
+		"idle",
+	);
 
 	const handleSubmit = async (e: React.FormEvent) => {
 		e.preventDefault();
@@ -75,36 +104,56 @@ export function Newsletter() {
 						onSubmit={handleSubmit}
 						className="flex flex-col md:flex-row gap-4 max-w-md mx-auto"
 					>
-						<label htmlFor="subscriber-name" className="sr-only">Seu Nome</label>
+						<label htmlFor="subscriber-name" className="sr-only">
+							Seu Nome
+						</label>
 						<input
 							type="text"
 							id="subscriber-name"
 							name="name"
 							placeholder="Seu Nome"
 							required
+							disabled={status === "loading"}
 							value={name}
 							onChange={(e) => setName(e.target.value)}
-							className="flex-1 bg-transparent border-b border-graphite py-3 px-4 text-paper placeholder-graphite-light focus:outline-none focus:border-merlot transition-colors font-serif"
+							className="flex-1 bg-transparent border-b border-graphite py-3 px-4 text-paper placeholder-graphite-light focus:outline-none focus:border-merlot transition-colors font-serif disabled:opacity-50 disabled:cursor-not-allowed"
 						/>
-						<label htmlFor="subscriber-email" className="sr-only">Seu E-mail</label>
+						<label htmlFor="subscriber-email" className="sr-only">
+							Seu E-mail
+						</label>
 						<input
 							type="email"
 							id="subscriber-email"
 							name="email"
 							placeholder="Seu E-mail"
 							required
+							disabled={status === "loading"}
 							value={email}
 							onChange={(e) => setEmail(e.target.value)}
-							className="flex-1 bg-transparent border-b border-graphite py-3 px-4 text-paper placeholder-graphite-light focus:outline-none focus:border-merlot transition-colors font-serif"
+							className="flex-1 bg-transparent border-b border-graphite py-3 px-4 text-paper placeholder-graphite-light focus:outline-none focus:border-merlot transition-colors font-serif disabled:opacity-50 disabled:cursor-not-allowed"
 						/>
 						<button
 							type="submit"
 							id="subscribe-btn"
 							disabled={status === "loading"}
-							className="bg-paper text-ink hover:bg-merlot hover:text-white font-sans font-bold uppercase tracking-widest text-xs py-4 px-8 transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+							className="flex items-center justify-center bg-paper text-ink hover:bg-merlot hover:text-white font-sans font-bold uppercase tracking-widest text-xs py-4 px-8 transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
 						>
-							{status === "loading" ? "Enviando..." : status === "success" ? "Enviado!" : "Cadastrar"}
+							{status === "loading" && <Spinner />}
+							{status === "loading"
+								? "Enviando..."
+								: status === "success"
+									? "Enviado!"
+									: "Cadastrar"}
 						</button>
+						<div role="status" aria-live="polite" className="sr-only">
+							{status === "loading"
+								? "Enviando inscrição..."
+								: status === "success"
+									? "Inscrição realizada com sucesso!"
+									: status === "error"
+										? "Erro ao realizar inscrição."
+										: ""}
+						</div>
 					</form>
 
 					<p className="mt-6 text-xs text-graphite-light">
