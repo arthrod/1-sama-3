@@ -55,7 +55,7 @@
 	"env": {
 		"pr": {
 			"name": "samarias",
-			"workers_dev": true,
+			"workers_dev": false,
 			"routes": [],
 			"vars": {
 				"CMS_CLIENT": "keystatic",
