@@ -193,6 +193,7 @@ export default function RootLayout({
 				/>
 				<script
 					defer
+					// biome-ignore lint/security/noDangerouslySetInnerHtml: Google Analytics
 					dangerouslySetInnerHTML={{
 						__html: `
 							window.dataLayer = window.dataLayer || [];
@@ -204,6 +205,7 @@ export default function RootLayout({
 				/>
 				<script
 					type="application/ld+json"
+					// biome-ignore lint/security/noDangerouslySetInnerHtml: JSON-LD
 					dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
 				/>
 			</head>

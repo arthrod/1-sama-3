@@ -64,14 +64,14 @@ export function HeroSlideshow() {
 		// Reset timer on navigation
 		if (timerRef.current) clearInterval(timerRef.current);
 		startTimer();
-	}, []);
+	}, [startTimer]);
 
 	const goToPrev = useCallback(() => {
 		setCurrentSlide((prev) => (prev - 1 + SLIDES.length) % SLIDES.length);
 		// Reset timer on navigation
 		if (timerRef.current) clearInterval(timerRef.current);
 		startTimer();
-	}, []);
+	}, [startTimer]);
 
 	const handleManualChange = (index: number) => {
 		setCurrentSlide(index);
@@ -113,8 +113,7 @@ export function HeroSlideshow() {
 		return () => {
 			if (timerRef.current) clearInterval(timerRef.current);
 		};
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, []);
+	}, [startTimer]);
 
 	return (
 		<section

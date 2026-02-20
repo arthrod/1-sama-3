@@ -178,6 +178,7 @@ export default async function Home() {
 		<>
 			<script
 				type="application/ld+json"
+				// biome-ignore lint/security/noDangerouslySetInnerHtml: JSON-LD
 				dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
 			/>
 			<div className="min-h-screen transition-colors duration-500 bg-paper dark:bg-paper-dark">
