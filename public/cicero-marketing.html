@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cicero — Legal Intelligence</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            /* Palette */
+            --color-scarlet: #9d0208;
+            --color-black: #0a0909;
+            --color-ink: #1a1818;
+            --color-paper: #ffffff; /* Warm White */
+            --color-warm-gray: #f5f4f0;
+
+            /* Typography */
+            --font-display: 'Cormorant Garamond', serif;
+            --font-body: 'DM Sans', sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--color-warm-gray);
+            color: var(--color-ink);
+            font-family: var(--font-body);
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+        }
+
+        /* Utility */
+        .container {
+            max-width: 1440px;
+            margin: 0 auto;
+            padding: 0 40px;
+        }
+
+        /* Typography Helpers */
+        h1, h2, h3, h4 {
+            font-family: var(--font-display);
+            font-weight: 400;
+        }
+
+        .text-scarlet { color: var(--color-scarlet); }
+        .text-ink { color: var(--color-ink); }
+        .text-paper { color: var(--color-paper); }
+        .font-mono { font-family: var(--font-mono); }
+
+        /* Header */
+        header {
+            padding: 40px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: var(--font-display);
+            font-size: 32px;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--color-ink);
+            margin-left: 32px;
+            font-size: 14px;
+            font-weight: 500;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            transition: color 0.2s;
+        }
+
+        nav a:hover {
+            color: var(--color-scarlet);
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 100px 0 160px;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 80px;
+            line-height: 0.9;
+            margin-bottom: 24px;
+            letter-spacing: -0.03em;
+        }
+
+        .hero h1 span {
+            display: block;
+            font-style: italic;
+            color: var(--color-scarlet);
+        }
+
+        .hero p {
+            font-size: 20px;
+            color: var(--color-ink);
+            opacity: 0.8;
+            max-width: 600px;
+            margin: 0 auto 48px;
+            line-height: 1.6;
+        }
+
+        .btn {
+            display: inline-block;
+            background: var(--color-ink);
+            color: var(--color-paper);
+            padding: 16px 32px;
+            text-decoration: none;
+            font-weight: 500;
+            border-radius: 2px; /* Sharp geometry */
+            transition: all 0.2s;
+            border: 1px solid var(--color-ink);
+        }
+
+        .btn:hover {
+            background: transparent;
+            color: var(--color-ink);
+        }
+
+        /* Split Feature Section */
+        .split-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            min-height: 800px;
+            border-top: 1px solid rgba(0,0,0,0.1);
+        }
+
+        /* Left Side: The Input (Messy Email) */
+        .panel-left {
+            background-color: var(--color-ink);
+            color: var(--color-paper);
+            padding: 80px;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .panel-label {
+            position: absolute;
+            top: 40px;
+            left: 40px;
+            font-family: var(--font-mono);
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            opacity: 0.5;
+        }
+
+        .email-window {
+            background: #252525;
+            border: 1px solid #333;
+            border-radius: 4px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+            font-family: var(--font-mono);
+            font-size: 14px;
+            line-height: 1.6;
+            color: #d4d4d4;
+            max-width: 540px;
+            margin: 0 auto;
+        }
+
+        .email-header {
+            border-bottom: 1px solid #333;
+            padding: 16px 24px;
+            background: #2a2a2a;
+        }
+
+        .email-meta {
+            display: grid;
+            grid-template-columns: 80px 1fr;
+            gap: 8px;
+            margin-bottom: 8px;
+            font-size: 12px;
+        }
+
+        .email-meta span:first-child {
+            color: #888;
+        }
+
+        .email-body {
+            padding: 24px;
+            white-space: pre-wrap;
+        }
+
+        .cursor {
+            display: inline-block;
+            width: 8px;
+            height: 18px;
+            background: var(--color-scarlet);
+            animation: blink 1s step-end infinite;
+            vertical-align: middle;
+            margin-left: 2px;
+        }
+
+        @keyframes blink { 50% { opacity: 0; } }
+
+        /* Right Side: The Output (Structured Doc) */
+        .panel-right {
+            background-color: var(--color-paper);
+            color: var(--color-ink);
+            padding: 80px;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            border-left: 1px solid rgba(0,0,0,0.1);
+        }
+
+        .doc-window {
+            background: #fff;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+            padding: 60px;
+            max-width: 540px;
+            margin: 0 auto;
+            border: 1px solid #eaeaea;
+            position: relative;
+        }
+
+        .doc-window::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--color-scarlet);
+        }
+
+        .doc-title {
+            text-align: center;
+            margin-bottom: 40px;
+            font-family: var(--font-display);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            font-weight: 600;
+            font-size: 24px;
+        }
+
+        .doc-clause {
+            margin-bottom: 24px;
+        }
+
+        .doc-clause h4 {
+            font-family: var(--font-body);
+            font-weight: 700;
+            font-size: 12px;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+            color: var(--color-scarlet);
+        }
+
+        .doc-clause p {
+            font-size: 15px;
+            line-height: 1.7;
+            text-align: justify;
+        }
+
+        /* Connector */
+        .connector {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            width: 64px;
+            height: 64px;
+            background: var(--color-scarlet);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 10px 20px rgba(157, 2, 8, 0.3);
+            z-index: 10;
+        }
+
+        .connector svg {
+            width: 32px;
+            height: 32px;
+            color: #fff;
+        }
+
+        /* Stats / Footer Strip */
+        .stats-strip {
+            background: var(--color-black);
+            color: var(--color-paper);
+            padding: 60px 0;
+            border-top: 1px solid #333;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+            text-align: center;
+        }
+
+        .stat-item h3 {
+            font-size: 48px;
+            color: var(--color-scarlet);
+            margin-bottom: 8px;
+        }
+
+        .stat-item p {
+            font-size: 14px;
+            opacity: 0.7;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .split-section {
+                grid-template-columns: 1fr;
+            }
+
+            .connector {
+                transform: translate(-50%, -50%) rotate(90deg);
+            }
+
+            .hero h1 {
+                font-size: 48px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <div class="logo">Cicero</div>
+            <nav>
+                <a href="#">Product</a>
+                <a href="#">Pricing</a>
+                <a href="#">Enterprise</a>
+                <a href="#" style="color: var(--color-scarlet);">Login</a>
+            </nav>
+        </header>
+
+        <section class="hero">
+            <h1>Structure from<br><span>pure chaos.</span></h1>
+            <p>Turn messy email threads into pristine legal documents instantly. <br>The intelligence layer for the modern firm.</p>
+            <a href="#" class="btn">Start Free Trial</a>
+        </section>
+    </div>
+
+    <section class="split-section" style="position: relative;">
+        <!-- Connector Arrow -->
+        <div class="connector">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="square" stroke-linejoin="miter" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+            </svg>
+        </div>
+
+        <!-- Left: Input -->
+        <div class="panel-left">
+            <div class="panel-label">Input Source</div>
+            <div class="email-window">
+                <div class="email-header">
+                    <div class="email-meta">
+                        <span>From:</span> <span>Sarah Miller &lt;s.miller@client.com&gt;</span>
+                    </div>
+                    <div class="email-meta">
+                        <span>To:</span> <span>assistant@cicero.im</span>
+                    </div>
+                    <div class="email-meta">
+                        <span>Subject:</span> <span>Re: Term Sheet for Alpha Project</span>
+                    </div>
+                </div>
+                <div class="email-body">
+Hey, we need to get that term sheet out. Basically, stick to the standard NDA we used last time but change the jurisdiction to Delaware.
+
+Also, purchase price is $2.5M, payable 60% on closing and the rest over 12 months. Make sure there's a non-compete for the founders, let's say 3 years? And usual warranties.
+
+Oh, and add a clause about the IP assignment being immediate upon signing. Need this by EOD.<span class="cursor"></span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right: Output -->
+        <div class="panel-right">
+            <div class="panel-label" style="color: var(--color-ink); opacity: 0.4;">Output Generated</div>
+            <div class="doc-window">
+                <div class="doc-title">Term Sheet Summary</div>
+
+                <div class="doc-clause">
+                    <h4>1. Purchase Price & Payment Terms</h4>
+                    <p>The total purchase price shall be <strong>$2,500,000.00 USD</strong>. Payment shall be structured as follows: sixty percent (60%) to be paid upon Closing, with the remaining forty percent (40%) to be paid in equal installments over a period of twelve (12) months post-Closing.</p>
+                </div>
+
+                <div class="doc-clause">
+                    <h4>2. Non-Competition Covenant</h4>
+                    <p>Founders agree to be bound by a non-competition covenant for a period of <strong>three (3) years</strong> following the Closing Date, restricting engagement in businesses directly competitive with the Company.</p>
+                </div>
+
+                <div class="doc-clause">
+                    <h4>3. Intellectual Property Assignment</h4>
+                    <p>All Intellectual Property rights shall be assigned to the Buyer effective immediately upon the execution of this Agreement.</p>
+                </div>
+
+                <div class="doc-clause">
+                    <h4>4. Governing Law</h4>
+                    <p>This Agreement shall be governed by and construed in accordance with the laws of the <strong>State of Delaware</strong>.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="stats-strip">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <h3>0.2s</h3>
+                    <p>Processing Time</p>
+                </div>
+                <div class="stat-item">
+                    <h3>100%</h3>
+                    <p>Format Accuracy</p>
+                </div>
+                <div class="stat-item">
+                    <h3>AES-256</h3>
+                    <p>Bank-Grade Security</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
