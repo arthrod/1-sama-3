@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cicero | The AI Paralegal</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+    <style>
+        /* CSS Reset & Base */
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        :root {
+            --color-scarlet: #9d0208;
+            --color-ink: #1a1818;
+            --color-paper: #f5f4f0;
+            --color-gray: #e5e4e0;
+            --color-gray-dark: #8c8b88;
+
+            --font-display: 'Cormorant Garamond', serif;
+            --font-body: 'DM Sans', sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+        }
+
+        body {
+            background-color: var(--color-paper);
+            color: var(--color-ink);
+            font-family: var(--font-body);
+            line-height: 1.5;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Typography */
+        h1, h2, h3, h4 {
+            font-family: var(--font-display);
+            font-weight: 400;
+            line-height: 1.1;
+        }
+
+        .text-display {
+            font-size: clamp(3rem, 8vw, 6rem);
+            letter-spacing: -0.02em;
+        }
+
+        .text-h2 {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+        }
+
+        .text-h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+
+        .text-mono {
+            font-family: var(--font-mono);
+            font-size: 0.875rem;
+            letter-spacing: -0.02em;
+        }
+
+        .text-caps {
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            font-size: 0.75rem;
+            font-weight: 700;
+        }
+
+        /* Layout */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .section {
+            padding: 8rem 0;
+            border-bottom: 1px solid var(--color-gray);
+        }
+
+        .grid {
+            display: grid;
+            gap: 2rem;
+        }
+
+        .grid-2 { grid-template-columns: 1fr 1fr; }
+        .grid-3 { grid-template-columns: repeat(3, 1fr); }
+
+        @media (max-width: 768px) {
+            .grid-2, .grid-3 { grid-template-columns: 1fr; }
+            .section { padding: 4rem 0; }
+        }
+
+        /* Components */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem 2rem;
+            background: var(--color-ink);
+            color: var(--color-paper);
+            font-family: var(--font-body);
+            font-weight: 500;
+            text-decoration: none;
+            border: 1px solid var(--color-ink);
+            border-radius: 2px; /* Sharp geometry */
+            transition: all 0.2s ease;
+        }
+
+        .btn:hover {
+            background: var(--color-scarlet);
+            border-color: var(--color-scarlet);
+            color: white;
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--color-ink);
+            border: 1px solid var(--color-ink);
+        }
+
+        .btn-outline:hover {
+            background: var(--color-ink);
+            color: var(--color-paper);
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 0.25rem 0.5rem;
+            background: var(--color-gray);
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            border-radius: 2px;
+        }
+
+        /* Hero Specifics */
+        .hero {
+            min-height: 90vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            border-bottom: 1px solid var(--color-gray);
+        }
+
+        .hero-mail-link {
+            font-family: var(--font-mono);
+            color: var(--color-scarlet);
+            font-size: 1.25rem;
+            text-decoration: none;
+            border-bottom: 1px solid transparent;
+            transition: border-color 0.2s;
+        }
+
+        .hero-mail-link:hover {
+            border-color: var(--color-scarlet);
+        }
+
+        /* Comparison Section */
+        .comparison-card {
+            background: white;
+            padding: 2rem;
+            border: 1px solid var(--color-gray);
+            height: 100%;
+            position: relative;
+        }
+
+        .comparison-label {
+            position: absolute;
+            top: -1rem;
+            left: 2rem;
+            background: var(--color-ink);
+            color: white;
+            padding: 0.5rem 1rem;
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            border-radius: 2px;
+        }
+
+        .comparison-label.after {
+            background: var(--color-scarlet);
+        }
+
+        .code-block {
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            color: var(--color-gray-dark);
+            white-space: pre-wrap;
+            line-height: 1.6;
+        }
+
+        .doc-preview {
+            font-family: 'Times New Roman', serif; /* Simulate Word doc */
+            line-height: 1.6;
+        }
+
+        .doc-preview h4 {
+            font-family: 'Times New Roman', serif;
+            font-weight: bold;
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+
+        /* Pricing */
+        .pricing-card {
+            border: 1px solid var(--color-gray);
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: transform 0.2s;
+        }
+
+        .pricing-card:hover {
+            border-color: var(--color-ink);
+            transform: translateY(-5px);
+        }
+
+        .pricing-card.featured {
+            background: var(--color-ink);
+            color: var(--color-paper);
+            border-color: var(--color-ink);
+        }
+
+        .pricing-card.featured .text-h3,
+        .pricing-card.featured .price,
+        .pricing-card.featured li {
+            color: var(--color-paper);
+        }
+
+        .pricing-card.featured .btn {
+            background: var(--color-paper);
+            color: var(--color-ink);
+            border-color: var(--color-paper);
+        }
+
+        .pricing-card.featured .btn:hover {
+            background: var(--color-scarlet);
+            color: white;
+            border-color: var(--color-scarlet);
+        }
+
+        .price {
+            font-family: var(--font-display);
+            font-size: 3rem;
+            margin: 1rem 0;
+        }
+
+        .price span {
+            font-size: 1rem;
+            font-family: var(--font-body);
+            color: var(--color-gray-dark);
+        }
+
+        ul.features {
+            list-style: none;
+            margin: 2rem 0;
+        }
+
+        ul.features li {
+            margin-bottom: 0.75rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        ul.features li::before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: var(--color-scarlet);
+        }
+
+        /* Nav */
+        nav {
+            padding: 2rem 0;
+            border-bottom: 1px solid var(--color-gray);
+        }
+
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--color-ink);
+            text-decoration: none;
+            letter-spacing: -0.02em;
+        }
+
+        .nav-links a {
+            margin-left: 2rem;
+            text-decoration: none;
+            color: var(--color-ink);
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+
+        .nav-links a:hover {
+            color: var(--color-scarlet);
+        }
+
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="container nav-content">
+            <a href="#" class="logo">CICERO</a>
+            <div class="nav-links">
+                <a href="#how-it-works">How It Works</a>
+                <a href="#pricing">Pricing</a>
+                <a href="#login">Login</a>
+            </div>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <div class="container">
+            <div class="grid grid-2" style="align-items: end;">
+                <div>
+                    <span class="badge">BETA ACCESS OPEN</span>
+                    <h1 class="text-display" style="margin-top: 2rem;">
+                        The Associate That Never Sleeps.
+                    </h1>
+                </div>
+                <div style="padding-bottom: 1rem;">
+                    <p class="text-h3" style="margin-bottom: 2rem; color: var(--color-gray-dark); font-family: var(--font-display); font-style: italic;">
+                        Turn messy email threads into structured legal briefs. Instantly.
+                    </p>
+                    <div style="display: flex; align-items: center; gap: 1rem;">
+                        <a href="mailto:assistant@cicero.im" class="btn">Start a Draft</a>
+                        <span class="text-mono" style="font-size: 0.75rem; color: var(--color-gray-dark);">
+                            or forward to <a href="mailto:assistant@cicero.im" class="hero-mail-link">assistant@cicero.im</a>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section id="how-it-works" class="section">
+        <div class="container">
+            <div class="grid grid-2">
+                <!-- Messy Input -->
+                <div class="comparison-card">
+                    <span class="comparison-label">INPUT: EMAIL</span>
+                    <div class="code-block">
+From: John Doe &lt;jdoe@example.com&gt;
+Subject: Re: Smith vs. Jones - Settlement Details
+
+Hey, just got off the phone with opposing counsel.
+They're agreeing to the $50k but want a non-disparagement clause.
+Also, payment terms: 30 days net, wire transfer only.
+Can we draft something up by EOD?
+Oh, and make sure we include the standard indemnity we discussed last week.
+Thanks.
+                    </div>
+                </div>
+
+                <!-- Structured Output -->
+                <div class="comparison-card" style="border-color: var(--color-ink);">
+                    <span class="comparison-label after">OUTPUT: DOCX</span>
+                    <div class="doc-preview">
+                        <h4>SETTLEMENT AGREEMENT AND RELEASE</h4>
+                        <p><strong>1. SETTLEMENT AMOUNT.</strong> The Defendant agrees to pay the Plaintiff the sum of Fifty Thousand Dollars ($50,000.00) (the "Settlement Amount").</p>
+                        <p><strong>2. PAYMENT TERMS.</strong> Payment shall be made via wire transfer within thirty (30) days of the execution of this Agreement.</p>
+                        <p><strong>3. NON-DISPARAGEMENT.</strong> The Parties agree not to make any statements, written or verbal, or cause or encourage others to make any statements, that defame, disparage or in any way criticize the personal or business reputation, practices, or conduct of the other Party.</p>
+                        <p><strong>4. INDEMNIFICATION.</strong> [Standard Indemnity Clause Inserted via Reference]</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container">
+            <div class="grid grid-3" style="text-align: center;">
+                <div>
+                    <h3 class="text-h2" style="color: var(--color-scarlet);">01</h3>
+                    <h4 class="text-caps" style="margin-top: 1rem;">Forward</h4>
+                    <p style="margin-top: 1rem; color: var(--color-gray-dark);">Send any email thread to your dedicated Cicero address.</p>
+                </div>
+                <div>
+                    <h3 class="text-h2" style="color: var(--color-scarlet);">02</h3>
+                    <h4 class="text-caps" style="margin-top: 1rem;">Structure</h4>
+                    <p style="margin-top: 1rem; color: var(--color-gray-dark);">Cicero parses facts, dates, and obligations using custom legal LLMs.</p>
+                </div>
+                <div>
+                    <h3 class="text-h2" style="color: var(--color-scarlet);">03</h3>
+                    <h4 class="text-caps" style="margin-top: 1rem;">Review</h4>
+                    <p style="margin-top: 1rem; color: var(--color-gray-dark);">Receive a polished .docx and .pdf in your inbox within minutes.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="pricing" class="section">
+        <div class="container">
+            <h2 class="text-h2" style="margin-bottom: 4rem; text-align: center;">Simple, Billable Pricing.</h2>
+
+            <div class="grid grid-3">
+                <!-- Free Tier -->
+                <div class="pricing-card">
+                    <div>
+                        <h3 class="text-h3">Solo</h3>
+                        <div class="price">$0<span>/mo</span></div>
+                        <p style="color: var(--color-gray-dark); font-size: 0.875rem;">Perfect for testing the waters.</p>
+                        <ul class="features">
+                            <li>5 Documents / month</li>
+                            <li>Standard Templates</li>
+                            <li>48h Turnaround</li>
+                            <li>Email Support</li>
+                        </ul>
+                    </div>
+                    <a href="#" class="btn btn-outline" style="width: 100%;">Start Free</a>
+                </div>
+
+                <!-- Pro Tier -->
+                <div class="pricing-card featured">
+                    <div>
+                        <h3 class="text-h3">Associate</h3>
+                        <div class="price">$49<span>/mo</span></div>
+                        <p style="color: rgba(255,255,255,0.7); font-size: 0.875rem;">For busy practitioners.</p>
+                        <ul class="features">
+                            <li>Unlimited Documents</li>
+                            <li>Custom Firm Templates</li>
+                            <li>Instant Turnaround (< 2m)</li>
+                            <li>Priority Processing</li>
+                        </ul>
+                    </div>
+                    <a href="#" class="btn" style="width: 100%;">Get Started</a>
+                </div>
+
+                <!-- Firm Tier -->
+                <div class="pricing-card">
+                    <div>
+                        <h3 class="text-h3">Firm</h3>
+                        <div class="price">Custom</div>
+                        <p style="color: var(--color-gray-dark); font-size: 0.875rem;">Enterprise controls & security.</p>
+                        <ul class="features">
+                            <li>SSO / SAML</li>
+                            <li>Audit Logs</li>
+                            <li>Dedicated Account Manager</li>
+                            <li>On-premise Deployment</li>
+                        </ul>
+                    </div>
+                    <a href="#" class="btn btn-outline" style="width: 100%;">Contact Sales</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer style="padding: 4rem 0; background: var(--color-ink); color: var(--color-gray-dark);">
+        <div class="container">
+            <div class="grid grid-2">
+                <div>
+                    <h4 class="logo" style="color: white; margin-bottom: 1rem;">CICERO</h4>
+                    <p class="text-mono" style="max-width: 300px;">
+                        Made for lawyers who hate software.<br>
+                        San Francisco, CA.
+                    </p>
+                </div>
+                <div style="text-align: right; display: flex; flex-direction: column; gap: 0.5rem;">
+                    <a href="#" style="color: white; text-decoration: none;">Terms of Service</a>
+                    <a href="#" style="color: white; text-decoration: none;">Privacy Policy</a>
+                    <a href="#" style="color: white; text-decoration: none;">Security</a>
+                </div>
+            </div>
+            <div style="margin-top: 4rem; padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.1); text-align: center;">
+                <p class="text-mono" style="font-size: 0.75rem;">&copy; 2024 Cicero Legal Technologies Inc.</p>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
