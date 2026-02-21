@@ -4,6 +4,11 @@ on:
   pull_request:
     types: [opened, synchronize, reopened]
 
+# Add permissions block to allow commenting on PRs
+permissions:
+  pull-requests: write
+  contents: read
+
 jobs:
   deploy-preview:
     runs-on: ubuntu-latest
