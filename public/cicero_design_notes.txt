@@ -1,0 +1,19 @@
+Cicero Design Exploration - Notes
+
+1. The "Invisible" UI
+   - The core value of Cicero is that it lives in your existing workflow (email).
+   - I chose to make the landing page explicitly demonstrate this by showing the "Input" as a standard email client interface.
+   - This "Before/After" comparison is the hero of the page because it instantly explains the product without abstract diagrams.
+
+2. Visual Differentiation (No Blue)
+   - Legal tech often defaults to "Trust Blue" (Salesforce, DocuSign).
+   - Cicero uses Scarlet (#9d0208) and severe Black/White contrast to signal something different: urgency, precision, and a "red pen" editorial authority.
+   - The typography (Cormorant Garamond) evokes the authority of printed legal briefs, while the monospace (JetBrains Mono) ties it to the technical/email nature of the input.
+
+3. Sharp Geometry
+   - I avoided all border-radius (except for a minimal 2px on the CTA box) to reinforce the idea of "strictness" and "precision" required in legal documents.
+   - Soft curves suggest "friendly/casual"; sharp corners suggest "binding/exact".
+
+4. Hierarchy
+   - The email address `assistant@cicero.im` is treated as the primary product interface. It is given the most visual weight after the headline.
+   - The pricing is simplified to a retainer model, reflecting how firms actually pay for outside counsel.

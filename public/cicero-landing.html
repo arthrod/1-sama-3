@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cicero — Legal Work, Without the Legwork</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=DM+Sans:wght@400;500;700&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --color-scarlet: #9d0208;
+            --color-ink: #1a1818;
+            --color-warm-white: #f5f4f0;
+            --color-white: #ffffff;
+            --color-gray: #e5e4e0;
+            --color-gray-dark: #888888;
+
+            --font-display: 'Cormorant Garamond', serif;
+            --font-body: 'DM Sans', sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+
+            --spacing-unit: 8px;
+            --container-max: 1200px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--color-warm-white);
+            color: var(--color-ink);
+            font-family: var(--font-body);
+            line-height: 1.5;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: var(--font-display);
+            font-weight: 400;
+            line-height: 1.1;
+        }
+
+        .container {
+            max-width: var(--container-max);
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Utility */
+        .text-scarlet { color: var(--color-scarlet); }
+        .text-gray { color: var(--color-gray-dark); }
+        .bg-ink { background-color: var(--color-ink); color: var(--color-white); }
+        .mono { font-family: var(--font-mono); }
+        .sharp { border-radius: 2px; }
+
+        /* Header */
+        header {
+            padding: 2rem 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+        }
+
+        nav a {
+            margin-left: 2rem;
+            text-decoration: none;
+            color: var(--color-ink);
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        /* Hero */
+        .hero {
+            padding: 6rem 0 4rem;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            max-width: 800px;
+            margin: 0 auto 1.5rem;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            color: var(--color-gray-dark);
+            margin-bottom: 3rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-box {
+            background: var(--color-white);
+            border: 1px solid var(--color-gray);
+            display: inline-flex;
+            align-items: center;
+            padding: 1rem 1.5rem;
+            box-shadow: 4px 4px 0 var(--color-ink); /* Hard shadow */
+        }
+
+        .email-address {
+            font-size: 1.1rem;
+            margin-right: 1rem;
+            color: var(--color-ink);
+        }
+
+        .copy-btn {
+            background: var(--color-scarlet);
+            color: var(--color-white);
+            border: none;
+            padding: 0.5rem 1rem;
+            font-family: var(--font-body);
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            cursor: pointer;
+            transition: transform 0.1s;
+        }
+
+        .copy-btn:active {
+            transform: translateY(1px);
+        }
+
+        /* Comparison Section */
+        .comparison {
+            padding: 4rem 0;
+            background: var(--color-white);
+            border-top: 1px solid var(--color-gray);
+            border-bottom: 1px solid var(--color-gray);
+        }
+
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .card {
+            background: var(--color-warm-white);
+            padding: 2rem;
+            border: 1px solid var(--color-gray);
+            position: relative;
+        }
+
+        .card-label {
+            position: absolute;
+            top: -12px;
+            left: 2rem;
+            background: var(--color-ink);
+            color: var(--color-white);
+            padding: 0.25rem 0.75rem;
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            text-transform: uppercase;
+        }
+
+        .email-input {
+            font-family: var(--font-body);
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        .email-meta {
+            color: var(--color-gray-dark);
+            margin-bottom: 1rem;
+            border-bottom: 1px solid var(--color-gray);
+            padding-bottom: 0.5rem;
+            font-size: 0.8rem;
+        }
+
+        .doc-preview {
+            font-family: 'Times New Roman', serif;
+            background: var(--color-white);
+            padding: 2rem; /* A4-ish look */
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            font-size: 0.85rem;
+            color: #333;
+            line-height: 1.4;
+        }
+
+        .doc-title {
+            text-align: center;
+            font-weight: bold;
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
+            font-size: 1rem;
+        }
+
+        .arrow-divider {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 2rem 0;
+            font-family: var(--font-display);
+            font-style: italic;
+            color: var(--color-scarlet);
+            font-size: 1.5rem;
+        }
+
+        /* Features */
+        .features {
+            padding: 6rem 0;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            text-align: center;
+        }
+
+        .feature-icon {
+            font-size: 2rem;
+            color: var(--color-scarlet);
+            margin-bottom: 1rem;
+            font-family: var(--font-display); /* Using typographic symbols */
+        }
+
+        .feature h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .feature p {
+            color: var(--color-gray-dark);
+            font-size: 0.95rem;
+        }
+
+        /* Pricing */
+        .pricing {
+            padding: 6rem 0;
+            background: var(--color-ink);
+            color: var(--color-warm-white);
+            text-align: center;
+        }
+
+        .pricing h2 {
+            font-size: 3rem;
+            margin-bottom: 3rem;
+            color: var(--color-white);
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .price-card {
+            border: 1px solid var(--color-gray-dark);
+            padding: 3rem;
+            text-align: left;
+            transition: border-color 0.3s;
+        }
+
+        .price-card:hover {
+            border-color: var(--color-scarlet);
+        }
+
+        .price-card h3 {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+            color: var(--color-white);
+        }
+
+        .price {
+            font-family: var(--font-mono);
+            font-size: 1.5rem;
+            color: var(--color-gray);
+            margin-bottom: 2rem;
+            display: block;
+        }
+
+        .price-features li {
+            list-style: none;
+            margin-bottom: 0.75rem;
+            padding-left: 1.5rem;
+            position: relative;
+            color: var(--color-gray);
+        }
+
+        .price-features li::before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: var(--color-scarlet);
+        }
+
+        .btn-outline {
+            display: inline-block;
+            margin-top: 2rem;
+            border: 1px solid var(--color-white);
+            color: var(--color-white);
+            padding: 1rem 2rem;
+            text-decoration: none;
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            letter-spacing: 0.05em;
+            transition: background 0.3s, color 0.3s;
+        }
+
+        .btn-outline:hover {
+            background: var(--color-white);
+            color: var(--color-ink);
+        }
+
+        /* Footer */
+        footer {
+            padding: 4rem 0;
+            text-align: center;
+            font-size: 0.85rem;
+            color: var(--color-gray-dark);
+            border-top: 1px solid var(--color-gray);
+        }
+
+        footer a {
+            color: var(--color-ink);
+            text-decoration: none;
+            margin: 0 1rem;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .hero > * {
+            animation: fadeIn 0.8s ease-out forwards;
+        }
+
+        .hero p { animation-delay: 0.2s; opacity: 0; }
+        .cta-box { animation-delay: 0.4s; opacity: 0; }
+
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <div class="logo">Cicero.</div>
+            <nav>
+                <a href="#how-it-works">How it Works</a>
+                <a href="#pricing">Pricing</a>
+                <a href="mailto:contact@cicero.im">Contact</a>
+            </nav>
+        </header>
+
+        <section class="hero">
+            <h1>Your Legal Assistant is an Email Address.</h1>
+            <p>Draft contracts, review NDAs, and formalize agreements instantly. Just forward the thread.</p>
+
+            <div class="cta-box sharp">
+                <span class="email-address mono">assistant@cicero.im</span>
+                <button class="copy-btn sharp" onclick="navigator.clipboard.writeText('assistant@cicero.im'); this.innerText = 'COPIED!'">Copy</button>
+            </div>
+        </section>
+    </div>
+
+    <section class="comparison" id="how-it-works">
+        <div class="container">
+            <div class="comparison-grid">
+                <!-- Left: Messy Input -->
+                <div>
+                    <div class="card sharp">
+                        <div class="card-label sharp">INPUT: EMAIL</div>
+                        <div class="email-input">
+                            <div class="email-meta mono">
+                                To: assistant@cicero.im<br>
+                                Subject: Fwd: Contract for Sarah
+                            </div>
+                            <p>Hey Cicero,</p>
+                            <p>Can you draft a standard contractor agreement for Sarah based on our previous thread? She's starting next Monday at $85/hr, 20 hours a week max. Include the IP assignment clause we used for Jason.</p>
+                            <p>Thanks,<br>Alex</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right: Clean Output -->
+                <div>
+                    <div class="card sharp" style="background: var(--color-gray); padding: 1rem;">
+                        <div class="card-label sharp" style="background: var(--color-scarlet);">OUTPUT: DOCX + PDF</div>
+                        <div class="doc-preview sharp">
+                            <div class="doc-title">INDEPENDENT CONTRACTOR AGREEMENT</div>
+                            <p><strong>THIS INDEPENDENT CONTRACTOR AGREEMENT</strong> (the "Agreement") is made and entered into as of October 24, 2024 (the "Effective Date"), by and between <strong>ALEX HOLDINGS INC.</strong> (the "Company") and <strong>SARAH JENKINS</strong> (the "Contractor").</p>
+                            <p><strong>1. SERVICES.</strong> Contractor agrees to perform the services described in Exhibit A attached hereto (the "Services"). Contractor shall devote up to 20 hours per week to the performance of the Services.</p>
+                            <p><strong>2. COMPENSATION.</strong> As full compensation for the Services, Company shall pay Contractor at the rate of $85.00 per hour...</p>
+                            <p><strong>3. INTELLECTUAL PROPERTY.</strong> Contractor hereby assigns to the Company all right, title, and interest in and to any Work Product...</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="arrow-divider">
+                ~ 30 seconds later ~
+            </div>
+        </div>
+    </section>
+
+    <div class="container">
+        <section class="features">
+            <div class="feature">
+                <div class="feature-icon">I</div>
+                <h3>Zero Friction</h3>
+                <p>No new portals to learn. No apps to install. If you can send an email, you can use Cicero.</p>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">II</div>
+                <h3>Always Contextual</h3>
+                <p>Cicero remembers your past agreements, preferred clauses, and company entities.</p>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">III</div>
+                <h3>Secure & Private</h3>
+                <p>Bank-grade encryption. Your data is used solely to generate your documents.</p>
+            </div>
+        </section>
+    </div>
+
+    <section class="pricing" id="pricing">
+        <div class="container">
+            <h2>Predictable Pricing</h2>
+            <div class="pricing-grid">
+                <div class="price-card sharp">
+                    <h3>Professional</h3>
+                    <span class="price mono">$299<small>/mo</small></span>
+                    <ul class="price-features">
+                        <li>Unlimited Document Drafting</li>
+                        <li>Standard NDA Reviews</li>
+                        <li>Email & Slack Integration</li>
+                        <li>24h Turnaround Guarantee</li>
+                    </ul>
+                    <a href="#" class="btn-outline sharp">Start Trial</a>
+                </div>
+                <div class="price-card sharp" style="border-color: var(--color-scarlet);">
+                    <h3>Enterprise</h3>
+                    <span class="price mono">Custom</span>
+                    <ul class="price-features">
+                        <li>Everything in Professional</li>
+                        <li>Custom Playbooks</li>
+                        <li>API Access</li>
+                        <li>Dedicated Account Manager</li>
+                    </ul>
+                    <a href="#" class="btn-outline sharp">Contact Sales</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Cicero Legal Technologies Inc.</p>
+            <div style="margin-top: 1rem;">
+                <a href="#">Privacy</a>
+                <a href="#">Terms</a>
+                <a href="#">Security</a>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
