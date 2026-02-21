@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cicero - The Email Legal Service</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=DM+Sans:opsz,wght@9..40..1000,400;500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --color-scarlet: #9d0208;
+            --color-ink: #1a1818;
+            --color-warm-white: #f5f4f0;
+            --color-white: #ffffff;
+            --color-gray: #e5e4e0;
+            --color-gray-dark: #888888;
+
+            --font-heading: 'Cormorant Garamond', serif;
+            --font-body: 'DM Sans', sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--color-warm-white);
+            color: var(--color-ink);
+            font-family: var(--font-body);
+            line-height: 1.5;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: var(--font-heading);
+            font-weight: 600;
+            line-height: 1.1;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Utility */
+        .text-scarlet { color: var(--color-scarlet); }
+        .font-mono { font-family: var(--font-mono); }
+        .uppercase { text-transform: uppercase; letter-spacing: 0.05em; font-size: 0.875rem; font-weight: 700; }
+        .flex { display: flex; }
+        .flex-col { flex-direction: column; }
+        .items-center { align-items: center; }
+        .justify-center { justify-content: center; }
+        .justify-between { justify-content: space-between; }
+        .gap-4 { gap: 1rem; }
+        .gap-8 { gap: 2rem; }
+        .grid { display: grid; }
+        .grid-cols-2 { grid-template-columns: 1fr 1fr; }
+        .w-full { width: 100%; }
+        .max-w-2xl { max-width: 42rem; }
+        .mx-auto { margin-left: auto; margin-right: auto; }
+        .text-center { text-align: center; }
+        .mt-4 { margin-top: 1rem; }
+        .mt-8 { margin-top: 2rem; }
+        .mt-12 { margin-top: 3rem; }
+        .mb-4 { margin-bottom: 1rem; }
+        .mb-8 { margin-bottom: 2rem; }
+        .mb-12 { margin-bottom: 3rem; }
+        .p-8 { padding: 2rem; }
+        .p-12 { padding: 3rem; }
+        .bg-white { background-color: var(--color-white); }
+        .border { border: 1px solid var(--color-gray); }
+        .rounded-sm { border-radius: 2px; } /* Sharp geometry constraint */
+
+        /* Header */
+        header {
+            padding: 2rem 0;
+            border-bottom: 1px solid var(--color-gray);
+        }
+        .logo {
+            font-family: var(--font-heading);
+            font-size: 1.5rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+        }
+
+        /* Hero */
+        .hero {
+            padding: 6rem 0;
+            text-align: center;
+        }
+        .hero h1 {
+            font-size: 4.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--color-ink);
+        }
+        .hero p {
+            font-size: 1.5rem;
+            color: var(--color-gray-dark);
+            max-width: 600px;
+            margin: 0 auto 3rem;
+        }
+        .cta-button {
+            display: inline-block;
+            background-color: var(--color-scarlet);
+            color: var(--color-white);
+            padding: 1rem 2rem;
+            font-family: var(--font-mono);
+            font-size: 1.125rem;
+            border-radius: 2px;
+            transition: opacity 0.2s;
+        }
+        .cta-button:hover {
+            opacity: 0.9;
+        }
+
+        /* Before/After Section */
+        .comparison {
+            padding: 4rem 0;
+            background-color: var(--color-white);
+            border-top: 1px solid var(--color-gray);
+            border-bottom: 1px solid var(--color-gray);
+        }
+        .email-window {
+            background-color: var(--color-warm-white);
+            border: 1px solid var(--color-gray);
+            border-radius: 2px;
+            padding: 2rem;
+            height: 100%;
+            position: relative;
+        }
+        .email-header {
+            border-bottom: 1px solid var(--color-gray);
+            padding-bottom: 1rem;
+            margin-bottom: 1rem;
+        }
+        .email-meta {
+            font-family: var(--font-mono);
+            font-size: 0.875rem;
+            color: var(--color-gray-dark);
+            margin-bottom: 0.25rem;
+        }
+        .email-body {
+            font-family: var(--font-body); /* Using body font for realism, or could be standard sans */
+            color: var(--color-ink);
+            white-space: pre-wrap;
+        }
+        .attachment-chip {
+            display: inline-flex;
+            align-items: center;
+            background-color: var(--color-white);
+            border: 1px solid var(--color-gray);
+            padding: 0.5rem 1rem;
+            border-radius: 2px;
+            font-size: 0.875rem;
+            margin-top: 1rem;
+            font-family: var(--font-mono);
+        }
+        .doc-preview {
+            background: white;
+            border: 1px solid var(--color-gray);
+            padding: 2rem;
+            margin-top: 1rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            font-family: 'Times New Roman', serif;
+            font-size: 0.8rem;
+            line-height: 1.4;
+            color: #333;
+        }
+        .clarification-bubble {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: var(--color-ink);
+            color: var(--color-white);
+            padding: 1.5rem;
+            border-radius: 2px;
+            width: 300px;
+            z-index: 10;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            text-align: left;
+        }
+        .clarification-bubble::before {
+            content: "CLARIFICATION";
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            color: var(--color-gray-dark);
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Features/Workflow */
+        .features {
+            padding: 6rem 0;
+        }
+        .feature-card {
+            padding: 2rem;
+            border: 1px solid var(--color-gray);
+            background: var(--color-white);
+        }
+        .feature-icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: var(--color-scarlet);
+            font-family: var(--font-heading); /* Or an actual icon */
+        }
+
+        /* Use Cases */
+        .use-cases {
+            padding: 6rem 0;
+            background-color: var(--color-ink);
+            color: var(--color-warm-white);
+        }
+        .case-card {
+            background-color: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            padding: 2rem;
+            border-radius: 2px;
+        }
+        .case-input {
+            font-family: var(--font-mono);
+            font-size: 0.875rem;
+            opacity: 0.7;
+            margin-bottom: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        .case-output strong {
+            color: var(--color-white);
+            font-weight: 700;
+        }
+
+        /* Footer */
+        footer {
+            padding: 6rem 0;
+            text-align: center;
+            border-top: 1px solid var(--color-gray);
+        }
+        footer h2 {
+            font-size: 3rem;
+            margin-bottom: 2rem;
+        }
+
+        /* Icons */
+        .icon {
+            width: 1.5rem;
+            height: 1.5rem;
+            display: inline-block;
+            vertical-align: middle;
+            margin-right: 0.5rem;
+        }
+
+        .tag {
+            display: inline-block;
+            padding: 0.25rem 0.5rem;
+            background: var(--color-scarlet);
+            color: white;
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            border-radius: 2px;
+            margin-bottom: 1rem;
+        }
+
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container flex justify-between items-center">
+            <div class="logo">CICERO</div>
+            <nav>
+                <a href="mailto:assistant@cicero.im" class="font-mono text-scarlet">assistant@cicero.im</a>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <div class="tag">NOW LIVE</div>
+            <h1>The Email Is The Interface</h1>
+            <p>Professional legal documents, from messy instructions. No dashboard. No login. Just forward to your assistant.</p>
+            <a href="mailto:assistant@cicero.im?subject=My%20first%20request" class="cta-button">
+                Email assistant@cicero.im
+            </a>
+            <div class="mt-4 font-mono text-sm text-gray-dark">
+                (Yes, it really works. Try it.)
+            </div>
+        </div>
+    </section>
+
+    <!-- BEFORE / AFTER Section -->
+    <section class="comparison">
+        <div class="container">
+            <div class="grid grid-cols-2 gap-8 relative">
+
+                <!-- Left: Messy Input -->
+                <div class="email-window">
+                    <div class="email-header">
+                        <div class="email-meta">FROM: Sarah Jenkins (General Counsel)</div>
+                        <div class="email-meta">TO: assistant@cicero.im</div>
+                        <div class="email-meta">SUBJECT: Fwd: Vendor Agreement - URGENT</div>
+                    </div>
+                    <div class="email-body">
+                        <p>Hey,</p>
+                        <p>See attached from their side. Can you do a quick redline? Their indemnification clause is insane (section 9 I think?) and we need to push back on the auto-renewal. Also make sure the jurisdiction is NY.</p>
+                        <p>Need this by EOD if possible. Thx.</p>
+
+                        <div class="attachment-chip">
+                            📎 draft_saas_agreement_v1.pdf (2.4MB)
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Middle: Clarification Trust Signal -->
+                <div class="clarification-bubble">
+                    <div class="font-mono text-xs mb-2 text-gray-400">assistant@cicero.im asks:</div>
+                    <p class="mb-4">"Noted on Section 9 and auto-renewal. Should I also align the liability cap with our standard $1M policy, or leave it as is?"</p>
+                    <div class="font-mono text-xs mb-2 text-gray-400">Sarah replies:</div>
+                    <p>"Good catch. Align with standard."</p>
+                </div>
+
+                <!-- Right: Clean Output -->
+                <div class="email-window" style="background-color: var(--color-white);">
+                    <div class="email-header">
+                        <div class="email-meta">FROM: Cicero Assistant</div>
+                        <div class="email-meta">TO: Sarah Jenkins</div>
+                        <div class="email-meta">SUBJECT: Re: Vendor Agreement - Redline + Checklist</div>
+                    </div>
+                    <div class="email-body">
+                        <p>Hi Sarah,</p>
+                        <p>Here is the redlined agreement. I've heavily marked up Section 9 (Indemnification) to limit scope to direct damages only, and removed the auto-renewal clause per your instruction.</p>
+                        <p>Liability cap is now set to $1M aggregate.</p>
+
+                        <div class="flex gap-4 mt-4">
+                            <div class="attachment-chip" style="border-color: var(--color-scarlet); color: var(--color-scarlet);">
+                                📄 Saas_Agreement_Redline.docx
+                            </div>
+                            <div class="attachment-chip" style="border-color: var(--color-ink); color: var(--color-ink);">
+                                ✅ Action_Checklist.pdf
+                            </div>
+                        </div>
+
+                        <!-- Mini Doc Preview Visual -->
+                        <div class="doc-preview">
+                            <p style="text-align:center; font-weight:bold; margin-bottom:1rem;">MASTER SERVICES AGREEMENT</p>
+                            <p><strong>9. INDEMNIFICATION.</strong> Provider shall indemnify, defend and hold harmless Customer from and against any <span style="text-decoration: line-through; color: red;">and all</span> claims, damages, <span style="color: blue;">direct</span> losses...</p>
+                            <p style="margin-top:0.5rem;"><strong>10. TERM.</strong> This Agreement shall commence on the Effective Date and continue for a period of one (1) year. <span style="text-decoration: line-through; color: red;">It shall automatically renew for successive one year terms...</span></p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Value Props / Workflow -->
+    <section class="features">
+        <div class="container">
+            <div class="grid grid-cols-3 gap-8">
+
+                <div class="feature-card">
+                    <div class="uppercase text-scarlet mb-4">Angle 1</div>
+                    <h3>Send it messy.</h3>
+                    <p class="mt-4 text-gray-dark">Lawyers don't have time to write clean briefs. Forward chains, attach random files, type three words. We figure it out.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="uppercase text-scarlet mb-4">Angle 2</div>
+                    <h3>We read the whole thing.</h3>
+                    <p class="mt-4 text-gray-dark">Don't want to read a 47-page MSA? We do. We flag risks, find inconsistencies, and summarize the weird stuff.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="uppercase text-scarlet mb-4">Angle 3</div>
+                    <h3>Two attachments. Always.</h3>
+                    <p class="mt-4 text-gray-dark">You get a clean DOCX for work, and a PDF checklist for your workflow. The perfect handoff package.</p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Use Cases Gallery -->
+    <section class="use-cases">
+        <div class="container">
+            <h2 class="text-center mb-12">Just ask.</h2>
+            <div class="grid grid-cols-2 gap-4">
+
+                <div class="case-card">
+                    <div class="case-input">
+                        "Draft a response to this cease & desist, our position is fair use."
+                    </div>
+                    <div class="case-output">
+                        Received: <strong>Response_Letter.docx</strong> + <strong>Evidence_Checklist.pdf</strong>
+                    </div>
+                </div>
+
+                <div class="case-card">
+                    <div class="case-input">
+                        "Someone copied our dashboard, here's the URL."
+                    </div>
+                    <div class="case-output">
+                        Received: <strong>DMCA_Takedown.docx</strong> + <strong>Enforcement_Steps.pdf</strong>
+                    </div>
+                </div>
+
+                <div class="case-card">
+                    <div class="case-input">
+                        "What are the force majeure implications for our supply contracts?"
+                    </div>
+                    <div class="case-output">
+                        Received: <strong>Research_Memo.docx</strong> + <strong>Risk_Summary.pdf</strong>
+                    </div>
+                </div>
+
+                <div class="case-card">
+                    <div class="case-input">
+                        "Clean up this brief, filing deadline is Thursday."
+                    </div>
+                    <div class="case-output">
+                        Received: <strong>Formatted_Brief.docx</strong> + <strong>Filing_Checklist.pdf</strong>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer CTA -->
+    <footer>
+        <div class="container">
+            <p class="uppercase text-scarlet mb-4">No Signup required</p>
+            <h2>Stop logging in.<br>Start emailing.</h2>
+            <a href="mailto:assistant@cicero.im" class="font-mono text-2xl border-b-2 border-scarlet hover:text-scarlet transition-colors">
+                assistant@cicero.im
+            </a>
+            <p class="mt-8 text-gray-dark text-sm">
+                &copy; 2024 Cicero. All rights reserved.
+            </p>
+        </div>
+    </footer>
+
+</body>
+</html>
