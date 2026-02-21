@@ -252,6 +252,19 @@ export function HeroSlideshow() {
 					</svg>
 				</div>
 			</div>
+
+			{/* Preload Next Slide - Performance Optimization */}
+			{/* Forces the browser to fetch the next image in the sequence while the current one is displayed */}
+			<div className="hidden relative" aria-hidden="true">
+				<Image
+					src={SLIDES[(currentSlide + 1) % SLIDES.length].url}
+					alt=""
+					fill
+					sizes="100vw"
+					priority={false}
+					loading="eager"
+				/>
+			</div>
 		</section>
 	);
 }
