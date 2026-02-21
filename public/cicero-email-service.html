@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cicero — Email-Based Legal Assistant</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --color-scarlet: #9d0208;
+            --color-ink: #1a1818;
+            --color-warm-white: #f5f4f0;
+            --color-white: #ffffff;
+            --color-gray: #e5e4e0;
+            --color-gray-dark: #888888;
+
+            --font-heading: 'Cormorant Garamond', serif;
+            --font-body: 'DM Sans', sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--color-warm-white);
+            color: var(--color-ink);
+            font-family: var(--font-body);
+            line-height: 1.5;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: var(--font-heading);
+            font-weight: 400;
+            line-height: 1.1;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Utility */
+        .text-scarlet { color: var(--color-scarlet); }
+        .bg-scarlet { background-color: var(--color-scarlet); color: white; }
+        .bg-white { background-color: var(--color-white); }
+        .bg-ink { background-color: var(--color-ink); color: white; }
+        .font-mono { font-family: var(--font-mono); }
+        .font-serif { font-family: var(--font-heading); }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem 2rem;
+            font-family: var(--font-body);
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            border: 1px solid var(--color-ink);
+            background: transparent;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .btn-primary {
+            background-color: var(--color-scarlet);
+            border-color: var(--color-scarlet);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: #7a0004;
+        }
+
+        /* Header */
+        header {
+            padding: 2rem 0;
+            border-bottom: 1px solid var(--color-gray);
+        }
+
+        .nav-flex {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: var(--font-heading);
+            font-size: 1.5rem;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+        }
+
+        /* Hero */
+        .hero {
+            padding: 6rem 0;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 4.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--color-ink);
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            max-width: 600px;
+            margin: 0 auto 3rem;
+            color: var(--color-gray-dark);
+        }
+
+        .cta-container {
+            display: inline-flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .email-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.75rem 1.5rem;
+            background-color: var(--color-white);
+            border: 1px solid var(--color-gray);
+            border-radius: 2px;
+            font-family: var(--font-mono);
+            font-size: 1.125rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .email-pill:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+            border-color: var(--color-scarlet);
+        }
+
+        .copy-hint {
+            font-size: 0.875rem;
+            color: var(--color-gray-dark);
+            opacity: 0.7;
+        }
+
+        /* Before/After Split */
+        .comparison-section {
+            padding: 4rem 0 8rem;
+            background-color: var(--color-warm-white);
+        }
+
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: 1fr 80px 1fr;
+            gap: 2rem;
+            align-items: start;
+        }
+
+        .email-card {
+            background: white;
+            border: 1px solid var(--color-gray);
+            border-radius: 2px;
+            padding: 2rem;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+        }
+
+        .email-header {
+            border-bottom: 1px solid var(--color-gray);
+            padding-bottom: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .email-meta {
+            font-family: var(--font-body);
+            font-size: 0.875rem;
+            color: var(--color-gray-dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .email-subject {
+            font-weight: 700;
+            font-size: 1rem;
+            color: var(--color-ink);
+        }
+
+        .email-body {
+            font-family: var(--font-body); /* Or generic serif/sans depending on persona */
+            font-size: 1rem;
+            line-height: 1.6;
+            color: var(--color-ink);
+        }
+
+        .email-body.messy {
+            font-family: 'Arial', sans-serif; /* Make it look like default outlook */
+        }
+
+        .attachment-chip {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 0.75rem;
+            background: var(--color-gray);
+            border-radius: 2px;
+            font-size: 0.75rem;
+            margin-top: 1rem;
+            font-family: var(--font-body);
+            color: var(--color-ink);
+        }
+
+        .arrow-connector {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            color: var(--color-gray-dark);
+        }
+
+        .clarification-bubble {
+            background-color: var(--color-ink);
+            color: white;
+            padding: 1rem;
+            border-radius: 2px;
+            font-size: 0.875rem;
+            margin: 2rem 0;
+            position: relative;
+            max-width: 200px;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .clarification-bubble::after {
+            content: '';
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            margin-left: -6px;
+            border-width: 6px;
+            border-style: solid;
+            border-color: var(--color-ink) transparent transparent transparent;
+        }
+
+        .doc-preview {
+            background: white;
+            border: 1px solid var(--color-gray);
+            padding: 2rem;
+            font-family: 'Times New Roman', serif;
+            font-size: 0.9rem;
+            line-height: 1.4;
+            color: #333;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            margin-top: 1rem;
+            position: relative;
+        }
+
+        .doc-preview::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--color-scarlet);
+        }
+
+        .checklist-preview {
+            background: var(--color-warm-white);
+            border: 1px solid var(--color-gray);
+            padding: 1.5rem;
+            margin-top: 1rem;
+            font-family: var(--font-body);
+            font-size: 0.875rem;
+        }
+
+        .checklist-item {
+            display: flex;
+            gap: 0.75rem;
+            margin-bottom: 0.75rem;
+            align-items: flex-start;
+        }
+
+        .check-box {
+            width: 16px;
+            height: 16px;
+            border: 1px solid var(--color-scarlet);
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--color-scarlet);
+            font-size: 10px;
+        }
+
+        /* Features / Angles */
+        .features-section {
+            padding: 6rem 0;
+            background-color: white;
+            border-top: 1px solid var(--color-gray);
+            border-bottom: 1px solid var(--color-gray);
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 3rem;
+        }
+
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--color-ink);
+        }
+
+        .feature-card p {
+            color: var(--color-gray-dark);
+            font-size: 1rem;
+        }
+
+        .icon-box {
+            width: 48px;
+            height: 48px;
+            background-color: var(--color-warm-white);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            color: var(--color-scarlet);
+        }
+
+        /* Manifest */
+        .manifesto-section {
+            padding: 6rem 0;
+            text-align: center;
+        }
+
+        .manifesto-text {
+            font-family: var(--font-heading);
+            font-size: 2.5rem;
+            line-height: 1.2;
+            max-width: 800px;
+            margin: 0 auto 3rem;
+        }
+
+        .highlight {
+            color: var(--color-scarlet);
+            font-style: italic;
+        }
+
+        /* Footer */
+        footer {
+            padding: 4rem 0;
+            background-color: var(--color-ink);
+            color: var(--color-warm-white);
+            text-align: center;
+        }
+
+        footer a {
+            color: white;
+            text-decoration: underline;
+            text-decoration-color: var(--color-scarlet);
+            text-decoration-thickness: 2px;
+            font-family: var(--font-mono);
+        }
+
+        /* Icons */
+        svg {
+            width: 24px;
+            height: 24px;
+            stroke-width: 1.5;
+            stroke: currentColor;
+            fill: none;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container nav-flex">
+            <div class="logo">Cicero</div>
+            <nav>
+                <a href="#" class="btn btn-primary" style="font-size: 0.875rem; padding: 0.5rem 1rem;">Log In</a>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <h1>Send it messy.<br>Get it back perfect.</h1>
+            <p>The email-based legal assistant. No new software to learn.<br>Just forward your documents to Cicero.</p>
+
+            <div class="cta-container">
+                <a href="mailto:assistant@cicero.im" class="email-pill">
+                    <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><path d="M22 6l-10 7L2 6"/></svg>
+                    assistant@cicero.im
+                </a>
+                <span class="copy-hint">Click to open your email client</span>
+            </div>
+        </div>
+    </section>
+
+    <section class="comparison-section">
+        <div class="container">
+            <div class="comparison-grid">
+
+                <!-- BEFORE: Messy Email -->
+                <div class="email-card">
+                    <div class="email-header">
+                        <div class="email-meta">From: <strong>James (Partner)</strong></div>
+                        <div class="email-meta">To: <strong>assistant@cicero.im</strong></div>
+                        <div class="email-subject">Subject: Fwd: MSA review - URGENT</div>
+                    </div>
+                    <div class="email-body messy">
+                        Hey,<br><br>
+                        Can you take a quick look at this MSA attached? Opposing counsel sent it over. I think the indemnification is way too broad and check if the jurisdiction is NY. Also just flag anything else that looks weird.<br><br>
+                        Need it back by EOD.<br><br>
+                        Thx,<br>J
+
+                        <div class="attachment-chip">
+                            <svg width="16" height="16" viewBox="0 0 24 24" style="width:16px;height:16px;margin-right:4px;"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                            Draft_MSA_v3.pdf (4.2 MB)
+                        </div>
+                    </div>
+                </div>
+
+                <!-- MIDDLE: Clarification -->
+                <div class="arrow-connector">
+                    <div class="clarification-bubble">
+                        <strong>Cicero:</strong><br>
+                        "Do you want to limit liability to fees paid or a fixed cap?"
+                    </div>
+                    <div style="font-family: var(--font-mono); font-size: 0.75rem; background: #eee; padding: 0.25rem 0.5rem; border-radius: 2px;">
+                        James: "Fees paid."
+                    </div>
+                    <svg style="margin-top: 1rem; transform: rotate(90deg);" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </div>
+
+                <!-- AFTER: Clean Deliverable -->
+                <div class="email-card" style="border-color: var(--color-scarlet);">
+                    <div class="email-header">
+                        <div class="email-meta">From: <strong>Cicero Assistant</strong></div>
+                        <div class="email-meta">To: <strong>James (Partner)</strong></div>
+                        <div class="email-subject">Re: Fwd: MSA review - URGENT</div>
+                    </div>
+                    <div class="email-body">
+                        James,<br><br>
+                        I've reviewed the MSA. Here is the redlined DOCX with the indemnification narrowed and jurisdiction set to NY.<br><br>
+                        I also flagged 3 risks in the attached checklist regarding the IP assignment clause.<br><br>
+                        Best,<br>Cicero
+
+                        <!-- The Deliverable Pair -->
+                        <div style="display: flex; gap: 1rem; margin-top: 1.5rem;">
+                            <div style="flex: 1;">
+                                <div class="attachment-chip" style="background: white; border: 1px solid var(--color-gray); width: 100%;">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" style="color: #2b579a; width:16px;height:16px;margin-right:4px;"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                                    <strong>Redlined_MSA.docx</strong>
+                                </div>
+                                <div class="doc-preview">
+                                    <p style="text-align: center; font-weight: bold; margin-bottom: 1rem;">MASTER SERVICES AGREEMENT</p>
+                                    <p>...indemnify Customer against any <span style="background: #ffcccc; text-decoration: line-through;">and all</span> claims arising from...</p>
+                                    <p style="color: var(--color-scarlet); font-style: italic; font-size: 0.8em;">[Comment: Limited to direct damages only per instruction.]</p>
+                                </div>
+                            </div>
+
+                            <div style="flex: 1;">
+                                <div class="attachment-chip" style="background: white; border: 1px solid var(--color-gray); width: 100%;">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" style="color: #d40000; width:16px;height:16px;margin-right:4px;"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                                    <strong>Checklist.pdf</strong>
+                                </div>
+                                <div class="checklist-preview">
+                                    <div class="checklist-item">
+                                        <div class="check-box">✓</div>
+                                        <div>Jurisdiction changed to NY</div>
+                                    </div>
+                                    <div class="checklist-item">
+                                        <div class="check-box" style="border-color: #f59e0b; color: #f59e0b;">!</div>
+                                        <div><strong>Risk:</strong> IP Assignment is mutual</div>
+                                    </div>
+                                    <div class="checklist-item">
+                                        <div class="check-box">✓</div>
+                                        <div>Indemnity capped at fees</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section class="features-section">
+        <div class="container">
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <div class="icon-box">
+                        <svg viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+                    </div>
+                    <h3>Two Attachments</h3>
+                    <p>Always a DOCX for the work and a PDF checklist for the workflow. No context switching.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="icon-box">
+                        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+                    </div>
+                    <h3>Clarifying Questions</h3>
+                    <p>Cicero asks before it acts. If your instructions are vague, it asks the specific questions a junior associate would.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="icon-box">
+                        <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                    </div>
+                    <h3>Privileged & Secure</h3>
+                    <p>Built for legal professionals. Data is encrypted and treated with attorney-client privilege standards.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="manifesto-section">
+        <div class="container">
+            <p class="manifesto-text">
+                You don't need another dashboard.<br>
+                You don't need to learn another tool.<br>
+                <span class="highlight">You need to forward an email.</span>
+            </p>
+            <a href="mailto:assistant@cicero.im" class="btn btn-primary" style="padding: 1.5rem 3rem; font-size: 1.25rem;">
+                assistant@cicero.im
+            </a>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p style="margin-bottom: 1rem; opacity: 0.6;">&copy; 2024 Cicero Legal Intelligence</p>
+            <p style="font-size: 1.5rem;">
+                <a href="mailto:assistant@cicero.im">assistant@cicero.im</a>
+            </p>
+        </div>
+    </footer>
+
+</body>
+</html>
