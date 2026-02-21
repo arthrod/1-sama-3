@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cicero — Email-Based Legal Assistant</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=DM+Sans:wght@400;500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        /* Reset & Base */
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background-color: #f5f4f0; /* Warm White */
+            color: #1a1818; /* Ink */
+            line-height: 1.5;
+            -webkit-font-smoothing: antialiased;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 600;
+            line-height: 1.1;
+        }
+        a { text-decoration: none; color: inherit; }
+
+        /* Typography */
+        .font-mono { font-family: 'JetBrains Mono', monospace; }
+        .text-scarlet { color: #9d0208; }
+        .bg-scarlet { background-color: #9d0208; }
+        .text-ink { color: #1a1818; }
+        .bg-ink { background-color: #1a1818; }
+        .bg-white { background-color: #ffffff; }
+        .border-gray { border: 1px solid #e5e4e0; }
+
+        /* Layout Utilities */
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
+        .flex { display: flex; }
+        .flex-col { flex-direction: column; }
+        .items-center { align-items: center; }
+        .justify-center { justify-content: center; }
+        .justify-between { justify-content: space-between; }
+        .gap-4 { gap: 1rem; }
+        .gap-8 { gap: 2rem; }
+        .gap-12 { gap: 3rem; }
+        .grid { display: grid; }
+        .grid-cols-1 { grid-template-columns: 1fr; }
+        .grid-cols-2 { grid-template-columns: 1fr; }
+        .grid-cols-3 { grid-template-columns: 1fr; }
+        @media (min-width: 768px) {
+            .md\:grid-cols-2 { grid-template-columns: 1fr 1fr; }
+            .md\:grid-cols-3 { grid-template-columns: 1fr 1fr 1fr; }
+            .md\:flex-row { flex-direction: row; }
+            .md\:text-left { text-align: left; }
+        }
+
+        /* Components */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            padding: 1rem 2rem;
+            background-color: #1a1818;
+            color: #ffffff;
+            font-family: 'DM Sans', sans-serif;
+            font-weight: 500;
+            border-radius: 2px;
+            transition: opacity 0.2s;
+        }
+        .btn:hover { opacity: 0.9; }
+        .btn-scarlet { background-color: #9d0208; }
+
+        .email-pill {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.75rem 1.5rem;
+            background-color: #ffffff;
+            border: 1px solid #e5e4e0;
+            border-radius: 2px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.1rem;
+            color: #1a1818;
+            transition: border-color 0.2s;
+        }
+        .email-pill:hover { border-color: #9d0208; color: #9d0208; }
+
+        .card {
+            background: #ffffff;
+            padding: 2rem;
+            border: 1px solid #e5e4e0;
+            border-radius: 2px;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 8rem 0 6rem;
+            text-align: center;
+        }
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
+            letter-spacing: -0.02em;
+        }
+        .hero p {
+            font-size: 1.5rem;
+            color: #555;
+            max-width: 600px;
+            margin: 0 auto 3rem;
+        }
+
+        /* Workflow Section */
+        .workflow { padding: 6rem 0; background-color: #ffffff; }
+        .step-number {
+            font-family: 'JetBrains Mono', monospace;
+            color: #9d0208;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+        .step-title { font-size: 1.5rem; margin-bottom: 1rem; }
+        .step-desc { color: #666; font-size: 1.1rem; }
+
+        /* Email Thread Visual */
+        .email-thread {
+            max-width: 800px;
+            margin: 4rem auto;
+            border: 1px solid #e5e4e0;
+            background: #ffffff;
+            border-radius: 2px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+        }
+        .email-message { padding: 2rem; border-bottom: 1px solid #f5f4f0; }
+        .email-message:last-child { border-bottom: none; }
+        .email-header { display: flex; justify-content: space-between; margin-bottom: 1rem; font-size: 0.9rem; color: #888; }
+        .email-sender { font-weight: 700; color: #1a1818; }
+        .email-body { font-family: 'DM Sans', sans-serif; white-space: pre-wrap; line-height: 1.6; }
+        .cicero-reply { background-color: #fdfdfc; border-left: 4px solid #9d0208; }
+
+        /* Deliverables Section */
+        .deliverables { padding: 6rem 0; background-color: #1a1818; color: #f5f4f0; }
+        .deliverables h2 { font-size: 3rem; margin-bottom: 1rem; color: #ffffff; }
+        .doc-icon {
+            width: 60px; height: 80px;
+            background: #ffffff;
+            border-radius: 2px;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            color: #1a1818;
+            font-family: 'JetBrains Mono', monospace;
+        }
+        .doc-icon::before {
+            content: ''; position: absolute; top: 0; right: 0;
+            border-width: 0 16px 16px 0;
+            border-style: solid;
+            border-color: #e5e4e0 #ffffff;
+            box-shadow: -1px 1px 2px rgba(0,0,0,0.1);
+        }
+        .doc-preview {
+            background: #ffffff;
+            color: #1a1818;
+            padding: 2rem;
+            border-radius: 2px;
+            height: 100%;
+            font-size: 0.8rem;
+            position: relative;
+            opacity: 0.95;
+        }
+        .doc-preview h4 { font-family: 'Times New Roman', serif; font-size: 1.2rem; text-align: center; margin-bottom: 1.5rem; text-transform: uppercase; }
+        .doc-lines { display: flex; flex-direction: column; gap: 0.5rem; }
+        .line { height: 6px; background: #e5e4e0; width: 100%; }
+        .line.short { width: 60%; }
+        .checklist-item { display: flex; gap: 0.5rem; align-items: center; margin-bottom: 0.5rem; }
+        .checkbox { width: 14px; height: 14px; border: 1px solid #1a1818; }
+
+        /* Use Cases */
+        .use-cases { padding: 6rem 0; background-color: #f5f4f0; }
+        .use-case-card {
+            background: #ffffff;
+            padding: 2rem;
+            border: 1px solid #e5e4e0;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .quote {
+            font-family: 'DM Sans', sans-serif;
+            font-style: italic;
+            color: #666;
+            margin-bottom: 1.5rem;
+            position: relative;
+            padding-left: 1rem;
+            border-left: 2px solid #9d0208;
+        }
+        .result-pill {
+            display: inline-block;
+            font-size: 0.8rem;
+            font-family: 'JetBrains Mono', monospace;
+            padding: 0.25rem 0.5rem;
+            background: #f5f4f0;
+            color: #1a1818;
+            border-radius: 2px;
+        }
+
+        /* CTA Section */
+        .cta-section { padding: 8rem 0; text-align: center; background: #ffffff; }
+        .cta-section h2 { font-size: 3.5rem; margin-bottom: 2rem; }
+
+        /* Utility */
+        .red-text { color: #9d0208; }
+        .mono-sm { font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header class="container" style="padding-top: 2rem; padding-bottom: 2rem;">
+        <div class="flex justify-between items-center">
+            <div style="font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; font-weight: 700; letter-spacing: -0.01em;">Cicero</div>
+            <a href="mailto:assistant@cicero.im" class="font-mono" style="font-size: 0.9rem; border-bottom: 1px solid #1a1818;">assistant@cicero.im</a>
+        </div>
+    </header>
+
+    <!-- Hero -->
+    <section class="hero container">
+        <h1>Send it messy.<br>Get it back perfect.</h1>
+        <p>The first AI legal assistant that works entirely over email. No dashboards, no logins, no friction.</p>
+
+        <div style="display: flex; flex-direction: column; align-items: center; gap: 1rem;">
+            <a href="mailto:assistant@cicero.im?subject=First%20Request" class="email-pill">
+                <span style="margin-right: 0.5rem;">✉️</span> assistant@cicero.im
+            </a>
+            <span class="mono-sm" style="color: #888;">Click to copy or email directly</span>
+        </div>
+    </section>
+
+    <!-- The Workflow / Story -->
+    <section class="workflow">
+        <div class="container">
+            <div class="grid md:grid-cols-3 gap-8 mb-12">
+                <div>
+                    <span class="step-number">01. SEND</span>
+                    <h3 class="step-title">Forward the mess</h3>
+                    <p class="step-desc">Forward a chaotic thread, a 50-page PDF, or a half-written thought. "Flag risks in this," "Draft a response," or "Fix this formatting."</p>
+                </div>
+                <div>
+                    <span class="step-number">02. CLARIFY</span>
+                    <h3 class="step-title">Answer one question</h3>
+                    <p class="step-desc">Cicero reads everything. If something is ambiguous, it emails you back with specific, pointed questions—just like a senior associate would.</p>
+                </div>
+                <div>
+                    <span class="step-number">03. RECEIVE</span>
+                    <h3 class="step-title">Get the package</h3>
+                    <p class="step-desc">Receive a perfect DOCX ready for Word, and a PDF checklist of findings. No login required. It's just in your inbox.</p>
+                </div>
+            </div>
+
+            <!-- Visual Proof: The Clarification Loop -->
+            <div class="email-thread">
+                <!-- Step 1: Lawyer -->
+                <div class="email-message">
+                    <div class="email-header">
+                        <span class="email-sender">You</span>
+                        <span>Yesterday, 4:12 PM</span>
+                    </div>
+                    <div class="email-body">hey can you look at the attached MSA? partner sent it over, said it's standard but I don't trust the indemnity section. need a redline by tmrw morning. thx</div>
+                    <div style="margin-top: 1rem; padding: 0.5rem; background: #f5f4f0; border: 1px solid #e5e4e0; display: inline-flex; align-items: center; gap: 0.5rem; font-size: 0.9rem;">
+                        <span>📎</span> Draft_MSA_v3.pdf (4.2 MB)
+                    </div>
+                </div>
+
+                <!-- Step 2: Cicero Clarification -->
+                <div class="email-message cicero-reply">
+                    <div class="email-header">
+                        <span class="email-sender text-scarlet">Cicero Assistant</span>
+                        <span>Yesterday, 4:15 PM</span>
+                    </div>
+                    <div class="email-body">I've reviewed the MSA. Regarding the indemnity in Section 9:
+
+Do you want to push for a mutual indemnification cap, or strike the consequential damages waiver entirely? The current draft is uncapped for IP claims.
+
+Reply "Cap" or "Strike".</div>
+                </div>
+
+                <!-- Step 3: Lawyer Reply -->
+                <div class="email-message">
+                    <div class="email-header">
+                        <span class="email-sender">You</span>
+                        <span>Yesterday, 4:18 PM</span>
+                    </div>
+                    <div class="email-body">strike it. we have leverage here.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- The Deliverables -->
+    <section class="deliverables">
+        <div class="container">
+            <div class="flex flex-col md:flex-row items-center justify-between gap-12">
+                <div style="flex: 1;">
+                    <span class="font-mono text-scarlet mb-4 display-block">THE OUTPUT</span>
+                    <h2>Two attachments.<br>Everything you need.</h2>
+                    <p style="color: #aaa; font-size: 1.2rem; margin-bottom: 2rem;">Cicero always replies with the same structured package. The work product for you to use, and the checklist for you to manage.</p>
+
+                    <div class="flex flex-col gap-4">
+                        <div class="flex items-center gap-4">
+                            <div class="doc-icon" style="background: #1a1818; color: white; border: 1px solid #e5e4e0;">W</div>
+                            <div>
+                                <h4 class="font-bold text-white">Clean DOCX</h4>
+                                <p style="color: #888; font-size: 0.9rem;">Perfectly formatted, tracked changes, ready to edit.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-4">
+                            <div class="doc-icon" style="background: #9d0208; color: white;">PDF</div>
+                            <div>
+                                <h4 class="font-bold text-white">Action Checklist</h4>
+                                <p style="color: #888; font-size: 0.9rem;">Summary of risks, open items, and next steps.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Visual of the files -->
+                <div style="flex: 1; display: flex; gap: 1rem; position: relative;">
+                    <!-- DOCX Preview -->
+                    <div class="doc-preview" style="width: 55%; transform: rotate(-2deg); box-shadow: 0 10px 30px rgba(0,0,0,0.5);">
+                        <h4>Master Services Agreement</h4>
+                        <div class="doc-lines">
+                            <p style="font-size: 0.7rem; line-height: 1.4; margin-bottom: 1rem;">
+                                This Master Services Agreement ("Agreement") is entered into as of [Date] by and between <strong>Cicero Legal AI</strong> ("Provider") and...
+                            </p>
+                            <div style="background: #ffeb3b40; border: 1px dashed #9d0208; padding: 0.25rem;">
+                                <span style="font-size: 0.6rem; color: #9d0208; display: block; font-weight: 700;">[Cicero Comment]</span>
+                                <span style="font-size: 0.6rem;">Indemnification cap inserted per instruction.</span>
+                            </div>
+                            <div class="line"></div>
+                            <div class="line"></div>
+                            <div class="line short"></div>
+                        </div>
+                    </div>
+
+                    <!-- PDF Preview -->
+                    <div class="doc-preview" style="width: 50%; position: absolute; right: 0; top: 2rem; transform: rotate(2deg); box-shadow: 0 10px 30px rgba(0,0,0,0.5); border-top: 4px solid #9d0208;">
+                        <h4 style="text-align: left; font-family: 'DM Sans', sans-serif; font-size: 1rem; margin-bottom: 1rem;">Risk Summary</h4>
+
+                        <div class="checklist-item">
+                            <div class="checkbox" style="background: #1a1818;"></div>
+                            <span style="font-size: 0.75rem; text-decoration: line-through; color: #888;">Review Indemnity Cap</span>
+                        </div>
+                        <div class="checklist-item">
+                            <div class="checkbox"></div>
+                            <span style="font-size: 0.75rem;">Confirm Governing Law (DE)</span>
+                        </div>
+                        <div class="checklist-item">
+                            <div class="checkbox"></div>
+                            <span style="font-size: 0.75rem;">Check Payment Terms (Net 30)</span>
+                        </div>
+
+                        <div style="margin-top: 1rem; border-top: 1px solid #e5e4e0; padding-top: 0.5rem;">
+                            <span class="mono-sm text-scarlet">HIGH RISK:</span>
+                            <p style="font-size: 0.7rem; margin-top: 0.25rem;">Section 4.2 contains an exclusivity clause that may conflict with existing vendor agreements.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Use Cases Grid -->
+    <section class="use-cases">
+        <div class="container">
+            <h2 style="text-align: center; margin-bottom: 3rem; font-size: 2.5rem;">One email address.<br>Infinite workflows.</h2>
+
+            <div class="grid md:grid-cols-2 gap-4">
+                <!-- Case 1 -->
+                <div class="use-case-card">
+                    <div>
+                        <div class="quote">"FYI see the attached MSA, can you flag anything bad in the liability section?"</div>
+                    </div>
+                    <div class="flex items-center gap-2 mt-4">
+                        <span class="result-pill">47-page review</span>
+                        <span class="result-pill text-scarlet">12 Risks Flagged</span>
+                    </div>
+                </div>
+
+                <!-- Case 2 -->
+                <div class="use-case-card">
+                    <div>
+                        <div class="quote">"Someone copied our landing page. Here's their URL and ours. Do something."</div>
+                    </div>
+                    <div class="flex items-center gap-2 mt-4">
+                        <span class="result-pill">DMCA Takedown (DOCX)</span>
+                        <span class="result-pill">Similarity Score 94.2%</span>
+                    </div>
+                </div>
+
+                <!-- Case 3 -->
+                <div class="use-case-card">
+                    <div>
+                        <div class="quote">"Draft a response to this cease & desist, our position is fair use because X, Y, Z."</div>
+                    </div>
+                    <div class="flex items-center gap-2 mt-4">
+                        <span class="result-pill">Response Letter (DOCX)</span>
+                        <span class="result-pill">Evidence Checklist (PDF)</span>
+                    </div>
+                </div>
+
+                <!-- Case 4 -->
+                <div class="use-case-card">
+                    <div>
+                        <div class="quote">"What are the force majeure implications for our supply contracts if the port closes?"</div>
+                    </div>
+                    <div class="flex items-center gap-2 mt-4">
+                        <span class="result-pill">Research Memo (DOCX)</span>
+                        <span class="result-pill">Action Items by Vendor</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Final CTA -->
+    <section class="cta-section">
+        <div class="container">
+            <h2 class="text-ink">Your new associate is ready.</h2>
+            <div style="display: flex; flex-direction: column; align-items: center; gap: 1.5rem;">
+                <a href="mailto:assistant@cicero.im" class="email-pill" style="font-size: 1.5rem; padding: 1.5rem 3rem; background: #1a1818; color: #ffffff; border: none;">
+                    assistant@cicero.im
+                </a>
+                <p style="color: #666; max-width: 500px;">
+                    No credit card required for the first 3 requests.<br>
+                    Just email us. We'll handle the rest.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer style="background: #1a1818; color: #666; padding: 2rem 0; font-size: 0.9rem;">
+        <div class="container flex justify-between items-center">
+            <span>&copy; 2024 Cicero Legal AI</span>
+            <div class="flex gap-4">
+                <a href="#" class="hover:text-white">Privacy</a>
+                <a href="#" class="hover:text-white">Terms</a>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
