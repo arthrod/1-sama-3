@@ -2,7 +2,7 @@
 	"$schema": "./node_modules/wrangler/config-schema.json",
 	"main": "./worker.ts",
 	"name": "samarias",
-	"compatibility_date": "2024-03-25",
+	"compatibility_date": "2025-03-25",
 	"compatibility_flags": ["nodejs_compat"],
 
 	"assets": {
@@ -64,9 +64,6 @@
 				"NEXT_PUBLIC_KEYSTATIC_STORAGE_REPO": "arthrod/1-sama-3",
 				"KEYSTATIC_PATH_PREFIX": "",
 				"NEXT_PUBLIC_KEYSTATIC_CONTENT_PATH": "./src/content"
-			},
-			"observability": {
-				"enabled": false
 			}
 		}
 	}
