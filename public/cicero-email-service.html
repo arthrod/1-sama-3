@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cicero - The Email-Based Legal Assistant</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=DM+Sans:wght@400;500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --color-scarlet: #9d0208;
+            --color-ink: #1a1818;
+            --color-warm-white: #f5f4f0;
+            --color-white: #ffffff;
+            --color-gray: #e5e4e0;
+            --color-gray-dark: #888888;
+
+            --font-display: 'Cormorant Garamond', serif;
+            --font-body: 'DM Sans', sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--color-warm-white);
+            color: var(--color-ink);
+            font-family: var(--font-body);
+            line-height: 1.5;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        h1, h2, h3 {
+            font-family: var(--font-display);
+            font-weight: 600;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Hero */
+        .hero {
+            padding: 8rem 0 6rem;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 4.5rem;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            color: var(--color-ink);
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            max-width: 600px;
+            margin: 0 auto 3rem;
+            color: var(--color-ink);
+            opacity: 0.8;
+        }
+
+        .cta-box {
+            background-color: var(--color-white);
+            border: 1px solid var(--color-ink);
+            display: inline-flex;
+            align-items: center;
+            padding: 1rem 2rem;
+            gap: 1rem;
+            border-radius: 2px;
+            box-shadow: 4px 4px 0 var(--color-ink);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .cta-box:hover {
+            transform: translate(-2px, -2px);
+            box-shadow: 6px 6px 0 var(--color-scarlet);
+        }
+
+        .email-address {
+            font-family: var(--font-mono);
+            font-size: 1.25rem;
+            color: var(--color-scarlet);
+            font-weight: 500;
+        }
+
+        .cta-label {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--color-gray-dark);
+            border-right: 1px solid var(--color-gray);
+            padding-right: 1rem;
+        }
+
+        /* Value Prop Grid */
+        .value-props {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin: 4rem 0;
+            border-top: 1px solid var(--color-gray);
+            border-bottom: 1px solid var(--color-gray);
+            padding: 4rem 0;
+        }
+
+        .prop-item h3 {
+            font-size: 1.75rem;
+            margin-bottom: 1rem;
+            color: var(--color-scarlet);
+        }
+
+        /* The Comparison */
+        .comparison-section {
+            background-color: var(--color-ink);
+            color: var(--color-warm-white);
+            padding: 6rem 0;
+            overflow: hidden;
+        }
+
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: 1fr 80px 1fr;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .email-card {
+            background-color: var(--color-white);
+            color: var(--color-ink);
+            padding: 2rem;
+            border-radius: 2px;
+            font-family: var(--font-body);
+            position: relative;
+        }
+
+        .email-meta {
+            border-bottom: 1px solid var(--color-gray);
+            padding-bottom: 1rem;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+            color: var(--color-gray-dark);
+        }
+
+        .email-body {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .messy-text {
+            font-family: 'Arial', sans-serif; /* Simulate default email font */
+        }
+
+        .arrow-divider {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+        }
+
+        .arrow-divider svg {
+            width: 40px;
+            height: 40px;
+            fill: var(--color-warm-white);
+            opacity: 0.5;
+        }
+
+        .deliverable-card {
+            background-color: var(--color-warm-white); /* Slightly off-white for document feel */
+            color: var(--color-ink);
+            padding: 2.5rem;
+            border-radius: 2px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            position: relative;
+        }
+
+        .deliverable-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background-color: var(--color-scarlet);
+        }
+
+        .doc-header {
+            text-align: center;
+            margin-bottom: 2rem;
+            border-bottom: 1px solid var(--color-gray);
+            padding-bottom: 1rem;
+        }
+
+        .doc-title {
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .doc-body {
+            font-size: 0.8rem;
+            color: var(--color-ink);
+            opacity: 0.8;
+            column-count: 2;
+            column-gap: 2rem;
+        }
+
+        .attachments-badge {
+            position: absolute;
+            bottom: -20px;
+            right: 20px;
+            background-color: var(--color-scarlet);
+            color: var(--color-white);
+            padding: 0.75rem 1.5rem;
+            font-family: var(--font-mono);
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+
+        /* Workflow Steps */
+        .workflow {
+            padding: 6rem 0;
+        }
+
+        .workflow-title {
+            text-align: center;
+            font-size: 3rem;
+            margin-bottom: 4rem;
+        }
+
+        .steps {
+            display: flex;
+            justify-content: space-between;
+            position: relative;
+        }
+
+        .steps::before {
+            content: '';
+            position: absolute;
+            top: 24px;
+            left: 50px;
+            right: 50px;
+            height: 2px;
+            background-color: var(--color-gray);
+            z-index: 0;
+        }
+
+        .step {
+            position: relative;
+            z-index: 1;
+            background-color: var(--color-warm-white);
+            width: 30%;
+            text-align: center;
+            padding: 0 1rem;
+        }
+
+        .step-number {
+            width: 50px;
+            height: 50px;
+            background-color: var(--color-ink);
+            color: var(--color-white);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--font-mono);
+            font-size: 1.25rem;
+            margin: 0 auto 1.5rem;
+            border: 4px solid var(--color-warm-white);
+        }
+
+        .step h4 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            font-family: var(--font-display);
+        }
+
+        /* Footer */
+        .footer {
+            background-color: var(--color-white);
+            padding: 6rem 0;
+            text-align: center;
+            border-top: 1px solid var(--color-gray);
+        }
+
+        .footer-cta {
+            font-size: 2.5rem;
+            font-family: var(--font-display);
+            margin-bottom: 2rem;
+        }
+
+        .manifesto {
+            max-width: 800px;
+            margin: 0 auto 4rem;
+            font-size: 1.25rem;
+            line-height: 1.6;
+        }
+
+        .trust-signal {
+            display: inline-block;
+            margin-top: 1rem;
+            font-size: 0.9rem;
+            color: var(--color-gray-dark);
+            font-family: var(--font-mono);
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="container hero">
+        <h1>Your legal department<br>is now an email address.</h1>
+        <p>No portals. No logins. No "submit a ticket."<br>Just forward the mess. Get back the work.</p>
+
+        <a href="mailto:assistant@cicero.im" class="cta-box">
+            <span class="cta-label">Start now</span>
+            <span class="email-address">assistant@cicero.im</span>
+        </a>
+        <br>
+        <span class="trust-signal">Responds in minutes. 24/7.</span>
+    </div>
+
+    <div class="comparison-section">
+        <div class="container">
+            <div class="comparison-grid">
+                <!-- The Messy Email -->
+                <div class="email-card">
+                    <div class="email-meta">
+                        <strong>From:</strong> J. Miller (General Counsel)<br>
+                        <strong>To:</strong> assistant@cicero.im<br>
+                        <strong>Subject:</strong> Fwd: MSA from Acme Corp - URGENT
+                    </div>
+                    <div class="email-body messy-text">
+                        Hey,<br><br>
+                        Can you take a look at the attached MSA? Ideally I need a redline by tomorrow morning. <br><br>
+                        Their indemnity clause looks super aggressive and I think the jurisdiction is wrong (should be NY not DE).<br><br>
+                        Flag anything else that looks weird. Thx.
+                    </div>
+                    <div style="background: #f0f0f0; padding: 10px; font-size: 0.8rem; display: flex; align-items: center; gap: 10px;">
+                        <span style="font-size: 1.5rem;">📄</span> Acme_MSA_v3.docx (4.2 MB)
+                    </div>
+                </div>
+
+                <!-- Arrow -->
+                <div class="arrow-divider">
+                    <svg viewBox="0 0 24 24"><path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/></svg>
+                </div>
+
+                <!-- The Deliverable -->
+                <div class="deliverable-card">
+                    <div class="doc-header">
+                        <div class="doc-title">Memorandum of Analysis</div>
+                        <div style="font-family: var(--font-mono); font-size: 0.7rem; color: var(--color-gray-dark); margin-top: 0.5rem;">REF: ACME CORP MSA REVIEW</div>
+                    </div>
+                    <div class="doc-body">
+                        <p><strong>1. Executive Summary</strong></p>
+                        <p>We have reviewed the Master Services Agreement proposed by Acme Corp. The draft contains significant deviations from market standard, particularly regarding indemnification and limitation of liability.</p>
+                        <br>
+                        <p><strong>2. Key Risk Factors</strong></p>
+                        <p><strong>2.1 Indemnification (Section 12)</strong><br>The current language creates uncapped liability for indirect damages. We have redlined this to exclude consequential damages and cap liability at 12 months' fees.</p>
+                        <p><strong>2.2 Jurisdiction (Section 22)</strong><br>Changed from Delaware to New York as requested.</p>
+                    </div>
+
+                    <div class="attachments-badge">
+                        <span>📎 2 Attachments</span>
+                    </div>
+                </div>
+            </div>
+
+            <div style="text-align: center; margin-top: 4rem; opacity: 0.8;">
+                <p style="font-family: var(--font-mono); color: var(--color-gray);">
+                    <span style="color: var(--color-scarlet);">Step 2: Clarification</span> &mdash; "Cicero: Did you want us to push back on the non-solicit too? It's 24 months." &mdash; "Lawyer: Yes, kill it."
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="value-props">
+            <div class="prop-item">
+                <h3>Send it messy</h3>
+                <p>Forward forwarded threads. Attach half-finished drafts. Write three words of instruction. We parse the context, identify the task, and figure out what needs to be done. You don't work for the AI; it works for you.</p>
+            </div>
+            <div class="prop-item">
+                <h3>Clarification is Proof</h3>
+                <p>If something is ambiguous, Cicero doesn't guess. It emails you back with specific, pointed questions—just like a senior associate would. This feedback loop is why you can trust the output.</p>
+            </div>
+            <div class="prop-item">
+                <h3>Two Attachments</h3>
+                <p>Every delivery comes with two files: a clean <strong>DOCX</strong> (the work product, ready to sign or edit) and a <strong>PDF Checklist</strong> (risks, open items, and next steps). The work, and the workflow.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="container workflow">
+        <h2 class="workflow-title">The Workflow</h2>
+        <div class="steps">
+            <div class="step">
+                <div class="step-number">1</div>
+                <h4>Email</h4>
+                <p>Send a request to assistant@cicero.im. Use natural language. Attach whatever files you have.</p>
+            </div>
+            <div class="step">
+                <div class="step-number">2</div>
+                <h4>Review</h4>
+                <p>Cicero analyzes the documents, checks against your playbook, and asks clarifying questions if needed.</p>
+            </div>
+            <div class="step">
+                <div class="step-number">3</div>
+                <h4>Done</h4>
+                <p>Receive the completed documents and a summary report in your inbox. Usually in minutes.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <div class="container">
+            <div class="manifesto">
+                <p><strong>Stop logging into dashboards.</strong><br>
+                Legal work happens in email and Word. That's where we built Cicero.<br>
+                It's the most advanced legal AI in the world, disguised as a contact in your address book.</p>
+            </div>
+
+            <h2 class="footer-cta">Ready to delegate?</h2>
+
+            <a href="mailto:assistant@cicero.im" class="cta-box">
+                <span class="cta-label">Open Mail Client</span>
+                <span class="email-address">assistant@cicero.im</span>
+            </a>
+
+            <div style="margin-top: 4rem; color: var(--color-gray-dark); font-size: 0.9rem;">
+                &copy; 2025 Cicero Legal Intelligence.
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

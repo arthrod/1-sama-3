@@ -1,0 +1,21 @@
+# Cicero Email Service Design Notes
+
+## Design Option Selected
+**Option G: The Standalone Email Service Page**
+This option was chosen because it allows for a comprehensive narrative that walks the user through the entire mental model of the product: from the pain of the current state (messy requests) to the solution (email workflow) to the value (perfect deliverables).
+
+## Primary Selling Angles
+1.  **"Send it messy, get it back perfect"**: The core visual comparison (Before/After) demonstrates that the user doesn't need to structure their request. The burden of structure is shifted from the lawyer to Cicero.
+2.  **"No portals. No logins."**: The manifesto section attacks the fatigue of modern SaaS tools. By positioning "email" as the interface, we turn a constraint into a feature (zero friction).
+3.  **"Clarification is Proof"**: We explicitly mention the clarification step to address the fear of "hallucinating AI". It builds trust by showing the system behaves like a junior associate.
+
+## Emphasis on `assistant@cicero.im`
+The email address is treated as the product itself, not just a contact method.
+-   **Typography**: Set in `JetBrains Mono` to distinguish it as "system/code" vs the "human" serif/sans-serif text.
+-   **Color**: It is the primary application of the brand color Scarlet (`#9d0208`) in text.
+-   **Placement**: It appears in the Hero (the "Start now" button) and the Footer ("Open Mail Client").
+-   **UI Pattern**: It is wrapped in a distinctive "CTA Box" with a shadow that reacts to hover, making it feel like a clickable button even though it's a `mailto` link.
+
+## Visual Choices
+-   **Comparison Section**: Uses a dark background (`Ink`) to create a distinct visual break and focus attention on the "Before" (White card) and "After" (Warm White card) transformation.
+-   **Deliverable Motif**: The "After" card explicitly shows "2 Attachments" and a preview of a structured legal memo, reinforcing the "Work + Workflow" concept.
