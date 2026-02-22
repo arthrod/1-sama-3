@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cicero - Email Service</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=DM+Sans:wght@400;500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --scarlet: #9d0208;
+            --ink: #1a1818;
+            --warm-white: #f5f4f0;
+            --white: #ffffff;
+            --gray: #e5e4e0;
+            --gray-dark: #888888;
+
+            --font-heading: 'Cormorant Garamond', serif;
+            --font-body: 'DM Sans', sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: var(--font-body);
+            color: var(--ink);
+            background-color: var(--warm-white);
+            line-height: 1.5;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: var(--font-heading);
+            font-weight: 700;
+            line-height: 1.1;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Utility */
+        .text-scarlet { color: var(--scarlet); }
+        .bg-scarlet { background-color: var(--scarlet); }
+        .bg-white { background-color: var(--white); }
+        .bg-ink { background-color: var(--ink); color: var(--white); }
+        .border-gray { border: 1px solid var(--gray); }
+
+        .mono { font-family: var(--font-mono); }
+        .sharp { border-radius: 2px; }
+
+        .btn {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background-color: var(--scarlet);
+            color: var(--white);
+            font-family: var(--font-body);
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            font-size: 0.875rem;
+            border: none;
+            cursor: pointer;
+            transition: opacity 0.2s;
+            border-radius: 2px;
+        }
+
+        .btn:hover { opacity: 0.9; }
+
+        .btn-outline {
+            background-color: transparent;
+            border: 1px solid var(--ink);
+            color: var(--ink);
+        }
+
+        /* Hero */
+        .hero {
+            padding: 8rem 0 6rem;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 4.5rem;
+            margin-bottom: 1.5rem;
+            letter-spacing: -0.02em;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            max-width: 600px;
+            margin: 0 auto 3rem;
+            color: var(--gray-dark);
+        }
+
+        .email-cta {
+            font-family: var(--font-mono);
+            font-size: 1.5rem;
+            color: var(--ink);
+            background-color: var(--white);
+            padding: 1rem 2rem;
+            border: 1px solid var(--gray);
+            display: inline-flex;
+            align-items: center;
+            gap: 1rem;
+            transition: all 0.2s;
+            border-radius: 2px;
+        }
+
+        .email-cta:hover {
+            border-color: var(--scarlet);
+            color: var(--scarlet);
+        }
+
+        .email-icon {
+            width: 24px;
+            height: 24px;
+            fill: currentColor;
+        }
+
+        /* Before/After Section */
+        .comparison {
+            padding: 6rem 0;
+            background-color: var(--white);
+        }
+
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .email-card {
+            background: var(--white);
+            border: 1px solid var(--gray);
+            padding: 2rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            position: relative;
+        }
+
+        .email-header {
+            border-bottom: 1px solid var(--gray);
+            padding-bottom: 1rem;
+            margin-bottom: 1.5rem;
+            font-size: 0.875rem;
+            color: var(--gray-dark);
+        }
+
+        .email-header div {
+            margin-bottom: 0.25rem;
+        }
+
+        .email-body {
+            font-family: var(--font-body);
+            font-size: 1rem;
+            color: var(--ink);
+            line-height: 1.6;
+        }
+
+        .attachment-chip {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 0.75rem;
+            background: var(--gray);
+            border-radius: 2px;
+            font-size: 0.75rem;
+            margin-top: 1rem;
+            font-family: var(--font-mono);
+        }
+
+        .arrow-divider {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+            color: var(--scarlet);
+        }
+
+        .clarification-bubble {
+            background-color: var(--f5f4f0);
+            border: 1px solid var(--gray);
+            padding: 1rem;
+            border-radius: 2px;
+            font-size: 0.875rem;
+            max-width: 250px;
+            text-align: center;
+            position: relative;
+        }
+
+        .clarification-bubble::before {
+            content: '';
+            position: absolute;
+            top: -6px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-left: 6px solid transparent;
+            border-right: 6px solid transparent;
+            border-bottom: 6px solid var(--gray);
+        }
+
+        .deliverable-card {
+            background: var(--white);
+            border: 1px solid var(--gray);
+            padding: 2rem;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+
+        .doc-preview {
+            border: 1px solid var(--gray);
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            background: #fff;
+            position: relative;
+        }
+
+        .doc-preview::after {
+            content: 'DOCX';
+            position: absolute;
+            top: 0;
+            right: 0;
+            background: #2b579a;
+            color: white;
+            font-size: 0.6rem;
+            padding: 2px 4px;
+            font-family: var(--font-mono);
+        }
+
+        .pdf-preview {
+            border: 1px solid var(--gray);
+            padding: 1.5rem;
+            background: #fff;
+            position: relative;
+        }
+
+        .pdf-preview::after {
+            content: 'PDF';
+            position: absolute;
+            top: 0;
+            right: 0;
+            background: #b30b00;
+            color: white;
+            font-size: 0.6rem;
+            padding: 2px 4px;
+            font-family: var(--font-mono);
+        }
+
+        /* Features */
+        .features {
+            padding: 6rem 0;
+            background-color: var(--ink);
+            color: var(--white);
+        }
+
+        .features h2 {
+            font-size: 3rem;
+            margin-bottom: 4rem;
+            text-align: center;
+            color: var(--white);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 3rem;
+        }
+
+        .feature-item h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--warm-white);
+        }
+
+        .feature-item p {
+            color: var(--gray);
+            font-size: 1rem;
+        }
+
+        /* Timeline / Workflow */
+        .workflow {
+            padding: 6rem 0;
+        }
+
+        .workflow h2 {
+            font-size: 3rem;
+            margin-bottom: 4rem;
+            text-align: center;
+        }
+
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 2rem;
+            width: 1px;
+            background: var(--gray);
+        }
+
+        .timeline-item {
+            display: flex;
+            gap: 3rem;
+            margin-bottom: 4rem;
+            position: relative;
+        }
+
+        .timeline-marker {
+            width: 4rem;
+            height: 4rem;
+            background: var(--white);
+            border: 1px solid var(--gray);
+            border-radius: 50%; /* Circle for timeline nodes? Or sharp? Brand says max 2px. Let's make it a square or just text */
+            border-radius: 2px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--font-mono);
+            font-weight: 700;
+            z-index: 1;
+            flex-shrink: 0;
+        }
+
+        .timeline-content h3 {
+            font-size: 1.25rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-content p {
+            color: var(--gray-dark);
+            margin-bottom: 1rem;
+        }
+
+        .timeline-preview {
+            background: var(--white);
+            border: 1px solid var(--gray);
+            padding: 1.5rem;
+            font-size: 0.875rem;
+            font-family: var(--font-body);
+        }
+
+        /* CTA */
+        .cta-section {
+            padding: 8rem 0;
+            text-align: center;
+            background-color: var(--white);
+            border-top: 1px solid var(--gray);
+        }
+
+        .cta-section h2 {
+            font-size: 3.5rem;
+            margin-bottom: 2rem;
+        }
+
+        /* Footer */
+        footer {
+            padding: 2rem 0;
+            border-top: 1px solid var(--gray);
+            text-align: center;
+            font-size: 0.875rem;
+            color: var(--gray-dark);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 3rem; }
+            .comparison-grid { grid-template-columns: 1fr; }
+            .features-grid { grid-template-columns: 1fr; }
+            .timeline-item { flex-direction: column; gap: 1rem; }
+            .timeline::before { left: 1rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header style="padding: 2rem 0; display: flex; justify-content: space-between; align-items: center;">
+            <div style="font-family: var(--font-heading); font-weight: 700; font-size: 1.5rem;">CICERO</div>
+            <nav>
+                <a href="#" style="margin-left: 2rem; font-size: 0.875rem; font-weight: 500;">Pricing</a>
+                <a href="#" style="margin-left: 2rem; font-size: 0.875rem; font-weight: 500;">Login</a>
+            </nav>
+        </header>
+
+        <section class="hero">
+            <h1>Send it messy,<br>get it back perfect.</h1>
+            <p>The email-based legal assistant. Forward messy threads, vague instructions, and attachments. Get back professional, redlined documents and clear action checklists.</p>
+
+            <a href="mailto:assistant@cicero.im" class="email-cta">
+                <svg class="email-icon" viewBox="0 0 24 24">
+                    <path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+                </svg>
+                assistant@cicero.im
+            </a>
+            <div style="margin-top: 1rem; font-size: 0.875rem; color: var(--gray-dark);">
+                Click to start your first request
+            </div>
+        </section>
+    </div>
+
+    <section class="comparison">
+        <div class="container">
+            <div class="comparison-grid">
+
+                <!-- Left: Messy Input -->
+                <div>
+                    <div style="text-align: center; margin-bottom: 1rem; font-family: var(--font-mono); color: var(--gray-dark); text-transform: uppercase; font-size: 0.75rem; letter-spacing: 1px;">Input</div>
+                    <div class="email-card">
+                        <div class="email-header">
+                            <div style="font-weight: 700; color: var(--ink);">From: Sarah Jenkins (GC)</div>
+                            <div>To: assistant@cicero.im</div>
+                            <div>Subject: Fwd: MSA from vendor - URGENT</div>
+                        </div>
+                        <div class="email-body">
+                            <p>Hey, see attached. This vendor is pushing back on the indemnity clause and I think they snuck in some auto-renewal language. Can you check it?</p>
+                            <br>
+                            <p>Also, double check the jurisdiction, pretty sure we agreed on NY but this looks like DE.</p>
+                            <br>
+                            <p>Need a redline and a summary of risks by EOD. Thx.</p>
+
+                            <div class="attachment-chip">
+                                <span>📎 Vendor_MSA_v3_FINAL(2).docx</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Middle: Transformation -->
+                <div class="arrow-divider">
+                    <div class="clarification-bubble">
+                        <div style="font-weight: 700; margin-bottom: 0.25rem; font-size: 0.75rem; text-transform: uppercase;">Cicero Clarifies</div>
+                        "Do you want to preserve the business relationship or go aggressive on the indemnity?"
+                    </div>
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M5 12h14M12 5l7 7-7 7"/>
+                    </svg>
+                    <div class="clarification-bubble" style="background: white;">
+                        <div style="font-weight: 700; margin-bottom: 0.25rem; font-size: 0.75rem; text-transform: uppercase;">Sarah Replies</div>
+                        "Keep it friendly, we need them."
+                    </div>
+                </div>
+
+                <!-- Right: Perfect Output -->
+                <div>
+                    <div style="text-align: center; margin-bottom: 1rem; font-family: var(--font-mono); color: var(--gray-dark); text-transform: uppercase; font-size: 0.75rem; letter-spacing: 1px;">Output</div>
+                    <div class="deliverable-card">
+                        <div class="email-header">
+                            <div style="font-weight: 700; color: var(--ink);">From: Cicero Assistant</div>
+                            <div>To: Sarah Jenkins</div>
+                            <div>Subject: Re: MSA from vendor - Review Complete</div>
+                        </div>
+                        <div class="email-body">
+                            <p>Sarah,</p>
+                            <p>I've reviewed the MSA. I found the auto-renewal clause hidden in Section 14.3 and redlined it to require mutual written consent.</p>
+                            <p>I've also adjusted the indemnity to be mutual but capped, keeping the tone collaborative as requested.</p>
+
+                            <div style="margin-top: 1.5rem; display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                                <div class="doc-preview">
+                                    <div style="font-family: 'Times New Roman', serif; font-size: 0.6rem; line-height: 1.4; color: #333;">
+                                        <div style="text-align: center; font-weight: bold; margin-bottom: 0.5rem;">MASTER SERVICES AGREEMENT</div>
+                                        <p>...Agreement is made between...</p>
+                                        <p style="background: #ffe6e6; text-decoration: line-through;">14.3 Automatic Renewal.</p>
+                                        <p style="background: #e6ffe6;">14.3 Renewal upon mutual consent.</p>
+                                    </div>
+                                    <div style="font-size: 0.75rem; margin-top: 0.5rem; font-weight: 600;">MSA_Redline.docx</div>
+                                </div>
+                                <div class="pdf-preview">
+                                    <div style="font-family: sans-serif; font-size: 0.6rem; line-height: 1.4; color: #333;">
+                                        <div style="font-weight: bold; border-bottom: 1px solid #ccc; padding-bottom: 2px; margin-bottom: 4px;">ACTION ITEMS</div>
+                                        <div style="display: flex; gap: 4px; margin-bottom: 2px;"><span style="color: red;">[HIGH]</span> Reject auto-renewal</div>
+                                        <div style="display: flex; gap: 4px; margin-bottom: 2px;"><span style="color: orange;">[MED]</span> Negotiate cap</div>
+                                    </div>
+                                    <div style="font-size: 0.75rem; margin-top: 0.5rem; font-weight: 600;">Risk_Checklist.pdf</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section class="features">
+        <div class="container">
+            <h2>Built for law. Not adapted for it.</h2>
+            <div class="features-grid">
+                <div class="feature-item">
+                    <h3>No Context Switching</h3>
+                    <p>Every other legal AI requires you to open a dashboard, login, and copy-paste. Cicero meets you where you already work: your inbox. Just forward and forget.</p>
+                </div>
+                <div class="feature-item">
+                    <h3>Two Attachments, Always</h3>
+                    <p>You always get two files: the work product (DOCX) ready to edit, and the workflow product (PDF Checklist) to track next steps. It replaces the junior associate debrief.</p>
+                </div>
+                <div class="feature-item">
+                    <h3>Clarification Loop</h3>
+                    <p>If instructions are vague, Cicero doesn't guess. It asks pointed, specific questions to clarify intent—just like a good associate would.</p>
+                </div>
+                <div class="feature-item">
+                    <h3>Deep Reading</h3>
+                    <p>Don't want to read a 47-page agreement? Send it to Cicero. It reads every clause, cross-references definitions, and flags risks based on your playbook.</p>
+                </div>
+                <div class="feature-item">
+                    <h3>Legal Convention Aware</h3>
+                    <p>Cicero understands defined terms, clause numbering, and jurisdiction-specific language. The output looks like it was drafted by a lawyer, not a chatbot.</p>
+                </div>
+                <div class="feature-item">
+                    <h3>Secure & Private</h3>
+                    <p>Your data is encrypted in transit and at rest. We never train public models on your confidential client documents. Privilege is respected.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="workflow">
+        <div class="container">
+            <h2>How it works</h2>
+
+            <div class="timeline">
+
+                <div class="timeline-item">
+                    <div class="timeline-marker">1</div>
+                    <div class="timeline-content">
+                        <h3>Forward the email</h3>
+                        <p>Don't clean it up. Forward the messy chain, the attachments, and your half-formed thoughts.</p>
+                        <div class="timeline-preview" style="border-left: 3px solid var(--gray);">
+                            <span class="mono" style="font-size: 0.75rem; color: var(--gray-dark);">To: assistant@cicero.im</span><br>
+                            "Hey, thoughts on this? Seems aggressive."
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-marker">2</div>
+                    <div class="timeline-content">
+                        <h3>Cicero analyzes & asks</h3>
+                        <p>Cicero reads the documents and context. If needed, it emails back with specific questions.</p>
+                        <div class="timeline-preview" style="border-left: 3px solid var(--scarlet);">
+                            <span class="mono" style="font-size: 0.75rem; color: var(--gray-dark);">From: assistant@cicero.im</span><br>
+                            "The jurisdiction is set to Singapore. Is this intentional for a US deal?"
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-marker">3</div>
+                    <div class="timeline-content">
+                        <h3>Receive the package</h3>
+                        <p>Get a clean email with your deliverables attached. Review, edit, and send to client.</p>
+                        <div class="timeline-preview" style="display: flex; gap: 1rem;">
+                            <div style="border: 1px solid var(--gray); padding: 0.5rem; width: 60px; text-align: center; font-size: 0.75rem;">
+                                <div style="font-size: 1.5rem;">W</div>
+                                DOCX
+                            </div>
+                            <div style="border: 1px solid var(--gray); padding: 0.5rem; width: 60px; text-align: center; font-size: 0.75rem;">
+                                <div style="font-size: 1.5rem;">PDF</div>
+                                LIST
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section class="cta-section">
+        <div class="container">
+            <h2>Your new associate is ready.</h2>
+            <p style="margin-bottom: 3rem; font-size: 1.25rem; color: var(--gray-dark);">No signup forms. No credit card required for the first request.</p>
+
+            <a href="mailto:assistant@cicero.im" class="email-cta" style="font-size: 2rem; padding: 1.5rem 3rem;">
+                assistant@cicero.im
+            </a>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Cicero. All rights reserved. | <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
+        </div>
+    </footer>
+
+</body>
+</html>
