@@ -35,28 +35,47 @@
 		}
 	},
 
-	"routes": [
-		{
-			"pattern": "old.samarias.org/*",
-			"zone_name": "samarias.org"
-		},
-		{
-			"pattern": "old.samarias.org",
-			"zone_name": "samarias.org",
-			"custom_domain": true
-		},
-		{
-			"pattern": "keystatic.samarias.org",
-			"zone_name": "samarias.org",
-			"custom_domain": true
-		}
-	],
-
 	"env": {
+		"production": {
+			"name": "samarias",
+			"routes": [
+				{
+					"pattern": "old.samarias.org/*",
+					"zone_name": "samarias.org"
+				},
+				{
+					"pattern": "old.samarias.org",
+					"zone_name": "samarias.org",
+					"custom_domain": true
+				},
+				{
+					"pattern": "keystatic.samarias.org",
+					"zone_name": "samarias.org",
+					"custom_domain": true
+				}
+			],
+			"vars": {
+				"CMS_CLIENT": "keystatic",
+				"PUBLIC_KEYSTATIC_GITHUB_APP_SLUG": "1-sama-3",
+				"NEXT_PUBLIC_KEYSTATIC_STORAGE_KIND": "github",
+				"NEXT_PUBLIC_KEYSTATIC_STORAGE_REPO": "arthrod/1-sama-3",
+				"KEYSTATIC_PATH_PREFIX": "",
+				"NEXT_PUBLIC_KEYSTATIC_CONTENT_PATH": "./src/content"
+			}
+		},
 		"pr": {
 			"name": "samarias",
 			"workers_dev": true,
 			"routes": [],
+			"observability": {
+				"enabled": false,
+				"logs": {
+					"enabled": false
+				},
+				"traces": {
+					"enabled": false
+				}
+			},
 			"vars": {
 				"CMS_CLIENT": "keystatic",
 				"PUBLIC_KEYSTATIC_GITHUB_APP_SLUG": "1-sama-3",
