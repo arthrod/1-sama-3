@@ -56,6 +56,9 @@
 		"pr": {
 			"name": "samarias",
 			"workers_dev": true,
+			"observability": {
+				"enabled": false
+			},
 			"vars": {
 				"CMS_CLIENT": "keystatic",
 				"PUBLIC_KEYSTATIC_GITHUB_APP_SLUG": "1-sama-3",
