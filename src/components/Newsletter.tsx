@@ -39,6 +39,19 @@ export function Newsletter() {
 		};
 	}, [status]);
 
+	const getStatusMessage = () => {
+		switch (status) {
+			case "loading":
+				return "Enviando sua inscrição...";
+			case "success":
+				return "Inscrição realizada com sucesso!";
+			case "error":
+				return "Erro ao realizar a inscrição. Tente novamente.";
+			default:
+				return "";
+		}
+	};
+
 	return (
 		<section id="newsletter" className="py-32 bg-ink text-paper relative overflow-hidden">
 			{/* Decorative Elements */}
@@ -103,8 +116,15 @@ export function Newsletter() {
 							disabled={status === "loading"}
 							className="bg-paper text-ink hover:bg-merlot hover:text-white font-sans font-bold uppercase tracking-widest text-xs py-4 px-8 transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
 						>
-							{status === "loading" ? "Enviando..." : status === "success" ? "Enviado!" : "Cadastrar"}
+							{status === "loading"
+								? "Enviando..."
+								: status === "success"
+									? "Enviado!"
+									: "Cadastrar"}
 						</button>
+						<output className="sr-only" aria-live="polite">
+							{getStatusMessage()}
+						</output>
 					</form>
 
 					<p className="mt-6 text-xs text-graphite-light">
