@@ -35,24 +35,25 @@
 		}
 	},
 
-	"routes": [
-		{
-			"pattern": "old.samarias.org/*",
-			"zone_name": "samarias.org"
-		},
-		{
-			"pattern": "old.samarias.org",
-			"zone_name": "samarias.org",
-			"custom_domain": true
-		},
-		{
-			"pattern": "keystatic.samarias.org",
-			"zone_name": "samarias.org",
-			"custom_domain": true
-		}
-	],
-
 	"env": {
+		"production": {
+			"routes": [
+				{
+					"pattern": "old.samarias.org/*",
+					"zone_name": "samarias.org"
+				},
+				{
+					"pattern": "old.samarias.org",
+					"zone_name": "samarias.org",
+					"custom_domain": true
+				},
+				{
+					"pattern": "keystatic.samarias.org",
+					"zone_name": "samarias.org",
+					"custom_domain": true
+				}
+			]
+		},
 		"pr": {
 			"name": "samarias",
 			"workers_dev": true,
