@@ -13,3 +13,7 @@
 ## 2025-02-18 - Wrangler Auth & Environments
 **Learning:** When using Cloudflare API Tokens scoped to a specific Worker Service (e.g., 'samarias'), you CANNOT change the `name` field in `wrangler.jsonc` environments (e.g., `env.pr.name = 'samarias-preview'`) because the token lacks permission to deploy to a new service name. Instead, omit the `name` override in the environment configuration so it defaults to the authorized service name. Use `workers_dev: true` and `routes: []` to deploy a preview instance that does not affect production routes/domains.
 **Action:** For CI/PR environments with scoped tokens, always use the authorized service name (by omitting `name` override) and isolate traffic via `workers_dev` and empty `routes`.
+
+## 2025-02-18 - Eager Image Preloading for Carousels
+**Learning:** To prevent LCP contention and visual layout shifts in React carousels, rendering a hidden `next/image` with `loading="eager"` and `priority={false}` for the *upcoming* slide ensures the asset is prefetched by the browser without blocking the initial paint of the current slide.
+**Action:** Use hidden eager-loading images to improve perceived performance in image-heavy components like sliders.
